@@ -1288,7 +1288,7 @@ export default function GuidePage() {
                     </a>
                     에서, 한국어 펌웨어 관련 논의는{" "}
                     <a
-                      href="https://github.com/eunchurn/crosspoint-reader-ko/discussions"
+                      href="https://github.com/crosspoint-reader-ko/crosspoint-reader-ko/discussions"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-800 underline"

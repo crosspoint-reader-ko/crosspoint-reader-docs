@@ -81,7 +81,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="https://github.com/eunchurn/crosspoint-reader-ko"
+                  href="https://github.com/crosspoint-reader-ko/crosspoint-reader-ko"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition-colors"

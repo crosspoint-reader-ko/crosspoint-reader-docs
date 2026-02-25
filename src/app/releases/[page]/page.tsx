@@ -614,7 +614,7 @@ export default async function ReleasesPage({
                 릴리즈 정보를 불러올 수 없습니다.
               </p>
               <a
-                href="https://github.com/eunchurn/crosspoint-reader-ko/releases"
+                href="https://github.com/crosspoint-reader-ko/crosspoint-reader-ko/releases"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex items-center text-blue-600 hover:underline"

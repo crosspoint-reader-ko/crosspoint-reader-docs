@@ -7,4 +7,4 @@ export const getFirmwareFilename = () => `CrossPoint-${CROSSPOINT_VERSION}.bin`;
 
 // GitHub 릴리즈 직접 다운로드 URL
 export const getFirmwareDownloadUrl = () =>
-  `https://github.com/eunchurn/crosspoint-reader-ko/releases/download/v${CROSSPOINT_VERSION}/${getFirmwareFilename()}`;
+  `https://github.com/crosspoint-reader-ko/crosspoint-reader-ko/releases/download/v${CROSSPOINT_VERSION}/${getFirmwareFilename()}`;

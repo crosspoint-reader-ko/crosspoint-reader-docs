@@ -27,7 +27,7 @@ export default async function InstallPage() {
     latestRelease?.web_firmware_name || "firmware.bin";
   const webFirmwareDownloadUrl =
     latestRelease?.web_firmware_url ||
-    `https://github.com/eunchurn/crosspoint-reader-ko/releases/download/${CROSSPOINT_VERSION}/firmware.bin`;
+    `https://github.com/crosspoint-reader-ko/crosspoint-reader-ko/releases/download/${CROSSPOINT_VERSION}/firmware.bin`;
 
   // esptool용 머지된 펌웨어 (CrossPoint-*.bin)
   const mergedFirmwareFilename =
@@ -35,7 +35,7 @@ export default async function InstallPage() {
     `CrossPoint-${CROSSPOINT_VERSION}.bin`;
   const mergedFirmwareDownloadUrl =
     latestRelease?.merged_firmware_url ||
-    `https://github.com/eunchurn/crosspoint-reader-ko/releases/download/${CROSSPOINT_VERSION}/CrossPoint-${CROSSPOINT_VERSION}.bin`;
+    `https://github.com/crosspoint-reader-ko/crosspoint-reader-ko/releases/download/${CROSSPOINT_VERSION}/CrossPoint-${CROSSPOINT_VERSION}.bin`;
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -203,7 +203,7 @@ export default async function InstallPage() {
                         펌웨어 다운로드
                       </a>
                       <a
-                        href="https://github.com/eunchurn/crosspoint-reader-ko/releases"
+                        href="https://github.com/crosspoint-reader-ko/crosspoint-reader-ko/releases"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"

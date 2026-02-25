@@ -355,7 +355,7 @@ export default function Header() {
               );
             })}
             <a
-              href="https://github.com/eunchurn/crosspoint-reader-ko"
+              href="https://github.com/crosspoint-reader-ko/crosspoint-reader-ko"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-1"
@@ -426,7 +426,7 @@ export default function Header() {
                 />
               ))}
               <a
-                href="https://github.com/eunchurn/crosspoint-reader-ko"
+                href="https://github.com/crosspoint-reader-ko/crosspoint-reader-ko"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-3 py-2 text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors"

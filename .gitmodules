@@ -1,4 +1,4 @@
 [submodule "crosspoint-reader-ko"]
 	path = crosspoint-reader-ko
-	url = git@github.com:eunchurn/crosspoint-reader-ko.git
+	url = git@github.com:crosspoint-reader-ko/crosspoint-reader-ko.git
 	branch = release/korean

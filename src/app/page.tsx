@@ -130,7 +130,7 @@ export default async function Home() {
                     </svg>
                   </Link>
                   <a
-                    href="https://github.com/eunchurn/crosspoint-reader-ko/releases"
+                    href="https://github.com/crosspoint-reader-ko/crosspoint-reader-ko/releases"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-8 py-3 text-base font-semibold text-white shadow-lg hover:bg-gray-800 transition-colors"
