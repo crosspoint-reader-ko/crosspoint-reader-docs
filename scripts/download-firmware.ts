@@ -52,15 +52,15 @@ interface OfficialFirmware {
 const OFFICIAL_FIRMWARE_SOURCES: OfficialFirmware[] = [
   {
     name: "English Official",
-    url: "http://gotaserver.xteink.com/api/download/ESP32C3/V5.0.3/V5.0.3-EN-X4-PROD-0207_2.bin",
+    url: "http://gotaserver.xteink.com/api/download/ESP32C3/V5.1.6/V5.1.6-X4-EN-PROD-0304_.bin",
     filename: "english-official-firmware.bin",
-    version: "5.0.3",
+    version: "5.1.6",
   },
   {
     name: "Chinese Official",
-    url: "http://47.122.74.33:5000/api/download/ESP32C3/V5.0.6/V5.0.6-CH-X4-PROD-0213.bin",
+    url: "https://domestic-static-file.oss-cn-hangzhou.aliyuncs.com/admin_uploads/firmware/202604/08/751e134f-22b1-4a00-bbfa-0942593ef867/V5.3.9-X4-CH-PROD-0408_154553.bin",
     filename: "chinese-official-firmware.bin",
-    version: "5.0.6",
+    version: "5.3.9",
   },
 ];
 

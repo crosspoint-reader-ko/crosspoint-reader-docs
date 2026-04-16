@@ -45,6 +45,14 @@ export default function WebserverPage() {
                   <li>SD 카드의 파일 탐색 및 관리</li>
                   <li>전자책 정리를 위한 폴더 생성</li>
                   <li>파일 및 폴더 삭제</li>
+                  <li>
+                    <strong>책 직접 다운로드</strong> (v1.2.0): 웹 UI에서 SD
+                    카드의 책을 브라우저로 내려받기
+                  </li>
+                  <li>
+                    <strong>WebDAV 지원</strong> (v1.1+): macOS Finder, Windows
+                    탐색기, Cyberduck 등에서 기기를 네트워크 드라이브로 마운트
+                  </li>
                 </ul>
 
                 <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-4">

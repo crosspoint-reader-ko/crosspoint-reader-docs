@@ -1,6 +1,6 @@
 // 이 파일은 빌드 시 scripts/update-version.ts에 의해 자동 생성됩니다.
 // crosspoint-reader-ko/platformio.ini에서 버전 정보를 가져옵니다.
-export const CROSSPOINT_VERSION = "1.1.1-ko.0";
+export const CROSSPOINT_VERSION = "1.2.0-ko.0";
 
 // 펌웨어 파일명 생성 헬퍼
 export const getFirmwareFilename = () => `CrossPoint-${CROSSPOINT_VERSION}.bin`;
