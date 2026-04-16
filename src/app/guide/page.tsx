@@ -504,12 +504,12 @@ export default function GuidePage() {
                       <li>
                         Calibre에 플러그인 설치:{" "}
                         <a
-                          href="https://github.com/crosspoint-reader/calibre-plugins/releases"
+                          href="https://github.com/crosspoint-reader-ko/calibre-plugins/releases"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-600 hover:text-blue-800"
                         >
-                          https://github.com/crosspoint-reader/calibre-plugins/releases
+                          https://github.com/crosspoint-reader-ko/calibre-plugins/releases
                         </a>{" "}
                         에서 최신 crosspoint_reader 플러그인 zip 파일을 다운로드한
                         후, Calibre &rarr; 환경 설정 &rarr; 플러그인 &rarr;
