@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """
-Convert TTF/OTF font files directly to .epdfont binary format.
+Convert TTF/OTF font files directly to .epdfont binary format (v1).
+
+The on-device runtime EpdGlyph stores advanceX as 12.4 fixed-point pixels
+(introduced in upstream 1.2.0, PR #1168). The .epdfont v1 layout we emit here
+keeps advanceX as a plain uint8 in *integer pixels* — the firmware loader
+performs the `<< 4` upcast on read (see lib/EpdFont/SdFont.cpp::loadGlyphFromSD
+and docs/sd-font-format.md in the firmware repo). Existing .epdfont files
+remain compatible; do not bump the file format unless sub-pixel advance or
+>255-px advance is actually required.
 
 Usage:
     python ttf_to_epdfont.py <font_name> <size> <font_file> [--additional-intervals MIN,MAX] [-o output.epdfont]

@@ -29,7 +29,7 @@ interface KoreanVersionEntry {
 const FIRMWARE_SOURCES: FirmwareSource[] = [
   {
     name: "Korean Community",
-    url: "https://api.github.com/repos/eunchurn/crosspoint-reader-ko/releases/latest",
+    url: "https://api.github.com/repos/crosspoint-reader-ko/crosspoint-reader-ko/releases/latest",
     filename: "korean-firmware.bin",
     key: "korean",
   },
@@ -178,7 +178,7 @@ async function downloadKoreanFirmwareReleases(): Promise<KoreanVersionEntry[]> {
 
   try {
     const response = await fetch(
-      "https://api.github.com/repos/eunchurn/crosspoint-reader-ko/releases?per_page=5",
+      "https://api.github.com/repos/crosspoint-reader-ko/crosspoint-reader-ko/releases?per_page=5",
       {
         headers: {
           Accept: "application/vnd.github.v3+json",

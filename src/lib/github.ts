@@ -27,7 +27,7 @@ export async function getReleases(): Promise<Release[]> {
     // 타임스탬프를 URL에 추가하여 캐시 방지
     const timestamp = Date.now();
     const response = await fetch(
-      `https://api.github.com/repos/eunchurn/crosspoint-reader-ko/releases?_t=${timestamp}`,
+      `https://api.github.com/repos/crosspoint-reader-ko/crosspoint-reader-ko/releases?_t=${timestamp}`,
       {
         headers: {
           Accept: "application/vnd.github.v3+json",
@@ -83,7 +83,7 @@ export async function getLatestRelease(): Promise<LatestRelease | null> {
   try {
     const timestamp = Date.now();
     const response = await fetch(
-      `https://api.github.com/repos/eunchurn/crosspoint-reader-ko/releases/latest?_t=${timestamp}`,
+      `https://api.github.com/repos/crosspoint-reader-ko/crosspoint-reader-ko/releases/latest?_t=${timestamp}`,
       {
         headers: {
           Accept: "application/vnd.github.v3+json",

@@ -29,8 +29,9 @@ export const CROSSPOINT_VERSION = "${version}";
 export const getFirmwareFilename = () => \`CrossPoint-\${CROSSPOINT_VERSION}.bin\`;
 
 // GitHub 릴리즈 직접 다운로드 URL
+// 태그명은 'v' 접두사 없는 X.Y.Z-ko.N 형식 (릴리즈 제목만 vX.Y.Z-ko.N).
 export const getFirmwareDownloadUrl = () =>
-  \`https://github.com/crosspoint-reader-ko/crosspoint-reader-ko/releases/download/v\${CROSSPOINT_VERSION}/\${getFirmwareFilename()}\`;
+  \`https://github.com/crosspoint-reader-ko/crosspoint-reader-ko/releases/download/\${CROSSPOINT_VERSION}/\${getFirmwareFilename()}\`;
 `;
 
   writeFileSync(VERSION_TS_PATH, content, "utf-8");
