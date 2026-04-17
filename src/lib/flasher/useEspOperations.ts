@@ -13,7 +13,10 @@ import { downloadData } from "./download";
 import { wrapWithWakeLock } from "./wakelock";
 import OtaPartition, { OtaPartitionDetails } from "./OtaPartition";
 import useStepRunner from "./useStepRunner";
-import EspController from "./EspController";
+import EspController, {
+  AppPartitionLayout,
+  parseAppLayoutFromPartitions,
+} from "./EspController";
 
 export function useEspOperations() {
   const { stepData, initializeSteps, updateStepData, runStep } =
@@ -35,6 +38,7 @@ export function useEspOperations() {
       "장치 연결",
       "펌웨어 다운로드",
       ...(getPartitions ? ["파티션 테이블 업데이트"] : []),
+      "파티션 레이아웃 확인",
       "otadata 파티션 읽기",
       "앱 파티션 플래싱",
       "otadata 파티션 플래싱",
@@ -51,8 +55,9 @@ export function useEspOperations() {
     const firmwareFile = await runStep("펌웨어 다운로드", getFirmware);
 
     // Flash partition table if provided (needed for partition layout migration)
+    let writtenPartitions: Uint8Array | null = null;
     if (getPartitions) {
-      await runStep("파티션 테이블 업데이트", async () => {
+      writtenPartitions = await runStep("파티션 테이블 업데이트", async () => {
         const partitionsFile = await getPartitions();
         if (partitionsFile) {
           await espController.writePartitionTable(partitionsFile, (_, p, t) =>
@@ -60,10 +65,23 @@ export function useEspOperations() {
               progress: { current: p, total: t },
             }),
           );
+          return partitionsFile;
         }
-        // If partitions.bin not available (older release), skip silently
+        return null;
       });
     }
+
+    // Determine actual app0/app1 offsets. Prefer the just-written partition
+    // table, otherwise read it back from the device. Fall back to defaults
+    // if parsing fails.
+    const layout = await runStep("파티션 레이아웃 확인", async () => {
+      if (writtenPartitions) {
+        const parsed = parseAppLayoutFromPartitions(writtenPartitions);
+        if (parsed) return parsed;
+      }
+      const table = await espController.readPartitionTable();
+      return parseAppLayoutFromPartitions(table) ?? undefined;
+    });
 
     const [otaPartition, backupPartitionLabel] = await runStep(
       "otadata 파티션 읽기",
@@ -86,6 +104,7 @@ export function useEspOperations() {
       espController.writeAppPartition(
         backupPartitionLabel,
         firmwareFile,
+        layout as AppPartitionLayout | undefined,
         (_, p, t) =>
           updateStepData(flashAppPartitionStepName, {
             progress: { current: p, total: t },
@@ -128,6 +147,7 @@ export function useEspOperations() {
     initializeSteps([
       "파일 읽기",
       "장치 연결",
+      "파티션 레이아웃 확인",
       "otadata 파티션 읽기",
       "앱 파티션 플래싱",
       "otadata 파티션 플래싱",
@@ -146,6 +166,11 @@ export function useEspOperations() {
       const c = await EspController.fromRequestedDevice();
       await c.connect();
       return c;
+    });
+
+    const layout = await runStep("파티션 레이아웃 확인", async () => {
+      const table = await espController.readPartitionTable();
+      return parseAppLayoutFromPartitions(table) ?? undefined;
     });
 
     const [otaPartition, backupPartitionLabel] = await runStep(
@@ -169,6 +194,7 @@ export function useEspOperations() {
       espController.writeAppPartition(
         backupPartitionLabel,
         fileData,
+        layout as AppPartitionLayout | undefined,
         (_, p, t) =>
           updateStepData(flashAppPartitionStepName, {
             progress: { current: p, total: t },
