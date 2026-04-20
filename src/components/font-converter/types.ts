@@ -21,5 +21,4 @@ export interface QuickPreset {
   name: string;
   description: string;
   rangeIds: string[];
-  icon: string;
 }

@@ -1,7 +1,7 @@
 import { UNICODE_RANGES } from "../unicode-range";
 import type { QuickPreset } from "./types";
 
-// PoC: no upper bound on input file size — WASM heap grows on demand, conversion
+// No upper bound on input file size — WASM heap grows on demand, conversion
 // runs off-thread in a Web Worker, and the browser's own memory is the only ceiling.
 export const MAX_FONT_SIZE = Number.POSITIVE_INFINITY;
 
@@ -19,7 +19,6 @@ export const QUICK_PRESETS: QuickPreset[] = [
     name: "전체",
     description: "모든 유니코드 범위 - 매우 큼 (10만자 이상)",
     rangeIds: UNICODE_RANGES.map((r) => r.id),
-    icon: "🌐",
   },
   {
     id: "korean",
@@ -32,14 +31,12 @@ export const QUICK_PRESETS: QuickPreset[] = [
       "cjkSymbols",
       "enclosedCjkLetters",
     ],
-    icon: "🇰🇷",
   },
   {
     id: "hanja",
     name: "한자 (기본)",
     description: "CJK 통합 한자 (20,992자)",
     rangeIds: ["cjkUnified", "cjkSymbols", "kangxiRadicals"],
-    icon: "漢",
   },
   {
     id: "hanjaExtended",
@@ -61,7 +58,6 @@ export const QUICK_PRESETS: QuickPreset[] = [
       "kangxiRadicals",
       "cjkRadicalsSupplement",
     ],
-    icon: "漢+",
   },
   {
     id: "japanese",
@@ -74,7 +70,6 @@ export const QUICK_PRESETS: QuickPreset[] = [
       "cjkSymbols",
       "halfwidthFullwidth",
     ],
-    icon: "🇯🇵",
   },
   {
     id: "chinese",
@@ -86,14 +81,12 @@ export const QUICK_PRESETS: QuickPreset[] = [
       "cjkCompatIdeographs",
       "halfwidthFullwidth",
     ],
-    icon: "🇨🇳",
   },
   {
     id: "fullwidth",
     name: "전각 문자",
     description: "전각/반각 폼, CJK 기호",
     rangeIds: ["halfwidthFullwidth", "cjkSymbols", "cjkCompatibility"],
-    icon: "Ａ",
   },
   {
     id: "publishing",
@@ -109,7 +102,6 @@ export const QUICK_PRESETS: QuickPreset[] = [
       "numberForms",
       "letterlikeSymbols",
     ],
-    icon: "📖",
   },
   {
     id: "math",
@@ -127,7 +119,6 @@ export const QUICK_PRESETS: QuickPreset[] = [
       "miscMathSymbolsB",
       "supplementalArrows",
     ],
-    icon: "∑",
   },
   {
     id: "symbols",
@@ -140,7 +131,6 @@ export const QUICK_PRESETS: QuickPreset[] = [
       "boxDrawing",
       "blockElements",
     ],
-    icon: "★",
   },
   {
     id: "european",
@@ -159,7 +149,6 @@ export const QUICK_PRESETS: QuickPreset[] = [
       "cyrillicExtendedB",
       "cyrillicExtendedC",
     ],
-    icon: "🇪🇺",
   },
   {
     id: "multilingual",
@@ -171,7 +160,6 @@ export const QUICK_PRESETS: QuickPreset[] = [
       "thai",
       "latinExtendedAdditional",
     ],
-    icon: "🌍",
   },
   {
     id: "phonetics",
@@ -183,7 +171,6 @@ export const QUICK_PRESETS: QuickPreset[] = [
       "phoneticExtensionsSupplement",
       "spacingModifierLetters",
     ],
-    icon: "🗣️",
   },
   {
     id: "emoji",
@@ -196,7 +183,6 @@ export const QUICK_PRESETS: QuickPreset[] = [
       "supplementalSymbolsPictographs",
       "symbolsExtendedA",
     ],
-    icon: "😀",
   },
 ];
 

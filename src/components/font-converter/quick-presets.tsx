@@ -1,6 +1,7 @@
 "use client";
 
 import { QUICK_PRESETS } from "./constants";
+import { PresetIcon } from "./preset-icon";
 
 interface QuickPresetsProps {
   isPresetEnabled: (presetId: string) => boolean;
@@ -76,7 +77,15 @@ export function QuickPresets({
                   </svg>
                 )}
               </div>
-              <span className="text-sm">{preset.icon}</span>
+              <span
+                className={`shrink-0 inline-flex items-center justify-center min-w-5 h-5 whitespace-nowrap ${
+                  isEnabled
+                    ? "text-blue-700 dark:text-blue-300"
+                    : "text-gray-600 dark:text-gray-400"
+                }`}
+              >
+                <PresetIcon id={preset.id} />
+              </span>
               <span
                 className={`font-medium truncate ${isEnabled ? "text-blue-700 dark:text-blue-300" : "text-gray-900 dark:text-white"}`}
               >

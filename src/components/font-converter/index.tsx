@@ -596,7 +596,7 @@ export default function FontConverter() {
               </svg>
               <div className="flex-1">
                 <h4 className="text-sm font-medium text-emerald-800 dark:text-emerald-200">
-                  PoC 변환기 · 파일 크기 / 폰트 크기 제한 없음
+                  파일 크기 / 폰트 크기 제한 없음
                 </h4>
                 <p className="mt-1 text-sm text-emerald-700 dark:text-emerald-300">
                   FreeType WASM을 Web Worker에서 실행합니다. 변환 중 UI가 멈추지 않고,

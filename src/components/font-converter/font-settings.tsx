@@ -49,7 +49,7 @@ export function FontSettings({
               focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            PoC: 4–1024px 허용. 실제 상한은 브라우저 메모리.
+            4–1024px 지원. 큰 값은 변환 시간이 길어질 수 있습니다.
           </p>
         </div>
       </div>
