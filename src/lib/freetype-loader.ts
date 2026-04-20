@@ -1,50 +1,39 @@
 import type { FreeTypeInstance, FreeTypeInit } from "@/types/freetype";
+import { basePath } from "./basePath";
 
 let freetypeInstance: FreeTypeInstance | null = null;
 let loadingPromise: Promise<FreeTypeInstance> | null = null;
 
-// Dynamic script loader for CDN
-function loadScript(src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    // Check if script already loaded
-    if (document.querySelector(`script[src="${src}"]`)) {
-      resolve();
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.type = "module";
-    script.src = src;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
-    document.head.appendChild(script);
-  });
-}
-
+/**
+ * Main-thread FreeType instance. Used for lightweight work (font validation,
+ * preview rendering). Heavy conversion runs in the Web Worker — see
+ * `freetype-worker.ts` / `freetype-worker-client.ts`.
+ */
 export async function loadFreeType(): Promise<FreeTypeInstance> {
-  if (freetypeInstance) {
-    return freetypeInstance;
-  }
-
-  if (loadingPromise) {
-    return loadingPromise;
-  }
+  if (freetypeInstance) return freetypeInstance;
+  if (loadingPromise) return loadingPromise;
 
   loadingPromise = (async () => {
     try {
-      // Load FreeType from CDN (use @0 for latest v0.x)
-      const cdnUrl = "https://cdn.jsdelivr.net/npm/freetype-wasm@0/dist/freetype.js";
-
-      // Dynamic import from CDN
-      const module = await import(/* webpackIgnore: true */ cdnUrl);
-      const FreeTypeInit = module.default as FreeTypeInit;
-
-      freetypeInstance = await FreeTypeInit();
-
+      const wasmDir = `${basePath}/wasm/`;
+      const jsUrl = `${wasmDir}freetype.js`;
+      const module = (await import(/* webpackIgnore: true */ jsUrl)) as {
+        default: FreeTypeInit;
+      };
+      const init = module.default as unknown as (
+        opts: Record<string, unknown>,
+      ) => Promise<FreeTypeInstance>;
+      freetypeInstance = await init({
+        locateFile: (path: string) => `${wasmDir}${path}`,
+        // Match the worker's pre-sized heap so main-thread validation /
+        // preview rendering doesn't OOM on large fonts. emscripten_resize_heap
+        // is compiled in, so this can still grow up to ~2GB.
+        INITIAL_MEMORY: 256 * 1024 * 1024,
+      });
       return freetypeInstance;
-    } catch (error) {
+    } catch (err) {
       loadingPromise = null;
-      throw error;
+      throw err;
     }
   })();
 

@@ -1773,11 +1773,11 @@ docker compose up -d
                   <p className="text-green-900 text-sm">
                     <strong>v1.2.0 신기능:</strong> 기기가 비정상 종료된 경우
                     다음 부팅 시 <strong>충돌 원인(Crash Reason)</strong>이 화면에
-                    표시되며, 크래시 로그가 SD 카드의{" "}
+                    표시되며, 크래시 리포트가 SD 카드 루트의{" "}
                     <code className="bg-green-100 px-1 rounded">
-                      /.crosspoint/crash/
+                      crash_report.txt
                     </code>{" "}
-                    아래에 자동 저장됩니다. 이슈 제보 시 해당 로그를 첨부해
+                    파일로 자동 저장됩니다. 이슈 제보 시 해당 파일을 첨부해
                     주세요.
                   </p>
                 </div>

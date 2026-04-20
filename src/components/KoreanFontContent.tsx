@@ -53,7 +53,7 @@ export default function KoreanFontContent() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-b from-blue-50 to-white py-16">
+      <section className="bg-linear-to-b from-blue-50 to-white py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold text-gray-900">한글 폰트 정보</h1>
           <p className="mt-4 text-lg text-gray-600">
@@ -405,13 +405,12 @@ export default function KoreanFontContent() {
                   지원되는 폰트 형식 및 제한 사항
                 </h4>
                 <div className="text-sm text-yellow-700 space-y-2">
-                  <p><strong>지원 형식:</strong> TTF, OTF, WOFF, WOFF2 (최대 10MB)</p>
+                  <p><strong>지원 형식:</strong> TTF, OTF, WOFF, WOFF2</p>
                   <p><strong>지원되지 않는 폰트:</strong></p>
                   <ul className="list-disc list-inside ml-4 space-y-1">
                     <li><strong>가변 폰트 (Variable Fonts)</strong> - 현재 FreeType WASM에서 가변 폰트 인터페이스가 구현되지 않았습니다.</li>
                     <li><strong>컬러 폰트 (Color Fonts/Emoji)</strong> - 컬러 레이어 폰트는 흑백으로만 렌더링됩니다.</li>
                     <li><strong>비트맵 전용 폰트</strong> - 스케일러블 아웃라인이 없는 순수 비트맵 폰트는 변환되지 않습니다.</li>
-                    <li><strong>복잡한 폰트</strong> - 글리프 수가 매우 많거나 복잡한 폰트는 메모리 오류가 발생할 수 있습니다.</li>
                   </ul>
                   <p className="mt-2 text-yellow-600">
                     일반적인 한글 폰트(나눔고딕, 맑은 고딕, 본고딕 등)는 대부분 정상적으로 변환됩니다.
@@ -419,31 +418,6 @@ export default function KoreanFontContent() {
                 </div>
               </div>
 
-              {/* Web Converter Limitations */}
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mt-6">
-                <h4 className="text-sm font-semibold text-gray-800 mb-2">
-                  웹 변환기의 한계
-                </h4>
-                <div className="text-sm text-gray-600 space-y-2">
-                  <p>웹 변환기는 브라우저 환경의 제약으로 인해 다음과 같은 한계가 있습니다:</p>
-                  <ul className="list-disc list-inside ml-4 space-y-1">
-                    <li><strong>파일 크기 제한</strong> - 최대 10MB까지만 업로드 가능합니다.</li>
-                    <li><strong>메모리 제한</strong> - 브라우저 WASM 메모리 한계로 대용량 폰트 변환 시 오류가 발생할 수 있습니다.</li>
-                    <li><strong>유니코드 범위</strong> - CJK 확장 한자(Extension B~F) 등 일부 범위는 메모리 문제로 변환이 어렵습니다.</li>
-                    <li><strong>처리 속도</strong> - 글리프 수가 많은 폰트는 변환에 시간이 오래 걸립니다.</li>
-                  </ul>
-                  <p className="mt-2 text-gray-500">
-                    대용량 폰트나 광범위한 유니코드 범위가 필요한 경우{" "}
-                    <button
-                      onClick={() => scrollToSection("python-conversion")}
-                      className="text-blue-600 hover:underline"
-                    >
-                      Python 스크립트
-                    </button>
-                    를 사용하세요.
-                  </p>
-                </div>
-              </div>
             </div>
 
             {/* Python Advanced Conversion */}
@@ -453,8 +427,8 @@ export default function KoreanFontContent() {
               </h2>
               <p className="text-gray-600 mb-4">
                 더 많은 유니코드 범위와 세밀한 옵션이 필요하다면 Python 스크립트를 사용할 수 있습니다.
-                웹 변환기와 달리 <strong>파일 크기 제한이 없고</strong>, CJK 확장 한자 등 대용량 폰트 변환에 적합합니다.
-                또한 위의 웹 변환기 제약사항(가변 폰트, 컬러 폰트 등)이 거의 적용되지 않습니다.
+                {/* 웹 변환기와 달리 <strong>파일 크기 제한이 없고</strong>, CJK 확장 한자 등 대용량 폰트 변환에 적합합니다.
+                또한 위의 웹 변환기 제약사항(가변 폰트, 컬러 폰트 등)이 거의 적용되지 않습니다. */}
               </p>
 
               <div className="space-y-4">
