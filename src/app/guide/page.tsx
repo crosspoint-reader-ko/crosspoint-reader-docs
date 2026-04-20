@@ -48,6 +48,17 @@ function SectionLink({
   );
 }
 
+const tocSections: { id: string; title: string }[] = [
+  { id: "whats-new", title: "v1.2.0 변경사항" },
+  { id: "hardware", title: "하드웨어" },
+  { id: "power", title: "전원·시작" },
+  { id: "screens", title: "화면 구성" },
+  { id: "reading", title: "읽기 모드" },
+  { id: "chapter", title: "챕터 선택" },
+  { id: "limitations", title: "제한사항" },
+  { id: "troubleshooting", title: "문제 해결" },
+];
+
 export default function GuidePage() {
   // Handle hash on page load
   useEffect(() => {
@@ -61,6 +72,14 @@ export default function GuidePage() {
       }, 100);
     }
   }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", `#${id}`);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -77,6 +96,18 @@ export default function GuidePage() {
             <p className="mt-2 text-sm text-gray-500">
               현재 문서 버전: <strong>v1.2.0-ko.0</strong>
             </p>
+            {/* Quick Navigation */}
+            <div className="mt-8 flex flex-wrap justify-center gap-2">
+              {tocSections.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className="px-3 py-1.5 text-sm bg-white border border-gray-200 rounded-full hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 transition-colors"
+                >
+                  {section.title}
+                </button>
+              ))}
+            </div>
           </div>
         </section>
 
