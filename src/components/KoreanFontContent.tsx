@@ -395,7 +395,8 @@ export default function KoreanFontContent() {
                 <li>폰트 크기와 비트 깊이를 설정하고 변환합니다.</li>
                 <li>
                   변환된 <code className="bg-gray-100 px-1 rounded">.epdfont</code> 파일을 SD 카드의{" "}
-                  <code className="bg-gray-100 px-1 rounded">/.crosspoint/fonts/</code> 폴더에 복사합니다.
+                  <code className="bg-gray-100 px-1 rounded">/.crosspoint/fonts/</code> 또는 루트의{" "}
+                  <code className="bg-gray-100 px-1 rounded">/fonts/</code> 폴더에 복사합니다.
                 </li>
                 <li>기기의 설정 &gt; 글꼴 설정에서 폰트를 선택합니다.</li>
               </ol>
