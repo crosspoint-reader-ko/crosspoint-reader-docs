@@ -25,9 +25,6 @@ export default function Footer() {
                 IDLERECORD
               </span>
             </a>
-            <p className="text-sm text-gray-400">
-              당신의 여유 시간을 기록하여, 평범한 순간을 특별한 기억으로 바꿔주는 플랫폼입니다.
-            </p>
           </div>
 
           <div>
