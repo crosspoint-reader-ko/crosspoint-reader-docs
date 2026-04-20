@@ -20,7 +20,7 @@ export default function KoreanFontPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-grow">
+      <main className="grow">
         <Suspense fallback={<div className="min-h-screen" />}>
           <KoreanFontContent />
         </Suspense>

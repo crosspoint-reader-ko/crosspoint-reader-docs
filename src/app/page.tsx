@@ -83,9 +83,9 @@ export default async function Home() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-grow">
+      <main className="grow">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white py-20 sm:py-32">
+        <section className="relative overflow-hidden bg-linear-to-b from-blue-50 to-white py-20 sm:py-32">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjAyIj48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnYyaDR2MmgtNHYyaC0ydi0yem0tMjIgMGgydjRoLTJ2LTJ6bTAtMTBoMnY0aC0ydi00em0xNi0xNmgydjRoLTJ2LTR6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50"></div>
 
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -251,7 +251,7 @@ export default async function Home() {
         </section>
 
         {/* Credits Section */}
-        <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+        <section className="py-20 bg-linear-to-b from-white to-gray-50">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <p className="mt-4 text-lg text-gray-500">
