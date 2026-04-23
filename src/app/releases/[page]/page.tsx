@@ -2,6 +2,7 @@ import { getReleases, type Release } from "@/lib/github";
 import { CROSSPOINT_VERSION } from "@/constants/version";
 import Link from "next/link";
 import hljs from "highlight.js";
+import { Marked } from "marked";
 
 export const metadata = {
   title: "릴리즈 노트",
@@ -34,223 +35,143 @@ function formatBytes(bytes: number): string {
   return (bytes / (1024 * 1024)).toFixed(1) + " MB";
 }
 
-function applyInlineFormatting(text: string): string {
-  // 1. 인라인 코드 백틱 보존 (내부 HTML 이스케이프)
-  const codeSegments: string[] = [];
-  let result = text.replace(/`([^`]+)`/g, (_, code) => {
-    // 플레이스홀더에 HTML 특수문자 사용하지 않음
-    const placeholder = `__INLINE_CODE_${codeSegments.length}__`;
-    const escapedCode = code.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    codeSegments.push(
-      `<code class="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono text-pink-600">${escapedCode}</code>`
-    );
-    return placeholder;
-  });
+const markdown = new Marked({
+  gfm: true,
+  breaks: false,
+  renderer: {
+    code({ text, lang }) {
+      const language = lang || "plaintext";
+      let highlighted: string;
+      try {
+        if (language !== "plaintext" && hljs.getLanguage(language)) {
+          highlighted = hljs.highlight(text, { language }).value;
+        } else {
+          highlighted = hljs.highlightAuto(text).value;
+        }
+      } catch {
+        highlighted = text
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+      return `<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm my-4"><code class="hljs language-${language}">${highlighted}</code></pre>`;
+    },
+    codespan({ text }) {
+      return `<code class="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono text-pink-600">${text}</code>`;
+    },
+    link({ href, text }) {
+      return `<a href="${href}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline break-all">${text}</a>`;
+    },
+    heading({ tokens, depth }) {
+      const text = this.parser.parseInline(tokens);
+      const classes: Record<number, string> = {
+        1: "text-2xl font-bold mt-8 mb-4",
+        2: "text-xl font-bold mt-6 mb-3",
+        3: "text-lg font-semibold mt-4 mb-2",
+        4: "text-base font-semibold mt-4 mb-2 text-gray-800",
+        5: "text-sm font-semibold mt-3 mb-2 text-gray-800",
+        6: "text-sm font-semibold mt-3 mb-2 text-gray-700",
+      };
+      return `<h${depth} class="${classes[depth] || classes[4]}">${text}</h${depth}>\n`;
+    },
+    list({ items, ordered }) {
+      const tag = ordered ? "ol" : "ul";
+      const cls = ordered
+        ? "my-2 space-y-1 list-decimal list-inside"
+        : "my-2 space-y-1 list-disc list-inside";
+      const body = items.map((item) => this.listitem(item)).join("");
+      return `<${tag} class="${cls}">${body}</${tag}>`;
+    },
+    listitem({ tokens }) {
+      return `<li>${this.parser.parse(tokens)}</li>`;
+    },
+    paragraph({ tokens }) {
+      return `<div class="my-2">${this.parser.parseInline(tokens)}</div>`;
+    },
+    table({ header, rows }) {
+      const thead =
+        "<thead class=\"bg-gray-50\"><tr>" +
+        header
+          .map(
+            (cell) =>
+              `<th class="px-3 py-2 text-left text-sm font-semibold text-gray-900 border border-gray-200">${this.parser.parseInline(cell.tokens)}</th>`,
+          )
+          .join("") +
+        "</tr></thead>";
+      const tbody =
+        "<tbody>" +
+        rows
+          .map(
+            (row) =>
+              "<tr>" +
+              row
+                .map(
+                  (cell) =>
+                    `<td class="px-3 py-2 text-sm text-gray-700 border border-gray-200">${this.parser.parseInline(cell.tokens)}</td>`,
+                )
+                .join("") +
+              "</tr>",
+          )
+          .join("") +
+        "</tbody>";
+      return `<div class="my-4 overflow-x-auto"><table class="min-w-full border border-gray-200 rounded-lg">${thead}${tbody}</table></div>`;
+    },
+    blockquote({ tokens }) {
+      const inner = this.parser.parse(tokens);
+      return `<blockquote class="my-2 pl-4 border-l-4 border-gray-300 text-gray-600 italic">${inner}</blockquote>`;
+    },
+  },
+});
 
-  // 2. <URL> 형식 링크 보존 (이스케이프 전에 처리)
-  const angleBracketLinks: string[] = [];
-  result = result.replace(/<(https?:\/\/[^>]+)>/g, (_, url) => {
-    const placeholder = `__ANGLE_LINK_${angleBracketLinks.length}__`;
-    angleBracketLinks.push(
-      `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline break-all">${url}</a>`
-    );
-    return placeholder;
-  });
+const ALERT_STYLES: Record<
+  string,
+  { wrapper: string; heading: string; body: string; icon: string }
+> = {
+  TIP: {
+    wrapper:
+      "my-4 p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg",
+    heading: "flex items-center gap-2 text-green-700 font-semibold mb-1",
+    body: "text-green-800",
+    icon: '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>',
+  },
+  NOTE: {
+    wrapper: "my-4 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg",
+    heading: "flex items-center gap-2 text-blue-700 font-semibold mb-1",
+    body: "text-blue-800",
+    icon: '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>',
+  },
+  WARNING: {
+    wrapper:
+      "my-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-lg",
+    heading: "flex items-center gap-2 text-yellow-700 font-semibold mb-1",
+    body: "text-yellow-800",
+    icon: '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>',
+  },
+  IMPORTANT: {
+    wrapper:
+      "my-4 p-4 bg-purple-50 border-l-4 border-purple-500 rounded-r-lg",
+    heading: "flex items-center gap-2 text-purple-700 font-semibold mb-1",
+    body: "text-purple-800",
+    icon: '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>',
+  },
+};
 
-  // 3. 나머지 HTML 태그 이스케이프
-  result = result.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-  // 4. 마크다운 링크
-  result = result.replace(
-    /\[([^\]]+)\]\(([^)]+)\)/g,
-    '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">$1</a>'
+function transformAlerts(html: string): string {
+  return html.replace(
+    /<blockquote class="[^"]*"><div class="my-2">\[!(TIP|NOTE|WARNING|IMPORTANT)\]<\/div>([\s\S]*?)<\/blockquote>/g,
+    (_, kind: string, body: string) => {
+      const style = ALERT_STYLES[kind];
+      if (!style) return _;
+      return `<div class="${style.wrapper}"><div class="${style.heading}">${style.icon}${kind}</div><div class="${style.body}">${body.trim()}</div></div>`;
+    },
   );
-
-  // 5. 자동 URL 링크
-  result = result.replace(
-    /(?<!["\(=])https?:\/\/[^\s&]+/g,
-    '<a href="$&" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline break-all">$&</a>'
-  );
-
-  // 6. Bold/Italic
-  result = result.replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>");
-  result = result.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, "<em>$1</em>");
-
-  // 7. 인라인 코드 복원
-  codeSegments.forEach((html, i) => {
-    result = result.replace(`__INLINE_CODE_${i}__`, html);
-  });
-
-  // 8. <URL> 링크 복원
-  angleBracketLinks.forEach((html, i) => {
-    result = result.replace(`__ANGLE_LINK_${i}__`, html);
-  });
-
-  return result;
 }
 
 function parseMarkdown(text: string): string {
   if (!text) return "";
-
-  // 줄바꿈 정규화 (Windows \r\n, Mac \r -> Unix \n)
-  text = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-
-  const codeBlocks: string[] = [];
-  let result = text.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
-    const placeholder = `<!--CODE_BLOCK_${codeBlocks.length}-->`;
-    const language = lang || "plaintext";
-    const escapedCode = code.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-    // 서버에서 highlight.js 적용
-    let highlightedCode: string;
-    try {
-      if (language !== "plaintext" && hljs.getLanguage(language)) {
-        highlightedCode = hljs.highlight(escapedCode, { language }).value;
-      } else {
-        highlightedCode = hljs.highlightAuto(escapedCode).value;
-      }
-    } catch {
-      highlightedCode = escapedCode;
-    }
-
-    codeBlocks.push(
-      `<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm my-4"><code class="hljs language-${language}">${highlightedCode}</code></pre>`
-    );
-    return placeholder;
-  });
-
-  const lines = result.split("\n");
-  const processedLines: string[] = [];
-  // 리스트 깊이 스택 (각 깊이의 들여쓰기 레벨 저장)
-  const listStack: number[] = [];
-
-  // 리스트 아이템인지 확인하고 들여쓰기 레벨 반환
-  function getListItemInfo(line: string): { level: number; content: string } | null {
-    const match = line.match(/^(\s*)([-*])\s+(.+)$/);
-    if (!match) return null;
-    const indent = match[1].length;
-    // 2칸 또는 4칸 들여쓰기를 1레벨로 계산
-    const level = Math.floor(indent / 2);
-    return { level, content: match[3] };
-  }
-
-  // 현재 리스트 스택 닫기
-  function closeListsToLevel(targetLevel: number) {
-    while (listStack.length > targetLevel) {
-      listStack.pop();
-      processedLines.push("</ul>");
-    }
-  }
-
-  for (const line of lines) {
-    let processed = line;
-
-    if (processed.startsWith("<!--CODE_BLOCK_")) {
-      closeListsToLevel(0);
-      processedLines.push(processed);
-      continue;
-    }
-
-    if (processed.match(/^#### /)) {
-      closeListsToLevel(0);
-      const headingContent = processed.replace(/^#### (.+)$/, "$1");
-      const formattedHeading = applyInlineFormatting(headingContent);
-      processedLines.push(
-        `<h4 class="text-base font-semibold mt-4 mb-2 text-gray-800">${formattedHeading}</h4>`
-      );
-      continue;
-    }
-    if (processed.match(/^### /)) {
-      closeListsToLevel(0);
-      const headingContent = processed.replace(/^### (.+)$/, "$1");
-      const formattedHeading = applyInlineFormatting(headingContent);
-      processedLines.push(
-        `<h3 class="text-lg font-semibold mt-4 mb-2">${formattedHeading}</h3>`
-      );
-      continue;
-    }
-    if (processed.match(/^## /)) {
-      closeListsToLevel(0);
-      const headingContent = processed.replace(/^## (.+)$/, "$1");
-      const formattedHeading = applyInlineFormatting(headingContent);
-      processedLines.push(
-        `<h2 class="text-xl font-bold mt-6 mb-3">${formattedHeading}</h2>`
-      );
-      continue;
-    }
-
-    const listItem = getListItemInfo(processed);
-    if (listItem) {
-      const { level, content } = listItem;
-      const formattedContent = applyInlineFormatting(content);
-
-      if (level > listStack.length - 1) {
-        // 새로운 하위 리스트 시작
-        while (listStack.length <= level) {
-          const ulClass = listStack.length === 0
-            ? 'my-2 space-y-1 list-disc list-inside'
-            : 'mt-1 ml-4 space-y-1 list-disc list-inside';
-          processedLines.push(`<ul class="${ulClass}">`);
-          listStack.push(listStack.length);
-        }
-      } else if (level < listStack.length - 1) {
-        // 상위 레벨로 돌아가기
-        closeListsToLevel(level + 1);
-      }
-
-      processedLines.push(`<li>${formattedContent}</li>`);
-      continue;
-    }
-
-    if (listStack.length > 0 && processed.trim() !== "") {
-      closeListsToLevel(0);
-    }
-
-    if (processed.trim() === "") {
-      processedLines.push("");
-      continue;
-    }
-
-    processed = applyInlineFormatting(processed);
-    processedLines.push(`<div class="my-2">${processed}</div>`);
-  }
-
-  closeListsToLevel(0);
-
-  result = processedLines.join("\n");
-
-  codeBlocks.forEach((block, i) => {
-    result = result.replace(`<!--CODE_BLOCK_${i}-->`, block);
-  });
-
-  // GitHub 스타일 인용 블록 처리 (> [!TIP], > [!NOTE], > [!WARNING], > [!IMPORTANT])
-  result = result.replace(
-    /<div class="my-2">&gt; \[!TIP\]<\/div>\n<div class="my-2">&gt; (.+?)<\/div>/g,
-    '<div class="my-4 p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg"><div class="flex items-center gap-2 text-green-700 font-semibold mb-1"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>TIP</div><div class="text-green-800">$1</div></div>'
-  );
-
-  result = result.replace(
-    /<div class="my-2">&gt; \[!NOTE\]<\/div>\n<div class="my-2">&gt; (.+?)<\/div>/g,
-    '<div class="my-4 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg"><div class="flex items-center gap-2 text-blue-700 font-semibold mb-1"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>NOTE</div><div class="text-blue-800">$1</div></div>'
-  );
-
-  result = result.replace(
-    /<div class="my-2">&gt; \[!WARNING\]<\/div>\n<div class="my-2">&gt; (.+?)<\/div>/g,
-    '<div class="my-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-lg"><div class="flex items-center gap-2 text-yellow-700 font-semibold mb-1"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>WARNING</div><div class="text-yellow-800">$1</div></div>'
-  );
-
-  result = result.replace(
-    /<div class="my-2">&gt; \[!IMPORTANT\]<\/div>\n<div class="my-2">&gt; (.+?)<\/div>/g,
-    '<div class="my-4 p-4 bg-purple-50 border-l-4 border-purple-500 rounded-r-lg"><div class="flex items-center gap-2 text-purple-700 font-semibold mb-1"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>IMPORTANT</div><div class="text-purple-800">$1</div></div>'
-  );
-
-  // 일반 인용 블록 (> 로 시작하는 줄)
-  result = result.replace(
-    /<div class="my-2">&gt; (.+?)<\/div>/g,
-    '<blockquote class="my-2 pl-4 border-l-4 border-gray-300 text-gray-600 italic">$1</blockquote>'
-  );
-
-  return result;
+  const normalized = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+  const html = markdown.parse(normalized) as string;
+  return transformAlerts(html);
 }
 
 function ReleaseCard({
