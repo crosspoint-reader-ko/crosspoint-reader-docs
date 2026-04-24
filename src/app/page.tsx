@@ -752,7 +752,7 @@ export default async function Home() {
 
               {/* Calibre Plugins */}
               <a
-                href="https://github.com/crosspoint-reader/calibre-plugins"
+                href="https://github.com/crosspoint-reader-ko/calibre-plugins/releases"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-lg hover:border-amber-300 transition-all"

@@ -138,7 +138,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/crosspoint-reader/calibre-plugins"
+                  href="https://github.com/crosspoint-reader-ko/calibre-plugins/releases"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition-colors"
