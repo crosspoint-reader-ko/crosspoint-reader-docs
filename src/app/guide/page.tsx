@@ -198,6 +198,25 @@ export default function GuidePage() {
                     <li>헝가리어, 슬로베니아어, 리투아니아어, 카자흐어 등 추가</li>
                   </ul>
                 </div>
+                <div className="sm:col-span-2">
+                  <h3 className="font-semibold text-gray-900 mb-1">
+                    X3 전용 (v1.2.0-ko.12)
+                  </h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>
+                      <strong>기울여 페이지 넘기기:</strong> QMI8658 자이로
+                      센서로 좌/우 기울임을 감지해 페이지 이동 (방향 반전 가능)
+                    </li>
+                    <li>
+                      <strong>상태 바 시계:</strong> DS3231 RTC + NTP 자동
+                      동기화, UTC 오프셋 지정 가능
+                    </li>
+                    <li>
+                      X3/X4 공용 펌웨어로, 하드웨어 유무에 따라 해당 설정
+                      항목이 자동으로 노출/숨김
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -603,6 +622,18 @@ export default function GuidePage() {
                         구성 가능)
                       </li>
                       <li>
+                        <strong>시계 (X3 전용):</strong> 상태 바에 현재 시각을
+                        표시합니다. X3에 내장된 DS3231 RTC로 시간을 유지하며,
+                        Wi-Fi 연결 시 NTP로 자동 동기화(최대 ~5초)되어
+                        RTC에 반영됩니다. DS3231이 없는 X4에서는 항목이 표시되지
+                        않습니다. (v1.2.0-ko.12)
+                      </li>
+                      <li>
+                        <strong>시계 UTC 오프셋 (X3 전용):</strong> 시계 표시에
+                        사용할 UTC 오프셋을 설정합니다. 예: 한국은 UTC+9,
+                        30분 단위도 지원(UTC+5:30 등). (v1.2.0-ko.12)
+                      </li>
+                      <li>
                         <strong>배터리 % 숨기기:</strong> 안 함(기본값), 리더에서,
                         항상 중 선택. 배터리 아이콘은 항상 표시됩니다.
                       </li>
@@ -747,6 +778,14 @@ export default function GuidePage() {
                         페이지 넘기기, <strong>화면 수동 새로고침(Manual Refresh)</strong>{" "}
                         중 선택. 수동 새로고침을 선택하면 짧은 전원 버튼 클릭으로
                         화면의 잔상(ghosting)을 즉시 제거할 수 있습니다. (v1.2.0)
+                      </li>
+                      <li>
+                        <strong>기울여 페이지 넘기기 (X3 전용):</strong> 내장
+                        자이로 센서(QMI8658)로 기기를 좌/우로 살짝 기울이면
+                        다음/이전 페이지로 넘어갑니다. 방향 설정(<em>정방향</em>{" "}
+                        / <em>역방향</em>)으로 기울임 방향과 페이지 넘김 방향을
+                        반전시킬 수 있고, 세로/가로/반전 방향 모두 지원합니다.
+                        QMI8658이 없는 X4에서는 항목이 표시되지 않습니다. (v1.2.0-ko.12)
                       </li>
                     </ul>
 
