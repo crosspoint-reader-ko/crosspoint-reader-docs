@@ -142,10 +142,11 @@ export default function GuideSettingsPage() {
                     </h4>
                     <ul className="list-disc list-inside text-gray-600 space-y-1 mb-4">
                       <li>
-                        <strong>절전 화면 이미지:</strong> 다크(기본값), 라이트,
-                        사용자 정의, 커버, 커버 + 사용자 정의, 없음 중 선택.{" "}
-                        <em>커버 + 사용자 정의</em>는 현재 책을 읽는 중에만 커버를
-                        표시하고 그 외에는 사용자 정의 이미지로 대체합니다. (v1.2.0)
+                        <strong>절전 화면:</strong> 어둡게(기본값), 밝게,
+                        사용자 지정, 표지, 표지 + 사용자 지정, 없음 중 선택.{" "}
+                        <em>표지 + 사용자 지정</em>은 현재 책을 읽는 중에만
+                        표지를 표시하고 그 외에는 사용자 지정 이미지로
+                        대체합니다. (v1.2.0)
                       </li>
                       <li>
                         <strong>절전 화면 커버 모드:</strong> 맞춤(Fit) / 자르기(Crop)
@@ -196,9 +197,11 @@ export default function GuideSettingsPage() {
                         1권 대신 3권까지 표시합니다.
                       </li>
                       <li>
-                        <strong>이미지 표시 (Image Display):</strong> EPUB 본문의
-                        이미지를 렌더링할지 여부 선택. 렌더링 비활성화 시 페이지
-                        넘기기가 빨라집니다. (v1.2.0)
+                        <strong>이미지:</strong> EPUB 본문 이미지 렌더링 방식
+                        선택 — <em>표시</em>(기본값) / <em>자리표시자</em>{" "}
+                        (작은 사각 표시만) / <em>제거</em> (완전히 건너뛰기).
+                        자리표시자·제거는 페이지 넘기기 속도를 높입니다.
+                        (v1.2.0)
                       </li>
                       <li>
                         <strong>햇빛 번짐 보정:</strong> 흰색 X4 모델의 직사광선
@@ -416,25 +419,25 @@ export default function GuideSettingsPage() {
                         이동
                       </li>
                       <li>
-                        <strong>각주 (Footnotes):</strong> 현재 책이 각주를
-                        포함할 때만 표시되며, 각주 목록을 한 번에 탐색
-                        (v1.2.0)
+                        <strong>각주:</strong> 현재 책이 각주를 포함할 때만
+                        표시되며, 각주 목록을 한 번에 탐색 (v1.2.0)
                       </li>
                       <li>
-                        <strong>화면 방향:</strong> 세로(기본) / 가로 시계 /
+                        <strong>읽기 방향:</strong> 세로(기본) / 가로 시계 /
                         반전 / 가로 반시계 방향 — 선택 즉시 미리보기 되고,
                         메뉴를 빠져나갈 때 적용됩니다.
                       </li>
                       <li>
-                        <strong>자동 페이지 넘김:</strong> 분당 넘김 속도 선택
-                        (OFF / 1 / 3 / 6 / 12) (v1.2.0)
+                        <strong>자동 넘김 (분당 페이지):</strong> 분당 넘김
+                        속도 선택 (꺼짐 / 1 / 3 / 6 / 12) (v1.2.0)
                       </li>
                       <li>
-                        <strong>퍼센트로 이동:</strong> 책 전체 진행률을
+                        <strong>% 위치로 이동:</strong> 책 전체 진행률을
                         직접 입력해 원하는 위치로 점프
                       </li>
                       <li>
-                        <strong>스크린샷:</strong> 현재 페이지를 SD 카드의{" "}
+                        <strong>스크린샷 촬영:</strong> 현재 페이지를 SD
+                        카드의{" "}
                         <code className="bg-gray-100 px-1 rounded">
                           /screenshots
                         </code>{" "}
@@ -448,16 +451,17 @@ export default function GuideSettingsPage() {
                         )
                       </li>
                       <li>
-                        <strong>QR 표시:</strong> 현재 웹서버/핫스팟 주소를
-                        QR로 화면에 띄워 휴대폰에서 바로 접속
+                        <strong>페이지를 QR로 표시:</strong> 현재
+                        웹서버/핫스팟 주소를 QR로 화면에 띄워 휴대폰에서 바로
+                        접속
                       </li>
                       <li>
                         <strong>홈으로:</strong> 현재 읽기 위치를 저장하고
                         홈 화면으로 돌아감
                       </li>
                       <li>
-                        <strong>진행률 동기화 (Sync):</strong> KOReader Sync
-                        서버로 현재 읽기 위치를 업로드 (자세한 내용은{" "}
+                        <strong>진행 동기화:</strong> KOReader Sync 서버로
+                        현재 읽기 위치를 업로드 (자세한 내용은{" "}
                         <Link
                           href="/guide/customize#koreader-sync"
                           className="text-blue-600 hover:text-blue-800"
@@ -467,14 +471,14 @@ export default function GuideSettingsPage() {
                         )
                       </li>
                       <li>
-                        <strong>캐시 삭제:</strong> 현재 책의 렌더링 캐시
-                        (.crosspoint 내) 만 삭제. 설정과 읽기 위치는 유지
+                        <strong>도서 캐시 삭제:</strong> 현재 책의 렌더링
+                        캐시(.crosspoint 내)만 삭제. 설정과 읽기 위치는 유지
                       </li>
                     </ul>
                     <div className="rounded-lg bg-blue-50 border border-blue-200 p-3 text-sm text-blue-800 mb-2">
-                      <strong>참고:</strong> 리더 확인 메뉴에서 바꾼 화면
-                      방향과 자동 페이지 넘김 값은 책 단위로 저장되며 JSON
-                      설정에도 반영됩니다.
+                      <strong>참고:</strong> 리더 확인 메뉴에서 바꾼 읽기
+                      방향과 자동 넘김 값은 책 단위로 저장되며 JSON 설정에도
+                      반영됩니다.
                     </div>
                   </div>
 
@@ -492,34 +496,36 @@ export default function GuideSettingsPage() {
                     </p>
                     <ul className="list-disc list-inside text-gray-600 space-y-1 mb-4">
                       <li>
-                        <strong>화면 방향:</strong> 세로 / 가로 시계 / 반전 /
+                        <strong>읽기 방향:</strong> 세로 / 가로 시계 / 반전 /
                         가로 반시계 중 선택
                       </li>
                       <li>
-                        <strong>자동 페이지 넘김:</strong> 분당 넘김 속도
-                        (OFF / 1 / 3 / 6 / 12) — EPUB과 동일 옵션
+                        <strong>자동 넘김 (분당 페이지):</strong> 분당 넘김
+                        속도 (꺼짐 / 1 / 3 / 6 / 12) — EPUB과 동일 옵션
                       </li>
                       <li>
-                        <strong>페이지 점프 크기 (Page Jump Step):</strong>{" "}
-                        OFF / 10 / 20 / 50 / 100 — 이동 버튼을 1초 이상 길게
-                        누르면 지정한 페이지 수만큼 건너뜁니다. OFF일 때는
-                        길게 눌러도 한 페이지만 넘김 (v1.2.0-ko)
+                        <strong>길게 눌러 페이지 이동:</strong> 꺼짐 / 10 / 20
+                        / 50 / 100 — 이동 버튼을 1초 이상 길게 누르면 지정한
+                        페이지 수만큼 건너뜁니다. 꺼짐일 때는 길게 눌러도
+                        한 페이지만 넘김 (v1.2.0-ko)
                       </li>
                       <li>
-                        <strong>퍼센트로 이동:</strong> 전체 파일 대비 진행률
+                        <strong>% 위치로 이동:</strong> 전체 파일 대비 진행률
                         입력으로 점프
                       </li>
                       <li>
-                        <strong>스크린샷:</strong> 현재 페이지를 BMP로 저장
+                        <strong>스크린샷 촬영:</strong> 현재 페이지를 BMP로
+                        저장
                       </li>
                       <li>
                         <strong>홈으로:</strong> 현재 위치 저장 후 홈 화면 복귀
                       </li>
                     </ul>
                     <p className="text-gray-500 text-xs">
-                      TXT 리더 메뉴에는 챕터 선택·각주·QR 표시·동기화·캐시
-                      삭제가 없습니다 — 이 기능들은 EPUB 리더에서만 의미가
-                      있어 TXT에서는 노출되지 않습니다.
+                      TXT 리더 메뉴에는 챕터 선택·각주·페이지를 QR로
+                      표시·진행 동기화·도서 캐시 삭제가 없습니다 — 이
+                      기능들은 EPUB 리더에서만 의미가 있어 TXT에서는 노출되지
+                      않습니다.
                     </p>
                   </div>
                 </div>
