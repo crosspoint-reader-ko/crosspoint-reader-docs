@@ -43,3 +43,7 @@ next-env.d.ts
 
 # firmware files (downloaded at build time)
 /public/firmware/
+
+# 공식 사용 설명서 PDF (SVG 추출 원본, 저장소에 포함하지 않음)
+/X3-ENG-User-Guide.pdf
+/X4_User_Manual_ENG_*.pdf

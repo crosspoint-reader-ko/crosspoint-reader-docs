@@ -8,11 +8,11 @@ import { CROSSPOINT_VERSION } from "@/constants/version";
 export const metadata: Metadata = {
   title: "설치 가이드",
   description:
-    "Xteink X4에 CrossPoint Reader 한국어 펌웨어를 설치하는 방법을 안내합니다. 웹 플래셔를 통해 간편하게 설치할 수 있습니다.",
+    "Xteink X3/X4에 CrossPoint Reader 한국어 펌웨어를 설치하는 방법을 안내합니다. 웹 플래셔를 통해 간편하게 설치할 수 있습니다.",
   openGraph: {
     title: "설치 가이드 | CrossPoint Reader",
     description:
-      "Xteink X4에 CrossPoint Reader 한국어 펌웨어를 설치하는 방법을 안내합니다.",
+      "Xteink X3/X4에 CrossPoint Reader 한국어 펌웨어를 설치하는 방법을 안내합니다.",
   },
 };
 
@@ -53,8 +53,8 @@ export default async function InstallPage() {
             </div>
             <h1 className="text-4xl font-bold text-gray-900">설치 가이드</h1>
             <p className="mt-4 text-lg text-gray-600">
-              CrossPoint Reader 한국어 펌웨어를 Xteink X4에 설치하는 방법을
-              안내합니다.
+              CrossPoint Reader 한국어 펌웨어를 Xteink X3 및 X4에 설치하는
+              방법을 안내합니다. 단일 펌웨어로 두 모델 모두 지원합니다.
             </p>
           </div>
         </section>
@@ -86,7 +86,10 @@ export default async function InstallPage() {
                     <h3 className="font-semibold text-gray-900">USB 연결</h3>
                   </div>
                   <p className="text-gray-600 ml-12">
-                    Xteink X4를 USB-C 케이블로 컴퓨터에 연결합니다.
+                    <strong>X4:</strong> USB-C 케이블로 컴퓨터에 연결합니다.
+                    <br />
+                    <strong>X3:</strong> 동봉된 마그네틱 충전/데이터 케이블로
+                    컴퓨터에 연결합니다.
                   </p>
 
                   <div className="flex items-center gap-4">

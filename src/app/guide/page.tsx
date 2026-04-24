@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import { getAssetPath } from "@/lib/basePath";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 // Section Link Component
@@ -60,6 +60,8 @@ const tocSections: { id: string; title: string }[] = [
 ];
 
 export default function GuidePage() {
+  const [deviceTab, setDeviceTab] = useState<"x3" | "x4">("x4");
+
   // Handle hash on page load
   useEffect(() => {
     const hash = window.location.hash.slice(1);
@@ -233,20 +235,142 @@ export default function GuidePage() {
               >
                 <SectionLink
                   id="hardware"
-                  className="text-2xl font-bold text-gray-900 mb-6"
+                  className="text-2xl font-bold text-gray-900 mb-4"
                 >
                   1. 하드웨어 개요
                 </SectionLink>
+                <p className="text-gray-600 mb-6">
+                  한국어 펌웨어는 <strong>Xteink X3</strong>와{" "}
+                  <strong>Xteink X4</strong> 두 모델을 지원합니다. 아래 탭에서
+                  사용 중인 모델을 선택해 폼팩터와 버튼 배치를 확인하세요.
+                </p>
+
+                {/* Device tab switcher */}
+                <div
+                  role="tablist"
+                  aria-label="기기 선택"
+                  className="mb-6 inline-flex rounded-lg border border-gray-200 bg-gray-50 p-1"
+                >
+                  {(
+                    [
+                      { id: "x4", label: "Xteink X4" },
+                      { id: "x3", label: "Xteink X3" },
+                    ] as const
+                  ).map((t) => (
+                    <button
+                      key={t.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={deviceTab === t.id}
+                      onClick={() => setDeviceTab(t.id)}
+                      className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                        deviceTab === t.id
+                          ? "bg-white text-blue-600 shadow-sm"
+                          : "text-gray-600 hover:text-gray-900"
+                      }`}
+                    >
+                      {t.label}
+                    </button>
+                  ))}
+                </div>
 
                 <div className="mb-8">
                   <Image
-                    src={getAssetPath("/device-overview.png")}
-                    alt="Xteink X4 하드웨어 개요"
+                    src={getAssetPath(
+                      deviceTab === "x3"
+                        ? "/x3-device-overview.svg"
+                        : "/x4-device-overview.svg",
+                    )}
+                    alt={
+                      deviceTab === "x3"
+                        ? "Xteink X3 폼팩터 및 버튼 배치"
+                        : "Xteink X4 폼팩터 및 버튼 배치"
+                    }
                     width={800}
-                    height={600}
-                    className="w-full h-auto rounded-lg"
+                    height={deviceTab === "x3" ? 422 : 422}
+                    className="w-full h-auto rounded-lg bg-white"
+                    unoptimized
                   />
+                  <p className="text-xs text-gray-400 mt-2">
+                    이미지 출처: Xteink {deviceTab === "x3" ? "X3" : "X4"} 공식
+                    사용 설명서
+                  </p>
                 </div>
+
+                {deviceTab === "x3" ? (
+                  <div className="grid sm:grid-cols-2 gap-4 mb-8 text-sm">
+                    <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+                      <h4 className="font-semibold text-gray-900 mb-2">
+                        제품 사양
+                      </h4>
+                      <ul className="text-gray-700 space-y-1">
+                        <li>화면: 3.7&quot; E-Ink (250+ PPI)</li>
+                        <li>크기: 98 × 64 × 5 mm (약 3.85&quot; × 2.52&quot; × 0.20&quot;)</li>
+                        <li>무게: 56 g</li>
+                        <li>배터리: 650 mAh</li>
+                        <li>저장 공간: 16 GB (MicroSD, 최대 512 GB 확장)</li>
+                        <li>NFC: 지원</li>
+                        <li>충전: 마그네틱 포고 핀 (전용 케이블 동봉)</li>
+                      </ul>
+                    </div>
+                    <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+                      <h4 className="font-semibold text-gray-900 mb-2">
+                        X3 전용 센서
+                      </h4>
+                      <ul className="text-gray-700 space-y-1">
+                        <li>QMI8658 6축 IMU (자이로/가속도 — 기울여 페이지 넘기기)</li>
+                        <li>DS3231 RTC + NTP 동기화 (상태 바 시계)</li>
+                        <li>뒷면 자성 부착부 + NFC 감지 영역</li>
+                      </ul>
+                      <p className="text-xs text-gray-500 mt-3">
+                        X3 전용 설정 항목은 하드웨어가 감지되면 자동으로
+                        노출됩니다. 자세한 내용은{" "}
+                        <Link
+                          href="#settings"
+                          className="text-blue-600 hover:text-blue-800"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            scrollToSection("settings");
+                          }}
+                        >
+                          설정 섹션
+                        </Link>
+                        을 참고하세요.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid sm:grid-cols-2 gap-4 mb-8 text-sm">
+                    <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+                      <h4 className="font-semibold text-gray-900 mb-2">
+                        제품 사양
+                      </h4>
+                      <ul className="text-gray-700 space-y-1">
+                        <li>화면: 4.3&quot; E-Ink (220 PPI)</li>
+                        <li>크기: 112 × 69 × 6 mm (약 4.4&quot; × 2.72&quot; × 0.23&quot;)</li>
+                        <li>무게: 74 g</li>
+                        <li>배터리: 450 mAh</li>
+                        <li>저장 공간: 32 GB (MicroSD)</li>
+                        <li>RAM: 128 MB</li>
+                        <li>충전: USB Type-C</li>
+                      </ul>
+                    </div>
+                    <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+                      <h4 className="font-semibold text-gray-900 mb-2">
+                        X4 전용 기능
+                      </h4>
+                      <ul className="text-gray-700 space-y-1">
+                        <li>1% 단위 배터리 잔량 표시 (Smooth Battery)</li>
+                        <li>흰색 모델 햇빛 번짐 소프트웨어 보정</li>
+                        <li>뒷면 마그네틱 부착 포인트 (케이스/스탠드 결합)</li>
+                      </ul>
+                      <p className="text-xs text-gray-500 mt-3">
+                        X4에는 자이로/RTC가 없어 기울여 페이지 넘기기·상태 바
+                        시계는 자동으로 숨겨집니다.
+                      </p>
+                    </div>
+                  </div>
+                )}
 
                 <h3
                   id="buttons"
@@ -263,32 +387,93 @@ export default function GuidePage() {
                           위치
                         </th>
                         <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 border-b">
-                          버튼
+                          버튼 / 포트
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td className="px-4 py-3 text-sm text-gray-700 border-b">
-                          <strong>하단</strong>
-                        </td>
-                        <td className="px-4 py-3 text-sm text-gray-700 border-b">
-                          뒤로, 확인, 왼쪽, 오른쪽
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-4 py-3 text-sm text-gray-700">
-                          <strong>우측면</strong>
-                        </td>
-                        <td className="px-4 py-3 text-sm text-gray-700">
-                          전원, 볼륨 업, 볼륨 다운, 리셋
-                        </td>
-                      </tr>
-                    </tbody>
+                    {deviceTab === "x3" ? (
+                      <tbody>
+                        <tr>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            <strong>하단</strong>
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            뒤로, 확인(OK), 다음 페이지, 이전 페이지
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            <strong>좌측면</strong>
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            이전 페이지 버튼
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            <strong>우측면</strong>
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            다음 페이지 버튼
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            <strong>상단</strong>
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            리셋, MicroSD 카드 슬롯, 전원
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-3 text-sm text-gray-700">
+                            <strong>뒷면</strong>
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-700">
+                            충전 LED, NFC 감지 영역, 자성 포인트, 마그네틱 충전 포트, 스트랩 홀
+                          </td>
+                        </tr>
+                      </tbody>
+                    ) : (
+                      <tbody>
+                        <tr>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            <strong>하단</strong>
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            뒤로, 확인(OK), 다음 페이지, 이전 페이지
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            <strong>좌측면</strong>
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            리셋, MicroSD 카드 슬롯
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            <strong>우측면</strong>
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-700 border-b">
+                            전원, 이전 페이지, 다음 페이지, USB-C 충전 포트, 스트랩 홀
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-3 text-sm text-gray-700">
+                            <strong>뒷면</strong>
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-700">
+                            마그네틱 부착 포인트
+                          </td>
+                        </tr>
+                      </tbody>
+                    )}
                   </table>
                 </div>
                 <p className="text-gray-600 mt-4 text-sm">
-                  버튼 배치는{" "}
+                  버튼 기능은{" "}
                   <Link
                     href="#settings"
                     className="text-blue-600 hover:text-blue-800"

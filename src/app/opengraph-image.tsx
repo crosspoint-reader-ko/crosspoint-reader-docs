@@ -9,6 +9,6 @@ export const contentType = ogContentType;
 export default async function Image() {
   return generateOGImage(
     "CrossPoint Reader",
-    "Xteink X4 전자잉크 리더를 위한 한국어 오픈소스 펌웨어",
+    "Xteink X3/X4 전자잉크 리더를 위한 한국어 오픈소스 펌웨어",
   );
 }

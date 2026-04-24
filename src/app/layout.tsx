@@ -5,7 +5,7 @@ import { basePath } from "@/lib/basePath";
 const siteUrl = "https://eunchurn.github.io/crosspoint-reader-docs";
 const siteName = "CrossPoint Reader 한국어";
 const siteDescription =
-  "Xteink X4 전자잉크 리더를 위한 CrossPoint Reader 한국어 펌웨어 설치 및 사용 가이드. EPUB, XTC, XTCH 파일을 지원하며 한글 폰트가 내장되어 있습니다.";
+  "Xteink X3 및 X4 전자잉크 리더를 위한 CrossPoint Reader 한국어 펌웨어 설치 및 사용 가이드. EPUB, XTC, XTCH 파일을 지원하며 한글 폰트가 내장되어 있습니다.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   description: siteDescription,
   keywords: [
     "CrossPoint Reader",
+    "Xteink X3",
     "Xteink X4",
     "전자책",
     "e-ink",
