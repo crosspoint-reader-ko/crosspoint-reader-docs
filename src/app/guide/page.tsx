@@ -182,6 +182,17 @@ export default function GuidePage() {
                       전원 버튼으로 <strong>수동 화면 새로고침</strong>
                     </li>
                     <li>JPEGDEC 기반 이미지 / 커버 변환 성능 개선</li>
+                    <li>
+                      <strong>책별 독서 타이머:</strong> 누적 독서 시간을
+                      자동 기록하고 리더 메뉴 진행률 라인에 표시 (v1.2.0-ko.14,{" "}
+                      <Link
+                        href="/guide/customize#reading-timer"
+                        className="text-blue-600 hover:text-blue-800"
+                      >
+                        자세히
+                      </Link>
+                      )
+                    </li>
                   </ul>
                 </div>
                 <div>

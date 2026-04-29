@@ -474,11 +474,28 @@ export default function GuideSettingsPage() {
                         <strong>도서 캐시 삭제:</strong> 현재 책의 렌더링
                         캐시(.crosspoint 내)만 삭제. 설정과 읽기 위치는 유지
                       </li>
+                      <li>
+                        <strong>독서 타이머 초기화:</strong> 현재 책의 누적
+                        독서 시간을 0으로 리셋 (두 단계 확인 후 적용,
+                        v1.2.0-ko.14). 자세한 동작은{" "}
+                        <Link
+                          href="/guide/customize#reading-timer"
+                          className="text-blue-600 hover:text-blue-800"
+                        >
+                          독서 타이머
+                        </Link>{" "}
+                        참고
+                      </li>
                     </ul>
                     <div className="rounded-lg bg-blue-50 border border-blue-200 p-3 text-sm text-blue-800 mb-2">
                       <strong>참고:</strong> 리더 확인 메뉴에서 바꾼 읽기
                       방향과 자동 넘김 값은 책 단위로 저장되며 JSON 설정에도
-                      반영됩니다.
+                      반영됩니다. 메뉴 상단 진행률 라인 우측에는 누적 독서
+                      시간 칩(예:{" "}
+                      <code className="bg-blue-100 px-1 rounded">
+                        Reading Time: 1h 23m
+                      </code>
+                      )이 함께 표시됩니다.
                     </div>
                   </div>
 
@@ -519,6 +536,19 @@ export default function GuideSettingsPage() {
                       </li>
                       <li>
                         <strong>홈으로:</strong> 현재 위치 저장 후 홈 화면 복귀
+                      </li>
+                      <li>
+                        <strong>독서 타이머 초기화:</strong> 현재 TXT 파일의
+                        누적 독서 시간을 0으로 리셋 (v1.2.0-ko.14). EPUB과
+                        동일하게 메뉴 진행률 라인 우측에 누적 시간 칩이
+                        표시됩니다. 자세한 내용은{" "}
+                        <Link
+                          href="/guide/customize#reading-timer"
+                          className="text-blue-600 hover:text-blue-800"
+                        >
+                          독서 타이머
+                        </Link>{" "}
+                        참고
                       </li>
                     </ul>
                     <p className="text-gray-500 text-xs">

@@ -52,6 +52,7 @@ const tocSections: { id: string; title: string }[] = [
   { id: "sleep-screen", title: "절전 화면" },
   { id: "custom-font", title: "커스텀 폰트" },
   { id: "screenshot", title: "스크린샷" },
+  { id: "reading-timer", title: "독서 타이머" },
 ];
 
 export default function GuideCustomizePage() {
@@ -448,6 +449,159 @@ docker compose up -d
                         </code>{" "}
                         폴더에 저장됩니다.
                       </p>
+                    </div>
+                  </div>
+
+                  <div id="reading-timer" className="scroll-mt-36">
+                    <SectionLink
+                      id="reading-timer"
+                      className="text-xl font-semibold text-gray-800 mb-2"
+                    >
+                      3.9 독서 타이머 (Reading Timer)
+                    </SectionLink>
+                    <p className="text-gray-600 mb-3">
+                      v1.2.0-ko.14 부터 책마다 누적 독서 시간을 자동으로
+                      기록합니다. EPUB과 TXT 양쪽 리더 모두에서 책을 펼치는
+                      순간부터 시간이 누적되며, 책을 닫고 다시 열어도 이어서
+                      계산됩니다. 누적 값은 해당 책의 캐시 디렉터리(SD 카드의{" "}
+                      <code className="bg-gray-100 px-1 rounded">
+                        /.crosspoint/&lt;hash&gt;/reading_stats.bin
+                      </code>
+                      )에 16바이트 바이너리로 저장됩니다.
+                    </p>
+
+                    <h4 className="text-lg font-medium text-gray-700 mt-4 mb-2">
+                      어디에 표시되나
+                    </h4>
+                    <p className="text-gray-600 mb-3">
+                      읽기 도중 <strong>확인(OK) 버튼</strong>을 눌러 리더 메뉴를
+                      열면 상단 진행률 라인 우측에 누적 시간 칩이 표시됩니다 —
+                      예: <code className="bg-gray-100 px-1 rounded">Reading Time: 1h 23m</code>.
+                      값은 짧게 표기되며 (
+                      <code className="bg-gray-100 px-1 rounded">45m</code>,{" "}
+                      <code className="bg-gray-100 px-1 rounded">1h 23m</code>,{" "}
+                      <code className="bg-gray-100 px-1 rounded">1d 5h</code>,{" "}
+                      <code className="bg-gray-100 px-1 rounded">123d</code>),
+                      EPUB·TXT 리더 메뉴 모두 동일하게 표시됩니다.
+                    </p>
+
+                    <h4 className="text-lg font-medium text-gray-700 mt-4 mb-2">
+                      누적 규칙
+                    </h4>
+                    <div className="overflow-x-auto mb-4">
+                      <table className="min-w-full border border-gray-200 rounded-lg text-sm">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-2 text-left font-semibold text-gray-900 border-b">
+                              상황
+                            </th>
+                            <th className="px-4 py-2 text-left font-semibold text-gray-900 border-b">
+                              동작
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="px-4 py-2 text-gray-700 border-b">
+                              페이지를 넘기거나 메뉴에서 읽기 화면으로 복귀
+                            </td>
+                            <td className="px-4 py-2 text-gray-700 border-b">
+                              누적 진행
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="px-4 py-2 text-gray-700 border-b">
+                              자동 페이지 넘김 활성 중
+                            </td>
+                            <td className="px-4 py-2 text-gray-700 border-b">
+                              누적 진행 (장시간 무인 읽기에서도 끊기지 않음)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="px-4 py-2 text-gray-700 border-b">
+                              5분 동안 입력 없음
+                            </td>
+                            <td className="px-4 py-2 text-gray-700 border-b">
+                              일시 정지 (다음 입력 시 자동 재개)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="px-4 py-2 text-gray-700 border-b">
+                              리더 메뉴 / 챕터 선택 / 서브 액티비티 진입
+                            </td>
+                            <td className="px-4 py-2 text-gray-700 border-b">
+                              그동안의 시간은 누적되지 않음 (메뉴 시간 제외)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="px-4 py-2 text-gray-700 border-b">
+                              30초 미만의 짧은 세션
+                            </td>
+                            <td className="px-4 py-2 text-gray-700 border-b">
+                              저장 생략 (SD 카드 마모 방지)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="px-4 py-2 text-gray-700 border-b">
+                              활성 독서 5분 경과
+                            </td>
+                            <td className="px-4 py-2 text-gray-700 border-b">
+                              자동 중간 저장
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="px-4 py-2 text-gray-700">
+                              리더 종료 / 책 닫기
+                            </td>
+                            <td className="px-4 py-2 text-gray-700">
+                              잔여 시간 드레인 후 최종 저장
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <h4 className="text-lg font-medium text-gray-700 mt-4 mb-2">
+                      초기화하기
+                    </h4>
+                    <p className="text-gray-600 mb-3">
+                      리더 메뉴에서 <strong>독서 타이머 초기화 (Reset
+                      Reading Timer)</strong> 항목을 선택하면 두 단계 확인 후
+                      해당 책의 누적 값이 0으로 리셋됩니다. 다른 책의
+                      독서 시간에는 영향을 주지 않습니다.
+                    </p>
+
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
+                      <p className="mb-2">
+                        <strong>호환성 메모</strong>
+                      </p>
+                      <ul className="list-disc list-inside space-y-1">
+                        <li>
+                          기존{" "}
+                          <code className="bg-blue-100 px-1 rounded">
+                            progress.bin
+                          </code>
+                          ,{" "}
+                          <code className="bg-blue-100 px-1 rounded">
+                            book.bin
+                          </code>
+                          ,{" "}
+                          <code className="bg-blue-100 px-1 rounded">
+                            section.bin
+                          </code>{" "}
+                          캐시 포맷에는 영향이 없습니다.
+                        </li>
+                        <li>
+                          <code className="bg-blue-100 px-1 rounded">
+                            reading_stats.bin
+                          </code>
+                          은 책당 새로 생성되는 파일이며, 없으면 0초로 시작합니다.
+                        </li>
+                        <li>
+                          이전에 읽던 책의 누적 시간은 v1.2.0-ko.14 빌드를
+                          처음 켠 시점부터 0초로 시작합니다.
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
