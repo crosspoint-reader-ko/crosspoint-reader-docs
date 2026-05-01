@@ -4,11 +4,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getLatestRelease } from "@/lib/github";
 import { CROSSPOINT_VERSION } from "@/constants/version";
+import { getAssetPath } from "@/lib/basePath";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 export const metadata: Metadata = {
   title: "설치 가이드",
   description:
-    "Xteink X3/X4에 CrossPoint Reader 한국어 펌웨어를 설치하는 방법을 안내합니다. 웹 플래셔를 통해 간편하게 설치할 수 있습니다.",
+    "Xteink X3/X4에 CrossPoint Reader 한국어 펌웨어를 설치하는 방법을 안내합니다. 웹 플래셔, SD카드, esptool 등 여러 방법을 지원합니다.",
   openGraph: {
     title: "설치 가이드 | CrossPoint Reader",
     description:
@@ -16,8 +19,35 @@ export const metadata: Metadata = {
   },
 };
 
+interface StoreFirmwareInfo {
+  x4File: string | null;
+  x4Version: string | null;
+  x3File: string | null;
+  x3Version: string | null;
+}
+
+function loadStoreFirmwareInfo(): StoreFirmwareInfo {
+  try {
+    const data = JSON.parse(
+      readFileSync(
+        join(process.cwd(), "public", "firmware", "versions.json"),
+        "utf-8",
+      ),
+    );
+    return {
+      x4File: data.x4ChineseOfficialFile || null,
+      x4Version: data.x4ChineseOfficial || null,
+      x3File: data.x3ChineseOfficialFile || null,
+      x3Version: data.x3ChineseOfficial || null,
+    };
+  } catch {
+    return { x4File: null, x4Version: null, x3File: null, x3Version: null };
+  }
+}
+
 export default async function InstallPage() {
   const latestRelease = await getLatestRelease();
+  const storeFirmware = loadStoreFirmwareInfo();
 
   // API에서 가져온 정보 사용, 실패 시 fallback
   const version = latestRelease?.tag_name || CROSSPOINT_VERSION;
@@ -53,8 +83,9 @@ export default async function InstallPage() {
             </div>
             <h1 className="text-4xl font-bold text-gray-900">설치 가이드</h1>
             <p className="mt-4 text-lg text-gray-600">
-              CrossPoint Reader 한국어 펌웨어를 Xteink X3 및 X4에 설치하는
-              방법을 안내합니다. 단일 펌웨어로 두 모델 모두 지원합니다.
+              CrossPoint Reader 한국어 펌웨어를 Xteink X3/X4에 설치하는 방법을
+              안내합니다. 단일 펌웨어로 두 모델 모두 지원하며, 웹 플래셔·SD카드·OTA
+              등 다양한 설치 방법을 제공합니다.
             </p>
           </div>
         </section>
@@ -90,6 +121,11 @@ export default async function InstallPage() {
                     <br />
                     <strong>X3:</strong> 동봉된 마그네틱 충전/데이터 케이블로
                     컴퓨터에 연결합니다.
+                    <br />
+                    <span className="text-sm text-gray-500">
+                      ※ 시리얼 넘버가 붙은 X3 패키지의 경우 USB가 인식되지 않을 수 있습니다.
+                      이 경우 아래 <strong>방법 2: SD카드 업데이트</strong>를 사용하세요.
+                    </span>
                   </p>
 
                   <div className="flex items-center gap-4">
@@ -163,10 +199,99 @@ export default async function InstallPage() {
                 </div>
               </div>
 
-              {/* Method 2: External Web Flasher */}
+              {/* Method 2: SD Card Update */}
+              <div className="rounded-2xl border border-green-200 bg-green-50 p-8 mb-12">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="flex h-8 shrink-0 items-center justify-center rounded-full bg-green-600 text-white font-bold text-sm px-3">
+                    NEW
+                  </span>
+                  <h2 className="text-2xl font-bold text-gray-900 m-0">
+                    방법 2: SD카드 펌웨어 업데이트
+                  </h2>
+                </div>
+                <p className="text-gray-600 mb-6">
+                  USB 연결이 어렵거나 무선으로 업데이트하기 어려운 환경에서
+                  사용할 수 있는 방법입니다. v1.2.0-ko.15부터 지원되며, X3
+                  스토어 펌웨어로의 롤백에도 사용할 수 있습니다.
+                </p>
+
+                <div className="not-prose space-y-6">
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-3">
+                      A. 처음 사용자 (USB가 안 되는 X3 OEM 펌웨어 상태)
+                    </h3>
+                    <ol className="list-decimal list-inside text-gray-600 space-y-2 ml-2">
+                      <li>
+                        GitHub 릴리즈에서{" "}
+                        <code className="bg-gray-200 px-2 py-0.5 rounded text-sm">
+                          {webFirmwareFilename}
+                        </code>
+                        을 다운로드합니다.
+                      </li>
+                      <li>
+                        SD카드 <strong>루트 폴더</strong>에 복사하면서
+                        파일명을{" "}
+                        <code className="bg-gray-200 px-2 py-0.5 rounded text-sm">
+                          update.bin
+                        </code>
+                        으로 변경합니다.
+                      </li>
+                      <li>SD카드를 디바이스에 삽입합니다.</li>
+                      <li>
+                        <strong>왼쪽 사이드 버튼을 누른 상태에서</strong> 전원
+                        버튼을 길게 눌러 부팅합니다.
+                      </li>
+                      <li>OEM 부트로더가 자동으로 펌웨어를 인식해 플래싱합니다.</li>
+                    </ol>
+                  </div>
+
+                  <div className="border-t border-green-200 pt-6">
+                    <h3 className="font-semibold text-gray-900 mb-3">
+                      B. 기존 사용자 (이미 CrossPoint Reader-KO 사용 중)
+                    </h3>
+                    <ol className="list-decimal list-inside text-gray-600 space-y-2 ml-2">
+                      <li>
+                        GitHub 릴리즈에서{" "}
+                        <code className="bg-gray-200 px-2 py-0.5 rounded text-sm">
+                          {webFirmwareFilename}
+                        </code>
+                        을 다운로드해 SD카드에 복사합니다.
+                      </li>
+                      <li>SD카드를 디바이스에 삽입합니다.</li>
+                      <li>
+                        <strong>설정 → 시스템 → SD카드 펌웨어 업데이트</strong>로 이동합니다.
+                      </li>
+                      <li>SD카드의 펌웨어 파일을 선택하면 자동으로 플래싱이 진행됩니다.</li>
+                      <li>플래싱이 완료되면 자동으로 재부팅됩니다.</li>
+                    </ol>
+                    <div className="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-3">
+                      <p className="text-sm text-blue-800">
+                        💡 같은 메뉴에서 다운로드 받은{" "}
+                        <strong>스토어 펌웨어</strong>(X3/X4 OEM)도 선택해
+                        롤백할 수 있습니다.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-green-200 pt-6">
+                    <h3 className="font-semibold text-gray-900 mb-3">
+                      참고: OTA(WiFi) 업데이트도 같은 메뉴에서 가능
+                    </h3>
+                    <p className="text-gray-600">
+                      WiFi가 연결되어 있다면{" "}
+                      <strong>설정 → 시스템 → 업데이트</strong>로 이동해 별도
+                      파일 없이 OTA 업데이트할 수 있습니다. SD/OTA 모두 X4
+                      실리콘에서 동작하도록 raw 파티션 쓰기 + 직접 otadata
+                      갱신 방식으로 동작합니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Method 3: External Web Flasher */}
               <div className="rounded-2xl border border-gray-200 bg-white p-8 mb-12">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  방법 2: 펌웨어 다운로드 후 플래셔 사용
+                  방법 3: 펌웨어 다운로드 후 플래셔 사용
                 </h2>
                 <p className="text-gray-600 mb-6">
                   펌웨어 파일을 직접 다운로드하여 웹 플래셔에서 설치하는
@@ -267,10 +392,10 @@ export default async function InstallPage() {
                 </div>
               </div>
 
-              {/* Method 3: esptool */}
+              {/* Method 4: esptool */}
               <div className="rounded-2xl border border-gray-200 bg-white p-8 mb-12">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  방법 3: esptool 사용 (고급)
+                  방법 4: esptool 사용 (고급)
                 </h2>
                 <p className="text-gray-600 mb-6">
                   명령줄 도구를 사용하여 직접 펌웨어를 플래시하는 방법입니다.
@@ -363,11 +488,12 @@ export default async function InstallPage() {
               {/* Reverting */}
               <div className="rounded-2xl border border-gray-200 bg-white p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  원래 펌웨어로 복원
+                  원래 펌웨어로 복원 (스토어 펌웨어)
                 </h2>
                 <p className="text-gray-600 mb-6">
                   원래 Xteink 공식 펌웨어로 되돌리려면 다음 방법 중 하나를
-                  사용하세요. 스토어 펌웨어로 롤백 시 최신 공식 펌웨어가 적용됩니다.
+                  사용하세요. 아래에서 X3/X4용 최신 스토어 펌웨어를 직접
+                  다운로드 받을 수 있습니다.
                 </p>
 
                 <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4">
@@ -381,9 +507,70 @@ export default async function InstallPage() {
                   </div>
                 </div>
 
+                {/* Store Firmware Downloads */}
+                <div className="mb-6">
+                  <h3 className="font-semibold text-gray-900 mb-3">
+                    스토어 펌웨어 다운로드
+                  </h3>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {storeFirmware.x4File && (
+                      <a
+                        href={getAssetPath(`/firmware/${storeFirmware.x4File}`)}
+                        download
+                        className="flex items-center justify-between gap-3 rounded-lg border border-gray-300 bg-white px-4 py-3 hover:bg-gray-50 transition-colors"
+                      >
+                        <div className="min-w-0">
+                          <div className="font-medium text-gray-900">
+                            X4 중국어 공식{" "}
+                            {storeFirmware.x4Version && (
+                              <span className="text-sm font-normal text-gray-500">
+                                v{storeFirmware.x4Version}
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-xs text-gray-500 truncate">
+                            {storeFirmware.x4File}
+                          </div>
+                        </div>
+                        <svg className="h-5 w-5 text-gray-600 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                        </svg>
+                      </a>
+                    )}
+                    {storeFirmware.x3File && (
+                      <a
+                        href={getAssetPath(`/firmware/${storeFirmware.x3File}`)}
+                        download
+                        className="flex items-center justify-between gap-3 rounded-lg border border-gray-300 bg-white px-4 py-3 hover:bg-gray-50 transition-colors"
+                      >
+                        <div className="min-w-0">
+                          <div className="font-medium text-gray-900">
+                            X3 중국어 공식{" "}
+                            {storeFirmware.x3Version && (
+                              <span className="text-sm font-normal text-gray-500">
+                                v{storeFirmware.x3Version}
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-xs text-gray-500 truncate">
+                            {storeFirmware.x3File}
+                          </div>
+                        </div>
+                        <svg className="h-5 w-5 text-gray-600 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                  <p className="mt-2 text-xs text-gray-500">
+                    파일명은 OEM 원본 파일명을 그대로 유지합니다. 다운로드 후
+                    아래 방법 중 하나로 플래싱하세요.
+                  </p>
+                </div>
+
                 <div className="space-y-4">
                   <div className="bg-gray-50 rounded-lg p-4">
-                    <h3 className="font-semibold text-gray-900">방법 1</h3>
+                    <h3 className="font-semibold text-gray-900">방법 1: 웹 플래셔</h3>
                     <p className="text-gray-600 mt-1">
                       <Link
                         href="/flasher"
@@ -391,12 +578,22 @@ export default async function InstallPage() {
                       >
                         웹 플래셔
                       </Link>
-                      에서 영어 또는 중국어 공식 펌웨어를 플래시합니다.
+                      에서 X3 또는 X4 스토어 펌웨어를 직접 플래시할 수 있습니다.
                     </p>
                   </div>
 
                   <div className="bg-gray-50 rounded-lg p-4">
-                    <h3 className="font-semibold text-gray-900">방법 2</h3>
+                    <h3 className="font-semibold text-gray-900">방법 2: SD카드 업데이트</h3>
+                    <p className="text-gray-600 mt-1">
+                      위에서 다운로드 받은 스토어 펌웨어 파일을 SD카드에
+                      복사한 뒤,{" "}
+                      <strong>설정 → 시스템 → SD카드 펌웨어 업데이트</strong>
+                      에서 해당 파일을 선택하면 자동으로 플래싱됩니다.
+                    </p>
+                  </div>
+
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <h3 className="font-semibold text-gray-900">방법 3: 외부 웹 플래셔</h3>
                     <p className="text-gray-600 mt-1">
                       <a
                         href="https://xteink.dve.al/"

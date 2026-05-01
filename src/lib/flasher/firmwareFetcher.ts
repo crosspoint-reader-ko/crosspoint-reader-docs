@@ -1,16 +1,16 @@
 import { getAssetPath } from "@/lib/basePath";
 
-// 공식 펌웨어는 빌드 시 다운로드되어 로컬에 저장됨 (Mixed Content 문제 해결)
-const officialFirmwareFiles = {
-  "5.1.6-EN": "/firmware/english-official-firmware.bin",
-  "5.3.9-CH": "/firmware/chinese-official-firmware.bin",
-};
-
 export interface FirmwareVersions {
   korean: string;
+  koreanFile: string;
   crosspoint: string;
+  crosspointFile: string;
   englishOfficial: string;
-  chineseOfficial: string;
+  englishOfficialFile: string;
+  x4ChineseOfficial: string;
+  x4ChineseOfficialFile: string;
+  x3ChineseOfficial: string;
+  x3ChineseOfficialFile: string;
   downloadedAt: string;
 }
 
@@ -26,9 +26,15 @@ export async function getFirmwareVersions(): Promise<FirmwareVersions> {
   if (!response.ok) {
     return {
       korean: "unknown",
+      koreanFile: "",
       crosspoint: "unknown",
+      crosspointFile: "",
       englishOfficial: "unknown",
-      chineseOfficial: "unknown",
+      englishOfficialFile: "",
+      x4ChineseOfficial: "unknown",
+      x4ChineseOfficialFile: "",
+      x3ChineseOfficial: "unknown",
+      x3ChineseOfficialFile: "",
       downloadedAt: "",
     };
   }
@@ -44,17 +50,36 @@ async function fetchFirmwareFromUrl(url: string): Promise<Uint8Array> {
   return new Uint8Array(await response.arrayBuffer());
 }
 
-export async function getOfficialFirmware(
-  version: keyof typeof officialFirmwareFiles,
-) {
-  const url = getAssetPath(officialFirmwareFiles[version]);
+export type OfficialFirmwareKey = "x4-en" | "x4-ch" | "x3-ch";
+
+export async function getOfficialFirmware(key: OfficialFirmwareKey) {
+  const versions = await getFirmwareVersions();
+  let filename: string;
+  switch (key) {
+    case "x4-en":
+      filename = versions.englishOfficialFile;
+      break;
+    case "x4-ch":
+      filename = versions.x4ChineseOfficialFile;
+      break;
+    case "x3-ch":
+      filename = versions.x3ChineseOfficialFile;
+      break;
+  }
+  if (!filename) {
+    throw new Error(`Official firmware not available: ${key}`);
+  }
+  const url = getAssetPath(`/firmware/${filename}`);
   return fetchFirmwareFromUrl(url);
 }
 
 export async function getCommunityFirmware(firmware: "CrossPoint") {
   if (firmware === "CrossPoint") {
-    // Firmware is downloaded at build time and stored in public/firmware
-    const url = getAssetPath("/firmware/crosspoint-firmware.bin");
+    const versions = await getFirmwareVersions();
+    if (!versions.crosspointFile) {
+      throw new Error("CrossPoint firmware not available");
+    }
+    const url = getAssetPath(`/firmware/${versions.crosspointFile}`);
     return fetchFirmwareFromUrl(url);
   }
 
@@ -62,14 +87,21 @@ export async function getCommunityFirmware(firmware: "CrossPoint") {
 }
 
 export async function getKoreanCommunityFirmware() {
-  // Firmware is downloaded at build time and stored in public/firmware
-  const url = getAssetPath("/firmware/korean-firmware.bin");
+  const versions = await getFirmwareVersions();
+  if (!versions.koreanFile) {
+    throw new Error("Korean firmware not available");
+  }
+  const url = getAssetPath(`/firmware/${versions.koreanFile}`);
   return fetchFirmwareFromUrl(url);
 }
 
 export async function getKoreanPartitions(): Promise<Uint8Array | null> {
   try {
-    const url = getAssetPath("/firmware/korean-partitions.bin");
+    const versions = await getFirmwareVersions();
+    if (!versions.koreanFile) return null;
+    // koreanFile: crosspoint-1.2.0-ko.15.bin -> crosspoint-1.2.0-ko.15-partitions.bin
+    const partitionsName = versions.koreanFile.replace(/\.bin$/, "-partitions.bin");
+    const url = getAssetPath(`/firmware/${partitionsName}`);
     return await fetchFirmwareFromUrl(url);
   } catch {
     return null;
@@ -79,7 +111,7 @@ export async function getKoreanPartitions(): Promise<Uint8Array | null> {
 export async function getKoreanPartitionsByTag(tag: string): Promise<Uint8Array | null> {
   try {
     const safeTag = tag.replace(/[^a-zA-Z0-9._-]/g, "_");
-    const url = getAssetPath(`/firmware/korean-partitions-${safeTag}.bin`);
+    const url = getAssetPath(`/firmware/crosspoint-${safeTag}-partitions.bin`);
     return await fetchFirmwareFromUrl(url);
   } catch {
     return null;
@@ -112,4 +144,31 @@ export async function getKoreanFirmwareReleases(): Promise<KoreanFirmwareRelease
 export async function getKoreanFirmwareByTag(filename: string): Promise<Uint8Array> {
   const url = getAssetPath(`/firmware/${filename}`);
   return fetchFirmwareFromUrl(url);
+}
+
+export function getOfficialFirmwareDownloadPath(key: OfficialFirmwareKey, versions: FirmwareVersions): string | null {
+  let filename: string;
+  switch (key) {
+    case "x4-en":
+      filename = versions.englishOfficialFile;
+      break;
+    case "x4-ch":
+      filename = versions.x4ChineseOfficialFile;
+      break;
+    case "x3-ch":
+      filename = versions.x3ChineseOfficialFile;
+      break;
+  }
+  if (!filename) return null;
+  return getAssetPath(`/firmware/${filename}`);
+}
+
+export function getCrossPointFirmwareDownloadPath(versions: FirmwareVersions): string | null {
+  if (!versions.crosspointFile) return null;
+  return getAssetPath(`/firmware/${versions.crosspointFile}`);
+}
+
+export function getKoreanFirmwareDownloadPath(versions: FirmwareVersions): string | null {
+  if (!versions.koreanFile) return null;
+  return getAssetPath(`/firmware/${versions.koreanFile}`);
 }

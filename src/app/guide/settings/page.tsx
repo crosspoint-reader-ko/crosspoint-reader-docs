@@ -333,6 +333,11 @@ export default function GuideSettingsPage() {
                         시간 설정 (1분, 5분, 10분(기본값), 15분, 30분)
                       </li>
                       <li>
+                        <strong>숨김 파일 표시:</strong> 파일 브라우저에서{" "}
+                        <code className="bg-gray-100 px-1 rounded">.</code>{" "}
+                        으로 시작하는 숨김 파일/폴더를 표시할지 선택 (v1.2.0)
+                      </li>
+                      <li>
                         <strong>Wi-Fi 네트워크:</strong> Wi-Fi 네트워크 선택 및
                         연결 관리
                       </li>
@@ -354,11 +359,6 @@ export default function GuideSettingsPage() {
                         <strong>다음/이전 페이지 탐색</strong>을 지원합니다.
                       </li>
                       <li>
-                        <strong>숨김 파일 표시:</strong> 파일 브라우저에서{" "}
-                        <code className="bg-gray-100 px-1 rounded">.</code>{" "}
-                        으로 시작하는 숨김 파일/폴더를 표시할지 선택 (v1.2.0)
-                      </li>
-                      <li>
                         <strong>읽기 캐시 삭제:</strong> 렌더링 캐시 및 임시
                         파일 삭제 (설정 및 읽기 위치는 유지됨)
                       </li>
@@ -371,32 +371,38 @@ export default function GuideSettingsPage() {
                         릴리즈를 바라봅니다)
                       </li>
                       <li>
+                        <strong>SD카드 펌웨어 업데이트:</strong> SD카드에 복사한
+                        펌웨어 파일(<code className="bg-gray-100 px-1 rounded">.bin</code>)을
+                        선택해 오프라인으로 펌웨어를 갱신합니다. 한국어/CrossPoint
+                        펌웨어 업데이트는 물론, X3/X4 OEM 스토어 펌웨어로의 롤백에도
+                        사용할 수 있습니다.{" "}
+                        <Link
+                          href="/install"
+                          className="text-blue-600 hover:text-blue-800"
+                        >
+                          설치 가이드 - 방법 2
+                        </Link>
+                        를 참고하세요. (v1.2.0-ko.15)
+                      </li>
+                      <li>
                         <strong>언어:</strong> UI 언어 선택. v1.2.0 기준으로
                         한국어 포함 20여 개 언어가 정렬된 순서로 제공되며,
                         테마에 맞춰 표시됩니다. (새로 추가: 헝가리어, 슬로베니아어,
                         리투아니아어, 카자흐어, 벨라루스어, 핀란드어, 이탈리아어,
                         덴마크어, 네덜란드어, 폴란드어/우크라이나어 개선 등)
                       </li>
-                      <li>
-                        <strong>설정 저장 형식:</strong> v1.2.0 부터 설정은 기존
-                        바이너리 파일 대신{" "}
-                        <code className="bg-gray-100 px-1 rounded">.json</code>{" "}
-                        으로 저장되어 손쉽게 백업/복원이 가능합니다. 한국어
-                        전용{" "}
-                        <code className="bg-gray-100 px-1 rounded">
-                          customFontPath
-                        </code>
-                        ,{" "}
-                        <code className="bg-gray-100 px-1 rounded">
-                          characterWrap
-                        </code>
-                        ,{" "}
-                        <code className="bg-gray-100 px-1 rounded">
-                          paragraphIndent
-                        </code>{" "}
-                        값도 JSON 설정에 포함됩니다. (v1.1.1-ko.1+)
-                      </li>
                     </ul>
+
+                    <div className="mt-3 rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm text-blue-900">
+                      <strong>참고 — 설정 저장 형식:</strong> v1.2.0부터 설정은
+                      기존 바이너리 파일 대신{" "}
+                      <code className="bg-white/60 px-1 rounded">.json</code>으로
+                      저장되어 손쉽게 백업/복원이 가능합니다. 한국어 전용{" "}
+                      <code className="bg-white/60 px-1 rounded">customFontPath</code>,{" "}
+                      <code className="bg-white/60 px-1 rounded">characterWrap</code>,{" "}
+                      <code className="bg-white/60 px-1 rounded">paragraphIndent</code>{" "}
+                      값도 JSON 설정에 포함됩니다. (v1.1.1-ko.1+)
+                    </div>
                   </div>
 
                   {/* EPUB Reader Menu (OK popup) */}

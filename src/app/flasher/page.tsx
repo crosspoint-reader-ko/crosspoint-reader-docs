@@ -11,6 +11,7 @@ import {
   FirmwareVersions,
   getKoreanFirmwareReleases,
   KoreanFirmwareRelease,
+  getOfficialFirmwareDownloadPath,
 } from "@/lib/flasher/firmwareFetcher";
 
 export default function FlasherPage() {
@@ -40,10 +41,24 @@ export default function FlasherPage() {
   const isRestartNeeded = stepData.some(
     (step) => step.name === "장치 재시작" && step.status === "success",
   );
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const hasScrolledRef = useRef(false);
+  const prevRunningRef = useRef(false);
 
   useEffect(() => {
-    if (isDeviceConnected && !hasScrolled && progressSectionRef.current) {
+    // 작업 시작(false→true) 시점에 스크롤 플래그를 리셋
+    if (isRunning && !prevRunningRef.current) {
+      hasScrolledRef.current = false;
+    }
+    prevRunningRef.current = isRunning;
+  }, [isRunning]);
+
+  useEffect(() => {
+    if (
+      isRunning &&
+      isDeviceConnected &&
+      !hasScrolledRef.current &&
+      progressSectionRef.current
+    ) {
       const element = progressSectionRef.current;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - 200;
@@ -52,17 +67,9 @@ export default function FlasherPage() {
         top: offsetPosition,
         behavior: "smooth",
       });
-      setHasScrolled(true);
+      hasScrolledRef.current = true;
     }
-  }, [isDeviceConnected, hasScrolled]);
-
-  useEffect(() => {
-    // 새 작업이 시작되면 스크롤 상태 리셋 (모든 단계가 pending일 때)
-    const allPending = stepData.length > 0 && stepData.every((step) => step.status === "pending");
-    if (allPending || !isRunning) {
-      setHasScrolled(false);
-    }
-  }, [isRunning, stepData]);
+  }, [isRunning, isDeviceConnected]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -259,31 +266,111 @@ export default function FlasherPage() {
                 disabled={isRunning}
                 className="w-full px-4 py-3 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                CrossPoint 펌웨어 플래싱 (커뮤니티){" "}
+                CrossPoint 펌웨어 플래싱 (커뮤니티, X3/X4 호환){" "}
                 {versions?.crosspoint && (
                   <span className="opacity-75">({versions.crosspoint})</span>
                 )}
               </button>
-              <button
-                onClick={actions.flashEnglishFirmware}
-                disabled={isRunning}
-                className="w-full px-4 py-3 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                영어 공식 펌웨어 플래싱{" "}
-                {versions?.englishOfficial && (
-                  <span className="opacity-75">({versions.englishOfficial})</span>
-                )}
-              </button>
-              <button
-                onClick={actions.flashChineseFirmware}
-                disabled={isRunning}
-                className="w-full px-4 py-3 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                중국어 공식 펌웨어 플래싱{" "}
-                {versions?.chineseOfficial && (
-                  <span className="opacity-75">({versions.chineseOfficial})</span>
-                )}
-              </button>
+
+              {/* X4 Store Firmware */}
+              <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xs font-semibold text-gray-700 uppercase tracking-wide">
+                    X4 스토어 펌웨어 (OEM)
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <button
+                      onClick={actions.flashX4ChineseFirmware}
+                      disabled={isRunning}
+                      className="flex-1 px-4 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      중국어 공식 (X4){" "}
+                      {versions?.x4ChineseOfficial && (
+                        <span className="opacity-75">({versions.x4ChineseOfficial})</span>
+                      )}
+                    </button>
+                    {versions && getOfficialFirmwareDownloadPath("x4-ch", versions) && (
+                      <a
+                        href={getOfficialFirmwareDownloadPath("x4-ch", versions)!}
+                        download
+                        className="inline-flex items-center justify-center gap-1.5 px-4 py-3 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors whitespace-nowrap"
+                        title={versions.x4ChineseOfficialFile}
+                      >
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                        </svg>
+                        다운로드
+                      </a>
+                    )}
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <button
+                      onClick={actions.flashEnglishFirmware}
+                      disabled={isRunning}
+                      className="flex-1 px-4 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      영어 공식 (X4){" "}
+                      {versions?.englishOfficial && (
+                        <span className="opacity-75">({versions.englishOfficial})</span>
+                      )}
+                    </button>
+                    {versions && getOfficialFirmwareDownloadPath("x4-en", versions) && (
+                      <a
+                        href={getOfficialFirmwareDownloadPath("x4-en", versions)!}
+                        download
+                        className="inline-flex items-center justify-center gap-1.5 px-4 py-3 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors whitespace-nowrap"
+                        title={versions.englishOfficialFile}
+                      >
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                        </svg>
+                        다운로드
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* X3 Store Firmware */}
+              <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xs font-semibold text-gray-700 uppercase tracking-wide">
+                    X3 스토어 펌웨어 (OEM)
+                  </span>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <button
+                    onClick={actions.flashX3ChineseFirmware}
+                    disabled={isRunning}
+                    className="flex-1 px-4 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    중국어 공식 (X3){" "}
+                    {versions?.x3ChineseOfficial && (
+                      <span className="opacity-75">({versions.x3ChineseOfficial})</span>
+                    )}
+                  </button>
+                  {versions && getOfficialFirmwareDownloadPath("x3-ch", versions) && (
+                    <a
+                      href={getOfficialFirmwareDownloadPath("x3-ch", versions)!}
+                      download
+                      className="inline-flex items-center justify-center gap-1.5 px-4 py-3 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors whitespace-nowrap"
+                      title={versions.x3ChineseOfficialFile}
+                    >
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                      </svg>
+                      다운로드
+                    </a>
+                  )}
+                </div>
+                <p className="mt-2 text-xs text-gray-500">
+                  시리얼 넘버가 붙은 X3 패키지는 USB 플래싱이 동작하지 않을 수 있습니다.
+                  이 경우 다운로드 버튼으로 받은 펌웨어를 SD 카드에 복사 후
+                  <strong> 설정 → 시스템 → SD카드 펌웨어 업데이트</strong>를 사용하세요.
+                </p>
+              </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex-1">
                   <FileUpload

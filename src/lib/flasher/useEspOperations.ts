@@ -126,9 +126,11 @@ export function useEspOperations() {
   };
 
   const flashEnglishFirmware = async () =>
-    flashRemoteFirmware(() => getOfficialFirmware("5.1.6-EN"));
-  const flashChineseFirmware = async () =>
-    flashRemoteFirmware(() => getOfficialFirmware("5.3.9-CH"));
+    flashRemoteFirmware(() => getOfficialFirmware("x4-en"));
+  const flashX4ChineseFirmware = async () =>
+    flashRemoteFirmware(() => getOfficialFirmware("x4-ch"));
+  const flashX3ChineseFirmware = async () =>
+    flashRemoteFirmware(() => getOfficialFirmware("x3-ch"));
   const flashCrossPointFirmware = async () =>
     flashRemoteFirmware(() => getCommunityFirmware("CrossPoint"));
   const flashKoreanFirmware = async () =>
@@ -271,7 +273,8 @@ export function useEspOperations() {
     isRunning,
     actions: {
       flashEnglishFirmware: wrapWithRunning(flashEnglishFirmware),
-      flashChineseFirmware: wrapWithRunning(flashChineseFirmware),
+      flashX4ChineseFirmware: wrapWithRunning(flashX4ChineseFirmware),
+      flashX3ChineseFirmware: wrapWithRunning(flashX3ChineseFirmware),
       flashCrossPointFirmware: wrapWithRunning(flashCrossPointFirmware),
       flashKoreanFirmware: wrapWithRunning(flashKoreanFirmware),
       flashKoreanFirmwareVersion: wrapWithRunning(flashKoreanFirmwareVersion),
