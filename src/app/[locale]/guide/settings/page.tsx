@@ -3,6 +3,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { GuideNav } from "@/components/guide-nav";
+import { InPageToc } from "@/components/in-page-toc";
 import { useEffect } from "react";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
@@ -110,18 +111,7 @@ export default function GuideSettingsPage() {
             <p className="mt-4 text-lg text-gray-600">
               {t("hero.description")}
             </p>
-            {/* Quick Navigation */}
-            <div className="mt-8 flex flex-wrap justify-center gap-2">
-              {tocSections.map((section) => (
-                <button
-                  key={section.id}
-                  onClick={() => scrollToSection(section.id)}
-                  className="px-3 py-1.5 text-sm bg-white border border-gray-200 rounded-full hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 transition-colors"
-                >
-                  {section.title}
-                </button>
-              ))}
-            </div>
+            <InPageToc sections={tocSections} />
           </div>
         </section>
 

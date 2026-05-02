@@ -153,20 +153,30 @@ function LanguageSwitcher() {
           {routing.locales.map((locale) => {
             // localePrefix: "as-needed" — 기본 로케일(ko)은 prefix 없이, 그 외는 /{locale}.
             // 정적 export 산출물 구조와 일치시키기 위해 직접 href 구성.
+            // trailingSlash: true 와 일관성 유지를 위해 항상 / 로 끝맺음.
+            const normalizedPath =
+              pathname === "/" ? "/" : pathname.endsWith("/") ? pathname : `${pathname}/`;
             const targetPath =
               locale === routing.defaultLocale
-                ? pathname
-                : `/${locale}${pathname === "/" ? "" : pathname}`;
+                ? normalizedPath
+                : `/${locale}${normalizedPath === "/" ? "/" : normalizedPath}`;
             const href = `${basePath}${targetPath}`;
             return (
               <a
                 key={locale}
                 href={href}
-                onClick={() => {
+                onClick={(e) => {
+                  // React state 업데이트와 <a> 기본 navigation 순서가 꼬여
+                  // 쿠키 set 전에 페이지 이동이 일어나는 걸 막기 위해 직접 제어.
+                  e.preventDefault();
                   if (typeof window !== "undefined") {
                     window.localStorage.setItem("locale", locale);
+                    // next-intl middleware가 NEXT_LOCALE 쿠키 기반으로 자동 redirect 하므로
+                    // 사용자가 선택한 로케일을 쿠키에 먼저 반영한 뒤 navigate 해야
+                    // 한국어 ↔ 영어 양방향 전환이 정상 동작 (production은 미들웨어 안 돌지만 무해).
+                    document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;
+                    window.location.assign(href);
                   }
-                  setIsOpen(false);
                 }}
                 className={`block px-4 py-2 text-sm transition-colors ${
                   currentLocale === locale
