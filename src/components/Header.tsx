@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
-import { getAssetPath } from "@/lib/basePath";
+import { basePath, getAssetPath } from "@/lib/basePath";
 
 interface NavItem {
   key: string;
@@ -150,26 +150,34 @@ function LanguageSwitcher() {
       </button>
       {isOpen && (
         <div className="absolute top-full right-0 mt-2 w-32 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-          {routing.locales.map((locale) => (
-            <Link
-              key={locale}
-              href={pathname}
-              locale={locale}
-              onClick={() => {
-                if (typeof window !== "undefined") {
-                  window.localStorage.setItem("locale", locale);
-                }
-                setIsOpen(false);
-              }}
-              className={`block px-4 py-2 text-sm transition-colors ${
-                currentLocale === locale
-                  ? "text-blue-600 bg-blue-50 font-medium"
-                  : "text-gray-600 hover:text-blue-600 hover:bg-gray-50"
-              }`}
-            >
-              {labels[locale]}
-            </Link>
-          ))}
+          {routing.locales.map((locale) => {
+            // localePrefix: "as-needed" — 기본 로케일(ko)은 prefix 없이, 그 외는 /{locale}.
+            // 정적 export 산출물 구조와 일치시키기 위해 직접 href 구성.
+            const targetPath =
+              locale === routing.defaultLocale
+                ? pathname
+                : `/${locale}${pathname === "/" ? "" : pathname}`;
+            const href = `${basePath}${targetPath}`;
+            return (
+              <a
+                key={locale}
+                href={href}
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.localStorage.setItem("locale", locale);
+                  }
+                  setIsOpen(false);
+                }}
+                className={`block px-4 py-2 text-sm transition-colors ${
+                  currentLocale === locale
+                    ? "text-blue-600 bg-blue-50 font-medium"
+                    : "text-gray-600 hover:text-blue-600 hover:bg-gray-50"
+                }`}
+              >
+                {labels[locale]}
+              </a>
+            );
+          })}
         </div>
       )}
     </div>
