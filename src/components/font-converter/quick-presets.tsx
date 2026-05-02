@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { QUICK_PRESETS } from "./constants";
 import { PresetIcon } from "./preset-icon";
 
@@ -16,10 +17,11 @@ export function QuickPresets({
   getPresetCharCount: _getPresetCharCount,
   onTogglePreset,
 }: QuickPresetsProps) {
+  const t = useTranslations("fontConverter");
   return (
     <div>
       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-        유니코드 범위
+        {t("presets.label")}
       </label>
       <div className="grid grid-cols-2 gap-2">
         {QUICK_PRESETS.map((preset) => {
@@ -38,7 +40,7 @@ export function QuickPresets({
                       ? "border-blue-300 bg-blue-50/50 dark:bg-blue-900/15 border-dashed"
                       : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
                 }`}
-              title={preset.description}
+              title={t(`presets.items.${preset.id}.description`)}
             >
               <div
                 className={`shrink-0 w-4 h-4 rounded border flex items-center justify-center
@@ -89,15 +91,14 @@ export function QuickPresets({
               <span
                 className={`font-medium truncate ${isEnabled ? "text-blue-700 dark:text-blue-300" : "text-gray-900 dark:text-white"}`}
               >
-                {preset.name}
+                {t(`presets.items.${preset.id}.name`)}
               </span>
             </button>
           );
         })}
       </div>
       <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-        프리셋을 클릭하여 켜고 끌 수 있습니다. 여러 프리셋을 동시에 선택할 수
-        있습니다.
+        {t("presets.hint")}
       </p>
     </div>
   );

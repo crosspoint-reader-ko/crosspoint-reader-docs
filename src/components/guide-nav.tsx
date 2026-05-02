@@ -1,22 +1,24 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const SECTIONS = [
-  { href: "/guide", label: "기본" },
-  { href: "/guide/settings", label: "설정" },
-  { href: "/guide/files", label: "파일·Calibre" },
-  { href: "/guide/customize", label: "커스터마이즈" },
-  { href: "/guide/roadmap", label: "제한사항·로드맵" },
-  { href: "/guide/troubleshooting", label: "문제 해결" },
+  { href: "/guide", labelKey: "basics" },
+  { href: "/guide/settings", labelKey: "settings" },
+  { href: "/guide/files", labelKey: "files" },
+  { href: "/guide/customize", labelKey: "customize" },
+  { href: "/guide/roadmap", labelKey: "roadmap" },
+  { href: "/guide/troubleshooting", labelKey: "troubleshooting" },
 ] as const;
 
 export function GuideNav() {
   const pathname = usePathname();
+  const t = useTranslations("guide.nav");
   return (
     <nav
-      aria-label="사용자 가이드"
+      aria-label={t("ariaLabel")}
       className="sticky top-16 z-30 bg-white/80 backdrop-blur border-b border-gray-200"
     >
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-3 flex gap-2 overflow-x-auto">
@@ -35,7 +37,7 @@ export function GuideNav() {
                   : "text-gray-600 hover:bg-blue-50 hover:text-blue-600 border border-gray-200"
               }`}
             >
-              {s.label}
+              {t(s.labelKey)}
             </Link>
           );
         })}

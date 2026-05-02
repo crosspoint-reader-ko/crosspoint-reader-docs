@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "title": "Installation Guide",
+    "description": "How to install the CrossPoint Reader Korean firmware on Xteink X3/X4. Multiple methods are supported, including the Web Flasher, SD card, and esptool.",
+    "ogTitle": "Installation Guide | CrossPoint Reader",
+    "ogDescription": "How to install the CrossPoint Reader Korean firmware on Xteink X3/X4."
+  },
+  "hero": {
+    "currentVersion": "Current version: v{version}",
+    "title": "Installation Guide",
+    "description": "Learn how to install the CrossPoint Reader Korean firmware on Xteink X3/X4. A single firmware supports both models, and you can choose from multiple installation methods including the Web Flasher, SD card, and OTA."
+  },
+  "method1": {
+    "badge": "RECOMMENDED",
+    "title": "Method 1: Use Web Flasher (Recommended)",
+    "description": "This is the easiest and fastest method. You can flash the firmware directly from the Web Flasher on this site.",
+    "step1": {
+      "title": "Connect via USB",
+      "x4": "<strong>X4:</strong> Connect to your computer with a USB-C cable.",
+      "x3": "<strong>X3:</strong> Connect to your computer using the included magnetic charging/data cable.",
+      "note": "Note: X3 packages with a serial number sticker may not be detected over USB. In that case, use <strong>Method 2: SD Card Update</strong> below."
+    },
+    "step2": {
+      "title": "Open the Web Flasher",
+      "description": "Navigate to the Web Flasher page. Please use Chrome or Edge.",
+      "button": "Open Web Flasher"
+    },
+    "step3": {
+      "title": "Flash the Firmware",
+      "description": "Click the <strong>Flash Korean Firmware (Community)</strong> button.",
+      "bullet1": "Select the USB serial device in the device picker",
+      "bullet2": "Flashing will proceed automatically"
+    },
+    "step4": {
+      "title": "Apply the Firmware",
+      "description": "The device reboots automatically when flashing completes. If it appears stuck:",
+      "item1": "Press the <strong>Reset</strong> button on the device once",
+      "item2": "Hold the <strong>Power button</strong> for at least 1 second to boot"
+    }
+  },
+  "method2": {
+    "badge": "NEW",
+    "title": "Method 2: SD Card Firmware Update",
+    "description": "Use this method when USB connection is unreliable or wireless updates are not feasible. Supported from v1.2.0-ko.15, this method can also be used to roll back to the X3 store firmware.",
+    "newUserTitle": "A. First-time users (X3 OEM firmware where USB is not working)",
+    "newUserStep1": "Download <code>{filename}</code> from the GitHub releases.",
+    "newUserStep2": "Copy it to the <strong>root folder</strong> of your SD card and rename it to <code>update.bin</code>.",
+    "newUserStep3": "Insert the SD card into the device.",
+    "newUserStep4": "<strong>While holding down the left side button</strong>, hold the power button to boot.",
+    "newUserStep5": "The OEM bootloader will automatically detect and flash the firmware.",
+    "existingUserTitle": "B. Existing users (already running CrossPoint Reader-KO)",
+    "existingUserStep1": "Download <code>{filename}</code> from the GitHub releases and copy it to your SD card.",
+    "existingUserStep2": "Insert the SD card into the device.",
+    "existingUserStep3": "Go to <strong>Settings → System → SD Card Firmware Update</strong>.",
+    "existingUserStep4": "Select the firmware file on the SD card and flashing will start automatically.",
+    "existingUserStep5": "The device will reboot automatically when flashing completes.",
+    "existingUserTip": "Tip: From the same menu you can also select a downloaded <strong>store firmware</strong> (X3/X4 OEM) to roll back.",
+    "otaTitle": "Note: OTA (WiFi) updates are available from the same menu",
+    "otaDescription": "If WiFi is connected, go to <strong>Settings → System → Update</strong> to perform an OTA update without any extra files. Both SD and OTA paths use raw partition writes plus direct otadata updates so they work on the X4 silicon."
+  },
+  "method3": {
+    "title": "Method 3: Download Firmware and Use a Flasher",
+    "description": "Download the firmware file directly and flash it using a Web Flasher.",
+    "step1Title": "1. Download Firmware",
+    "step1Description": "Download the <code>{filename}</code> file from the GitHub releases page.",
+    "downloadButton": "Download Firmware",
+    "releasesButton": "Open Releases Page",
+    "step2Title": "2. Open the Web Flasher",
+    "step2Description": "Open the Web Flasher.",
+    "openExternalFlasher": "Open xteink.dve.al",
+    "step3Title": "3. OTA Flash",
+    "step3Description": "In the <strong>OTA fast flash controls</strong> section:",
+    "step3Item1": "Click <strong>Select File</strong> and choose the downloaded .bin file",
+    "step3Item2": "Click <strong>Flash firmware from file</strong> to start flashing"
+  },
+  "method4": {
+    "title": "Method 4: Use esptool (Advanced)",
+    "description": "Flash the firmware directly from the command line. This method uses the merged binary file.",
+    "step1Title": "1. Download Firmware",
+    "step1Description": "Download the <code>{filename}</code> file from the GitHub releases page. (Merged binary specifically for esptool.)",
+    "downloadMergedButton": "Download Merged Firmware",
+    "step2Title": "2. Install esptool",
+    "step3Title": "3. Flash the Firmware",
+    "cautionTitle": "Caution",
+    "cautionText": "Do not unplug the USB cable while flashing. Doing so may damage the device."
+  },
+  "revert": {
+    "title": "Restore the Original Firmware (Store Firmware)",
+    "description": "To return to the original Xteink official firmware, use one of the methods below. You can download the latest store firmware for X3/X4 directly here.",
+    "settingsNote": "When switching between CrossPoint firmware and store firmware, all settings (WiFi, reading preferences, etc.) are preserved unchanged.",
+    "storeDownloadsTitle": "Store Firmware Downloads",
+    "x4Label": "X4 Chinese Official",
+    "x3Label": "X3 Chinese Official",
+    "filenameNote": "Filenames retain the original OEM names. After downloading, flash using one of the methods below.",
+    "option1Title": "Option 1: Web Flasher",
+    "option1Link": "Web Flasher",
+    "option1Suffix": " lets you flash the X3 or X4 store firmware directly.",
+    "option2Title": "Option 2: SD Card Update",
+    "option2Description": "Copy the downloaded store firmware file onto your SD card, then go to <strong>Settings → System → SD Card Firmware Update</strong> and select the file to flash automatically.",
+    "option3Title": "Option 3: External Web Flasher",
+    "option3Suffix": " to flash the official firmware."
+  }
+}

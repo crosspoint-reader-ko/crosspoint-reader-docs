@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "title": "설치 가이드",
+    "description": "Xteink X3/X4에 CrossPoint Reader 한국어 펌웨어를 설치하는 방법을 안내합니다. 웹 플래셔, SD카드, esptool 등 여러 방법을 지원합니다.",
+    "ogTitle": "설치 가이드 | CrossPoint Reader",
+    "ogDescription": "Xteink X3/X4에 CrossPoint Reader 한국어 펌웨어를 설치하는 방법을 안내합니다."
+  },
+  "hero": {
+    "currentVersion": "현재 버전: v{version}",
+    "title": "설치 가이드",
+    "description": "CrossPoint Reader 한국어 펌웨어를 Xteink X3/X4에 설치하는 방법을 안내합니다. 단일 펌웨어로 두 모델 모두 지원하며, 웹 플래셔·SD카드·OTA 등 다양한 설치 방법을 제공합니다."
+  },
+  "method1": {
+    "badge": "추천",
+    "title": "방법 1: 웹 플래셔 사용 (권장)",
+    "description": "가장 쉽고 빠른 방법입니다. 이 사이트의 웹 플래셔에서 바로 펌웨어를 설치할 수 있습니다.",
+    "step1": {
+      "title": "USB 연결",
+      "x4": "<strong>X4:</strong> USB-C 케이블로 컴퓨터에 연결합니다.",
+      "x3": "<strong>X3:</strong> 동봉된 마그네틱 충전/데이터 케이블로 컴퓨터에 연결합니다.",
+      "note": "※ 시리얼 넘버가 붙은 X3 패키지의 경우 USB가 인식되지 않을 수 있습니다. 이 경우 아래 <strong>방법 2: SD카드 업데이트</strong>를 사용하세요."
+    },
+    "step2": {
+      "title": "웹 플래셔로 이동",
+      "description": "웹 플래셔 페이지로 이동합니다. Chrome 또는 Edge 브라우저를 사용해주세요.",
+      "button": "웹 플래셔 열기"
+    },
+    "step3": {
+      "title": "펌웨어 플래싱",
+      "description": "<strong>한국어 펌웨어 플래싱 (커뮤니티)</strong> 버튼을 클릭합니다.",
+      "bullet1": "장치 선택 팝업에서 USB 시리얼 장치를 선택합니다",
+      "bullet2": "플래싱이 자동으로 진행됩니다"
+    },
+    "step4": {
+      "title": "펌웨어 적용",
+      "description": "플래시가 완료되면 자동으로 재부팅됩니다. 만약 멈춰있다면:",
+      "item1": "기기의 <strong>Reset</strong> 버튼을 한 번 누릅니다",
+      "item2": "<strong>전원 버튼</strong>을 1초 이상 눌러 부팅합니다"
+    }
+  },
+  "method2": {
+    "badge": "NEW",
+    "title": "방법 2: SD카드 펌웨어 업데이트",
+    "description": "USB 연결이 어렵거나 무선으로 업데이트하기 어려운 환경에서 사용할 수 있는 방법입니다. v1.2.0-ko.15부터 지원되며, X3 스토어 펌웨어로의 롤백에도 사용할 수 있습니다.",
+    "newUserTitle": "A. 처음 사용자 (USB가 안 되는 X3 OEM 펌웨어 상태)",
+    "newUserStep1": "GitHub 릴리즈에서 <code>{filename}</code>을 다운로드합니다.",
+    "newUserStep2": "SD카드 <strong>루트 폴더</strong>에 복사하면서 파일명을 <code>update.bin</code>으로 변경합니다.",
+    "newUserStep3": "SD카드를 디바이스에 삽입합니다.",
+    "newUserStep4": "<strong>왼쪽 사이드 버튼을 누른 상태에서</strong> 전원 버튼을 길게 눌러 부팅합니다.",
+    "newUserStep5": "OEM 부트로더가 자동으로 펌웨어를 인식해 플래싱합니다.",
+    "existingUserTitle": "B. 기존 사용자 (이미 CrossPoint Reader-KO 사용 중)",
+    "existingUserStep1": "GitHub 릴리즈에서 <code>{filename}</code>을 다운로드해 SD카드에 복사합니다.",
+    "existingUserStep2": "SD카드를 디바이스에 삽입합니다.",
+    "existingUserStep3": "<strong>설정 → 시스템 → SD카드 펌웨어 업데이트</strong>로 이동합니다.",
+    "existingUserStep4": "SD카드의 펌웨어 파일을 선택하면 자동으로 플래싱이 진행됩니다.",
+    "existingUserStep5": "플래싱이 완료되면 자동으로 재부팅됩니다.",
+    "existingUserTip": "💡 같은 메뉴에서 다운로드 받은 <strong>스토어 펌웨어</strong>(X3/X4 OEM)도 선택해 롤백할 수 있습니다.",
+    "otaTitle": "참고: OTA(WiFi) 업데이트도 같은 메뉴에서 가능",
+    "otaDescription": "WiFi가 연결되어 있다면 <strong>설정 → 시스템 → 업데이트</strong>로 이동해 별도 파일 없이 OTA 업데이트할 수 있습니다. SD/OTA 모두 X4 실리콘에서 동작하도록 raw 파티션 쓰기 + 직접 otadata 갱신 방식으로 동작합니다."
+  },
+  "method3": {
+    "title": "방법 3: 펌웨어 다운로드 후 플래셔 사용",
+    "description": "펌웨어 파일을 직접 다운로드하여 웹 플래셔에서 설치하는 방법입니다.",
+    "step1Title": "1. 펌웨어 다운로드",
+    "step1Description": "GitHub 릴리즈 페이지에서 <code>{filename}</code> 파일을 다운로드합니다.",
+    "downloadButton": "펌웨어 다운로드",
+    "releasesButton": "릴리즈 페이지 열기",
+    "step2Title": "2. 웹 플래셔 접속",
+    "step2Description": "웹 플래셔에 접속합니다.",
+    "openExternalFlasher": "xteink.dve.al 열기",
+    "step3Title": "3. OTA 플래시",
+    "step3Description": "<strong>OTA fast flash controls</strong> 섹션에서:",
+    "step3Item1": "<strong>Select File</strong> 버튼을 클릭하여 다운로드한 .bin 파일을 선택",
+    "step3Item2": "<strong>Flash firmware from file</strong> 버튼을 클릭하여 플래시 시작"
+  },
+  "method4": {
+    "title": "방법 4: esptool 사용 (고급)",
+    "description": "명령줄 도구를 사용하여 직접 펌웨어를 플래시하는 방법입니다. 머지된 바이너리 파일을 사용합니다.",
+    "step1Title": "1. 펌웨어 다운로드",
+    "step1Description": "GitHub 릴리즈 페이지에서 <code>{filename}</code> 파일을 다운로드합니다. (esptool 전용 머지된 바이너리)",
+    "downloadMergedButton": "머지된 펌웨어 다운로드",
+    "step2Title": "2. esptool 설치",
+    "step3Title": "3. 펌웨어 플래시",
+    "cautionTitle": "주의사항",
+    "cautionText": "플래시 중 USB 케이블을 분리하지 마세요. 기기가 손상될 수 있습니다."
+  },
+  "revert": {
+    "title": "원래 펌웨어로 복원 (스토어 펌웨어)",
+    "description": "원래 Xteink 공식 펌웨어로 되돌리려면 다음 방법 중 하나를 사용하세요. 아래에서 X3/X4용 최신 스토어 펌웨어를 직접 다운로드 받을 수 있습니다.",
+    "settingsNote": "CrossPoint 펌웨어와 스토어 펌웨어 간 전환 시 모든 설정(WiFi, 읽기 설정 등)은 변경되지 않고 그대로 유지됩니다.",
+    "storeDownloadsTitle": "스토어 펌웨어 다운로드",
+    "x4Label": "X4 중국어 공식",
+    "x3Label": "X3 중국어 공식",
+    "filenameNote": "파일명은 OEM 원본 파일명을 그대로 유지합니다. 다운로드 후 아래 방법 중 하나로 플래싱하세요.",
+    "option1Title": "방법 1: 웹 플래셔",
+    "option1Link": "웹 플래셔",
+    "option1Suffix": "에서 X3 또는 X4 스토어 펌웨어를 직접 플래시할 수 있습니다.",
+    "option2Title": "방법 2: SD카드 업데이트",
+    "option2Description": "위에서 다운로드 받은 스토어 펌웨어 파일을 SD카드에 복사한 뒤, <strong>설정 → 시스템 → SD카드 펌웨어 업데이트</strong>에서 해당 파일을 선택하면 자동으로 플래싱됩니다.",
+    "option3Title": "방법 3: 외부 웹 플래셔",
+    "option3Suffix": "에서 공식 펌웨어를 플래시합니다."
+  }
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import { forwardRef } from "react";
+import { useTranslations } from "next-intl";
 import { formatFileSize } from "@/lib/epdfont-converter";
 import type { FontInfo } from "./types";
 
@@ -31,10 +32,11 @@ export const FontUploader = forwardRef<HTMLDivElement, FontUploaderProps>(
     },
     ref,
   ) {
+    const t = useTranslations("fontConverter");
     return (
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          폰트 파일
+          {t("uploader.label")}
         </label>
         <div
           ref={ref}
@@ -73,23 +75,23 @@ export const FontUploader = forwardRef<HTMLDivElement, FontUploaderProps>(
             <div className="text-sm text-gray-600 dark:text-gray-400">
               {isDragging ? (
                 <span className="text-blue-600 dark:text-blue-400 font-medium">
-                  파일을 놓으세요
+                  {t("uploader.drop")}
                 </span>
               ) : (
                 <>
                   <span className="text-blue-600 dark:text-blue-400 font-medium">
-                    파일 선택
+                    {t("uploader.select")}
                   </span>
-                  {" 또는 드래그 앤 드롭"}
+                  {t("uploader.orDrag")}
                 </>
               )}
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-500">
-              TTF, OTF, WOFF, WOFF2 · 파일 크기 제한 없음
+              {t("uploader.formats")}
             </p>
             {fontFile && (
               <p className="text-sm text-gray-700 dark:text-gray-300 font-medium mt-2">
-                선택됨: {fontFile.name}
+                {t("uploader.selected", { name: fontFile.name })}
               </p>
             )}
           </div>
@@ -98,7 +100,7 @@ export const FontUploader = forwardRef<HTMLDivElement, FontUploaderProps>(
         {isValidating && (
           <div className="mt-2 flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400">
             <div className="animate-spin h-4 w-4 border-2 border-blue-500 border-t-transparent rounded-full"></div>
-            <span>폰트 파일 검증 중...</span>
+            <span>{t("uploader.validating")}</span>
           </div>
         )}
 
@@ -124,12 +126,14 @@ export const FontUploader = forwardRef<HTMLDivElement, FontUploaderProps>(
                       clipRule="evenodd"
                     />
                   </svg>
-                  <span className="font-medium">폰트 로드 완료</span>
+                  <span className="font-medium">
+                    {t("uploader.loadSuccess")}
+                  </span>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm mt-2">
                   <div>
                     <span className="text-gray-500 dark:text-gray-400">
-                      패밀리:{" "}
+                      {t("uploader.family")}
                     </span>
                     <span className="text-gray-900 dark:text-white font-medium">
                       {fontInfo.familyName}
@@ -137,7 +141,7 @@ export const FontUploader = forwardRef<HTMLDivElement, FontUploaderProps>(
                   </div>
                   <div>
                     <span className="text-gray-500 dark:text-gray-400">
-                      스타일:{" "}
+                      {t("uploader.style")}
                     </span>
                     <span className="text-gray-900 dark:text-white font-medium">
                       {fontInfo.styleName}
@@ -145,7 +149,7 @@ export const FontUploader = forwardRef<HTMLDivElement, FontUploaderProps>(
                   </div>
                   <div>
                     <span className="text-gray-500 dark:text-gray-400">
-                      글리프:{" "}
+                      {t("uploader.glyphs")}
                     </span>
                     <span className="text-gray-900 dark:text-white font-medium">
                       {fontInfo.numGlyphs.toLocaleString()}
@@ -153,7 +157,7 @@ export const FontUploader = forwardRef<HTMLDivElement, FontUploaderProps>(
                   </div>
                   <div>
                     <span className="text-gray-500 dark:text-gray-400">
-                      크기:{" "}
+                      {t("uploader.size")}
                     </span>
                     <span className="text-gray-900 dark:text-white font-medium">
                       {formatFileSize(fontInfo.fileSize)}
@@ -175,7 +179,7 @@ export const FontUploader = forwardRef<HTMLDivElement, FontUploaderProps>(
                   />
                 </svg>
                 <div>
-                  <p className="font-medium">폰트 검증 실패</p>
+                  <p className="font-medium">{t("uploader.loadFailed")}</p>
                   <p className="text-sm mt-1">{fontInfo.error}</p>
                 </div>
               </div>

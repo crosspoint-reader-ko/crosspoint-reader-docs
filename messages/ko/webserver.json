@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "title": "웹 서버 가이드",
+    "description": "CrossPoint Reader의 내장 웹 서버를 사용하여 EPUB, XTC, XTCH 파일을 무선으로 업로드하는 방법을 안내합니다.",
+    "ogTitle": "웹 서버 가이드 | CrossPoint Reader",
+    "ogDescription": "CrossPoint Reader의 내장 웹 서버를 사용하여 파일을 무선으로 업로드하는 방법을 안내합니다."
+  },
+  "hero": {
+    "title": "웹 서버 가이드",
+    "subtitle": "WiFi를 통해 EPUB 파일을 업로드하고 관리하는 방법을 안내합니다."
+  },
+  "overview": {
+    "title": "개요",
+    "intro": "CrossPoint Reader에는 내장 웹 서버가 포함되어 있어 다음 기능을 사용할 수 있습니다:",
+    "features": {
+      "upload": "동일한 WiFi 네트워크의 모든 기기에서 EPUB 파일 업로드",
+      "browse": "SD 카드의 파일 탐색 및 관리",
+      "folder": "전자책 정리를 위한 폴더 생성",
+      "delete": "파일 및 폴더 삭제",
+      "download": "<strong>책 직접 다운로드</strong> (v1.2.0): 웹 UI에서 SD 카드의 책을 브라우저로 내려받기",
+      "webdav": "<strong>WebDAV 지원</strong> (v1.1+): macOS Finder, Windows 탐색기, Cyberduck 등에서 기기를 네트워크 드라이브로 마운트"
+    },
+    "requirementsTitle": "필요 조건",
+    "requirements": {
+      "device": "CrossPoint Reader 기기",
+      "wifi": "WiFi 네트워크",
+      "client": "<strong>동일한 WiFi 네트워크</strong>에 연결된 컴퓨터, 스마트폰 또는 태블릿"
+    }
+  },
+  "step1": {
+    "title": "1단계: WiFi 화면 접근",
+    "items": {
+      "settings": "메인 메뉴 또는 파일 브라우저에서 <strong>설정</strong> 화면으로 이동",
+      "wifi": "<strong>WiFi</strong> 옵션 선택",
+      "scan": "기기가 자동으로 사용 가능한 네트워크를 스캔하기 시작"
+    }
+  },
+  "step2": {
+    "title": "2단계: WiFi 연결",
+    "availableNetworksTitle": "사용 가능한 네트워크 보기",
+    "availableNetworksIntro": "스캔이 완료되면 다음 표시와 함께 사용 가능한 WiFi 네트워크 목록이 표시됩니다:",
+    "indicators": {
+      "signal": "<strong>신호 강도 바</strong> (||||, |||, ||, |) - 연결 품질 표시",
+      "lock": "<strong>* 기호</strong> - 비밀번호로 보호됨 (암호화됨)",
+      "saved": "<strong>+ 기호</strong> - 이전에 저장된 자격 증명이 있음"
+    },
+    "selectNetworkTitle": "네트워크 선택",
+    "selectNetwork": {
+      "navigate": "<strong>왼쪽/오른쪽</strong> (또는 <strong>이전/다운</strong>) 버튼으로 네트워크 목록 탐색",
+      "confirm": "<strong>확인</strong>을 눌러 강조된 네트워크 선택"
+    },
+    "passwordTitle": "비밀번호 입력",
+    "passwordIntro": "네트워크에 비밀번호가 필요한 경우:",
+    "passwordSteps": {
+      "keyboard": "화면 키보드가 나타남",
+      "navigate": "탐색 버튼으로 문자 선택",
+      "confirm": "<strong>확인</strong>으로 각 문자 입력",
+      "done": "완료되면 키보드의 <strong>Done</strong> 옵션 선택"
+    },
+    "noteLabel": "참고:",
+    "note": "이전에 이 네트워크에 연결한 적이 있으면 저장된 비밀번호가 자동으로 사용됩니다."
+  },
+  "step3": {
+    "title": "3단계: 연결 성공",
+    "intro": "연결되면 화면에 다음이 표시됩니다:",
+    "info": {
+      "ssid": "<strong>네트워크 이름</strong> (SSID)",
+      "ip": "<strong>IP 주소</strong> (예: 192.168.1.102)",
+      "url": "<strong>웹 서버 URL</strong> (예: http://192.168.1.102/)"
+    },
+    "importantLabel": "중요:",
+    "important": "IP 주소를 기억해 두세요 - 컴퓨터나 스마트폰에서 웹 인터페이스에 접근할 때 필요합니다."
+  },
+  "step4": {
+    "title": "4단계: 웹 인터페이스 접근",
+    "computerTitle": "컴퓨터에서",
+    "computer": {
+      "sameWifi": "컴퓨터가 CrossPoint Reader와 <strong>동일한 WiFi 네트워크</strong>에 연결되어 있는지 확인",
+      "openBrowser": "웹 브라우저 열기 (Chrome 권장)",
+      "enterIp": "기기에 표시된 IP 주소를 주소창에 입력",
+      "press": "Enter 키 누르기"
+    },
+    "mobileTitle": "스마트폰 또는 태블릿에서",
+    "mobile": {
+      "sameWifi": "스마트폰/태블릿이 CrossPoint Reader와 <strong>동일한 WiFi 네트워크</strong>에 연결되어 있는지 확인",
+      "openBrowser": "모바일 브라우저 열기 (Safari, Chrome 등)",
+      "enterIp": "IP 주소를 주소창에 입력",
+      "go": "이동 탭"
+    }
+  },
+  "step5": {
+    "title": "5단계: 웹 인터페이스 사용",
+    "homeTitle": "홈페이지",
+    "homeIntro": "홈페이지에 표시되는 정보:",
+    "home": {
+      "status": "기기 상태 및 버전 정보",
+      "wifi": "WiFi 연결 상태",
+      "ip": "현재 IP 주소",
+      "memory": "사용 가능한 메모리"
+    },
+    "fileManagerTitle": "파일 관리자",
+    "fileManagerIntro": "<strong>File Manager</strong>를 클릭하여 파일 관리 기능에 접근합니다.",
+    "browseTitle": "파일 탐색",
+    "browse": {
+      "show": "SD 카드의 모든 파일과 폴더 표시",
+      "click": "폴더 이름을 클릭하여 해당 폴더로 이동",
+      "path": "상단의 경로 탐색으로 상위 폴더로 이동"
+    },
+    "uploadTitle": "EPUB 파일 업로드",
+    "upload": {
+      "addButton": "우측 상단의 <strong>+ Add</strong> 버튼 클릭",
+      "selectMenu": "드롭다운 메뉴에서 <strong>Upload eBook</strong> 선택",
+      "chooseFile": "<strong>Choose File</strong>을 클릭하고 .epub 파일 선택",
+      "uploadButton": "<strong>Upload</strong> 클릭",
+      "progress": "진행률 바가 업로드 상태 표시",
+      "refresh": "업로드 완료 시 페이지가 자동으로 새로고침"
+    },
+    "uploadNoteLabel": "참고:",
+    "uploadNote": ".epub 파일만 허용됩니다. 다른 파일 유형은 거부됩니다.",
+    "newFolderTitle": "폴더 생성",
+    "newFolder": {
+      "addButton": "우측 상단의 <strong>+ Add</strong> 버튼 클릭",
+      "selectMenu": "드롭다운 메뉴에서 <strong>New Folder</strong> 선택",
+      "name": "폴더 이름 입력 (영문, 숫자, 밑줄, 하이픈만 사용 가능)",
+      "create": "<strong>Create Folder</strong> 클릭"
+    },
+    "deleteTitle": "파일 및 폴더 삭제",
+    "delete": {
+      "icon": "파일 또는 폴더 옆의 휴지통 아이콘 클릭",
+      "confirm": "팝업 대화상자에서 삭제 확인",
+      "button": "<strong>Delete</strong>를 클릭하여 영구 삭제"
+    },
+    "deleteWarningLabel": "경고:",
+    "deleteWarning": "삭제는 영구적이며 취소할 수 없습니다! 폴더는 비어 있어야 삭제할 수 있습니다."
+  },
+  "troubleshooting": {
+    "title": "문제 해결",
+    "notVisible": {
+      "title": "네트워크에서 기기가 보이지 않음",
+      "problemLabel": "문제:",
+      "problem": "브라우저에서 \"연결할 수 없음\" 또는 \"사이트에 연결할 수 없음\" 표시",
+      "items": {
+        "sameWifi": "두 기기가 <strong>동일한 WiFi 네트워크</strong>에 있는지 확인",
+        "ip": "IP 주소가 정확히 입력되었는지 확인",
+        "http": "주소 시작에 <code>http://</code> 포함",
+        "vpn": "VPN을 사용 중이라면 비활성화 시도"
+      }
+    },
+    "drops": {
+      "title": "연결이 끊기거나 타임아웃",
+      "items": {
+        "closer": "WiFi 라우터에 더 가까이 이동",
+        "signal": "기기의 신호 강도 확인 (|| 이상 권장)",
+        "interference": "다른 기기의 간섭 피하기"
+      }
+    },
+    "uploadFails": {
+      "title": "업로드 실패",
+      "items": {
+        "valid": "파일이 유효한 .epub 파일인지 확인",
+        "space": "SD 카드에 충분한 공간이 있는지 확인",
+        "smaller": "먼저 더 작은 파일로 업로드 테스트",
+        "refresh": "브라우저 페이지를 새로고침하고 다시 시도"
+      }
+    }
+  },
+  "security": {
+    "title": "보안 참고사항",
+    "items": {
+      "port": "웹 서버는 포트 80 (표준 HTTP)에서 실행",
+      "noAuth": "<strong>인증이 필요하지 않음</strong> - 동일 네트워크의 누구나 인터페이스에 접근 가능",
+      "connected": "WiFi 화면에 \"Connected\"가 표시되는 동안만 웹 서버에 접근 가능",
+      "stop": "WiFi 화면을 나가면 웹 서버가 자동으로 중지",
+      "trusted": "보안을 위해 신뢰할 수 있는 프라이빗 네트워크에서만 사용"
+    }
+  },
+  "exit": {
+    "title": "WiFi 모드 종료",
+    "intro": "파일 업로드를 완료한 후:",
+    "steps": {
+      "back": "CrossPoint Reader의 <strong>뒤로</strong> 버튼 누르기",
+      "stop": "웹 서버가 자동으로 중지됨",
+      "disconnect": "WiFi가 연결 해제되어 배터리 절약",
+      "return": "이전 화면으로 돌아감"
+    },
+    "success": "업로드한 파일은 파일 브라우저에서 바로 사용할 수 있습니다!"
+  }
+}

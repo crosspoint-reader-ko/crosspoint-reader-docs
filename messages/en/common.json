@@ -1,0 +1,82 @@
+{
+  "site": {
+    "name": "CrossPoint Reader Korean",
+    "description": "Installation and user guide for the CrossPoint Reader Korean firmware on Xteink X3/X4 e-ink readers. Supports EPUB, XTC, XTCH files with bundled Korean fonts.",
+    "title": {
+      "default": "CrossPoint Reader - Korean Firmware Guide",
+      "template": "%s | CrossPoint Reader"
+    },
+    "keywords": "CrossPoint Reader,Xteink X3,Xteink X4,e-book,e-ink,firmware,Korean,EPUB,XTC,XTCH,electronic ink,e-reader,open source"
+  },
+  "header": {
+    "brand": "CrossPoint Reader KO",
+    "openMenu": "Open menu",
+    "nav": {
+      "install": "Install Guide",
+      "flasher": "Web Flasher",
+      "fontConverter": "Font Converter",
+      "userGuide": "User Guide",
+      "guideBasic": "Basics",
+      "webserver": "File Transfer",
+      "koreanFont": "Korean Font",
+      "releases": "Releases"
+    },
+    "donate": {
+      "button": "Donate"
+    },
+    "language": {
+      "label": "Select language",
+      "korean": "한국어",
+      "english": "English"
+    }
+  },
+  "footer": {
+    "docs": {
+      "title": "Documentation",
+      "install": "Install Guide",
+      "guide": "User Guide",
+      "webserver": "Web Server Guide",
+      "koreanFont": "Korean Font Info",
+      "releases": "Release Notes"
+    },
+    "links": {
+      "title": "Links",
+      "githubKorean": "GitHub (Korean fork)",
+      "githubUpstream": "GitHub (upstream)",
+      "webFlasher": "Web Flasher"
+    },
+    "community": {
+      "title": "Community"
+    },
+    "sponsor": {
+      "title": "Sponsor",
+      "daveAllie": "Dave Allie (upstream)"
+    },
+    "disclaimer": "CrossPoint Reader is not affiliated with <strong>Xteink</strong>.",
+    "license": "MIT License © {year} CrossPoint Reader Contributors"
+  },
+  "common": {
+    "loading": "Loading...",
+    "comingSoon": "Coming soon",
+    "version": "Version",
+    "currentVersion": "Current version: v{version}",
+    "downloadCount": "Downloads",
+    "released": "Released",
+    "latest": "Latest",
+    "next": "Next",
+    "previous": "Previous",
+    "more": "More",
+    "back": "Back",
+    "close": "Close",
+    "open": "Open",
+    "download": "Download",
+    "warning": "Warning",
+    "note": "Note",
+    "tip": "Tip",
+    "info": "Info"
+  },
+  "redirect": {
+    "loading": "Redirecting...",
+    "fallback": "If you are not redirected automatically, click below:"
+  }
+}

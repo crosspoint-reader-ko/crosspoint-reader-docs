@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { convertTTFToEPDFont, formatFileSize } from "@/lib/epdfont-converter";
 import { loadFreeType } from "@/lib/freetype-loader";
 import type { UnicodeInterval } from "@/types/epdfont";
@@ -8,7 +9,6 @@ import type { FreeTypeFace, FreeTypeInstance } from "@/types/freetype";
 import { UNICODE_RANGES } from "../unicode-range";
 import {
   DEFAULT_ENABLED_RANGES,
-  DEFAULT_PREVIEW_TEXT,
   MAX_FONT_SIZE,
   QUICK_PRESETS,
 } from "./constants";
@@ -24,6 +24,7 @@ import type { ConversionState, FontInfo } from "./types";
 import { UnicodeRangeSelector } from "./unicode-range-selector";
 
 export default function FontConverter() {
+  const t = useTranslations("fontConverter");
   const [fontFile, setFontFile] = useState<File | null>(null);
   const [fontData, setFontData] = useState<Uint8Array | null>(null);
   const [fontInfo, setFontInfo] = useState<FontInfo | null>(null);
@@ -53,7 +54,9 @@ export default function FontConverter() {
   const [baselineShift, setBaselineShift] = useState(0);
   const [horizontalScale, setHorizontalScale] = useState(100);
 
-  const [previewText, setPreviewText] = useState(DEFAULT_PREVIEW_TEXT);
+  const [previewText, setPreviewText] = useState<string>(() =>
+    t("previewText.default"),
+  );
   const [previewBgColor, setPreviewBgColor] = useState("#ffffff");
   const [previewFgColor, setPreviewFgColor] = useState("#000000");
   const [previewScale, setPreviewScale] = useState(1);
@@ -236,15 +239,14 @@ export default function FontConverter() {
         setConversionState({
           status: "error",
           progress: 0,
-          message:
-            "지원하지 않는 파일 형식입니다. TTF, OTF, WOFF, WOFF2 파일만 사용 가능합니다.",
+          message: t("status.unsupportedFile"),
         });
         return;
       }
 
       await processFile(file);
     },
-    [freetypeLoaded, processFile],
+    [freetypeLoaded, processFile, t],
   );
 
   const handleRangeToggle = useCallback((rangeId: string) => {
@@ -440,7 +442,7 @@ export default function FontConverter() {
     setConversionState({
       status: "converting",
       progress: 0,
-      message: "Starting conversion...",
+      message: t("status.starting"),
     });
 
     try {
@@ -478,21 +480,22 @@ export default function FontConverter() {
         setConversionState({
           status: "success",
           progress: 100,
-          message: "Conversion complete!",
+          message: t("status.complete"),
           result,
         });
       } else {
         setConversionState({
           status: "error",
           progress: 0,
-          message: result.error || "Conversion failed",
+          message: result.error || t("status.failed"),
         });
       }
     } catch (error) {
       setConversionState({
         status: "error",
         progress: 0,
-        message: error instanceof Error ? error.message : "Unknown error",
+        message:
+          error instanceof Error ? error.message : t("status.unknownError"),
       });
     }
   }, [
@@ -511,6 +514,7 @@ export default function FontConverter() {
     horizontalScale,
     baselineShift,
     antialiasing,
+    t,
   ]);
 
   const handleDownload = useCallback(() => {
@@ -561,7 +565,7 @@ export default function FontConverter() {
               <div className="flex items-center gap-3">
                 <div className="animate-spin h-5 w-5 border-2 border-blue-500 border-t-transparent rounded-full"></div>
                 <span className="text-blue-700 dark:text-blue-300">
-                  FreeType 라이브러리 로드 중...
+                  {t("status.freetypeLoading")}
                 </span>
               </div>
             </div>
@@ -652,7 +656,7 @@ export default function FontConverter() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  미리보기 텍스트
+                  {t("previewText.label")}
                 </label>
                 <textarea
                   value={previewText}
@@ -660,7 +664,7 @@ export default function FontConverter() {
                   rows={3}
                   className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md
                     bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono"
-                  placeholder="미리보기할 텍스트를 입력하세요..."
+                  placeholder={t("previewText.placeholder")}
                 />
               </div>
 
@@ -703,8 +707,8 @@ export default function FontConverter() {
                     transition-colors duration-200"
                 >
                   {conversionState.status === "converting"
-                    ? "변환 중..."
-                    : "EPDFont로 변환"}
+                    ? t("status.convertingButton")
+                    : t("status.convertButton")}
                 </button>
               </div>
             </div>

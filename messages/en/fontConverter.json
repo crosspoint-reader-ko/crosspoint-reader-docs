@@ -1,0 +1,151 @@
+{
+  "page": {
+    "loading": "Loading Font Converter...",
+    "metaTitle": "Font Converter",
+    "metaDescription": "Convert TTF/OTF fonts to the EPDFont format for CrossPoint Reader. Supports a wide range of Unicode blocks with real-time preview."
+  },
+  "status": {
+    "freetypeLoading": "Loading FreeType library...",
+    "freetypeLoadFailed": "Failed to load FreeType WASM library",
+    "unsupportedFile": "Unsupported file format. Only TTF, OTF, WOFF, and WOFF2 files are allowed.",
+    "convertingButton": "Converting...",
+    "convertButton": "Convert to EPDFont",
+    "starting": "Starting conversion...",
+    "complete": "Conversion complete!",
+    "failed": "Conversion failed",
+    "unknownError": "Unknown error"
+  },
+  "previewText": {
+    "label": "Preview text",
+    "placeholder": "Enter the text to preview...",
+    "default": "ABCDEFGabcdefg 0123456789\nThe quick brown fox jumps over the lazy dog.\nKorean test: 가나다라마바사아자차카타파하\nJapanese test: あいうえお カキクケコ\nChinese test: 你好世界\nMath symbols: ∑∫∂√∞±×÷=≠≈\nSpecial characters: ★☆♠♣♥♦►◄●○■□\nArrows: ←→↑↓↔↕⇐⇒⇑⇓"
+  },
+  "uploader": {
+    "label": "Font file",
+    "drop": "Drop the file here",
+    "select": "Choose a file",
+    "orDrag": " or drag and drop",
+    "formats": "TTF, OTF, WOFF, WOFF2 · No file size limit",
+    "selected": "Selected: {name}",
+    "validating": "Validating font file...",
+    "loadSuccess": "Font loaded",
+    "loadFailed": "Font validation failed",
+    "family": "Family: ",
+    "style": "Style: ",
+    "glyphs": "Glyphs: ",
+    "size": "Size: "
+  },
+  "settings": {
+    "fontName": "Font name",
+    "fontNamePlaceholder": "e.g., myfont",
+    "fontSize": "Font size (px)",
+    "fontSizeHint": "Supports 4–1024 px. Larger values may take longer to convert.",
+    "bitDepth": "Bit depth",
+    "bit1": "1-bit (black & white)",
+    "bit2": "2-bit (4-level grayscale)"
+  },
+  "rendering": {
+    "title": "Rendering options",
+    "charSpacing": "Letter spacing (px)",
+    "lineSpacing": "Line spacing (multiplier)",
+    "boldness": "Boldness",
+    "italicAngle": "Italic slant",
+    "horizontalScale": "Horizontal scale (%)",
+    "baselineShift": "Baseline shift (px)",
+    "antialiasing": "Antialiasing",
+    "reset": "Reset"
+  },
+  "presets": {
+    "label": "Unicode ranges",
+    "hint": "Click a preset to toggle it on or off. Multiple presets can be enabled at the same time.",
+    "items": {
+      "all": {
+        "name": "All",
+        "description": "All Unicode ranges - very large (100,000+ characters)"
+      },
+      "korean": {
+        "name": "Korean",
+        "description": "Hangul syllables, Jamo, Compatibility Jamo, CJK symbols, enclosed letters"
+      },
+      "hanja": {
+        "name": "Hanja (basic)",
+        "description": "CJK Unified Ideographs (20,992 characters)"
+      },
+      "hanjaExtended": {
+        "name": "Hanja (extended)",
+        "description": "CJK Ideographs + Extensions A–H (~90,000 characters) - Very Large!"
+      },
+      "japanese": {
+        "name": "Japanese",
+        "description": "Hiragana, Katakana, CJK symbols"
+      },
+      "chinese": {
+        "name": "Chinese",
+        "description": "CJK Unified Ideographs, symbols, Pinyin"
+      },
+      "fullwidth": {
+        "name": "Fullwidth",
+        "description": "Halfwidth/Fullwidth forms, CJK symbols"
+      },
+      "publishing": {
+        "name": "Publishing/Docs",
+        "description": "Enclosed letters, super/subscripts, unit symbols, vertical forms"
+      },
+      "math": {
+        "name": "Math symbols",
+        "description": "Mathematical operators, Greek, math alphabets"
+      },
+      "symbols": {
+        "name": "Special characters",
+        "description": "Symbols, Dingbats, geometric shapes, box drawing"
+      },
+      "european": {
+        "name": "European",
+        "description": "Latin extended, Greek, Cyrillic extended"
+      },
+      "multilingual": {
+        "name": "Multilingual",
+        "description": "Arabic, Hebrew, Thai, Vietnamese"
+      },
+      "phonetics": {
+        "name": "Phonetics",
+        "description": "IPA, phonetic extensions, spacing modifiers"
+      },
+      "emoji": {
+        "name": "Emoji",
+        "description": "Emoticons, pictographs, symbols"
+      }
+    }
+  },
+  "ranges": {
+    "label": "Unicode ranges (detailed)",
+    "summary": "{count} ranges, {chars} characters",
+    "large": "(large)",
+    "open": "Open",
+    "close": "Close",
+    "selectAll": "Select all",
+    "deselectAll": "Deselect all",
+    "resetDefaults": "Reset to defaults"
+  },
+  "custom": {
+    "label": "Custom Unicode range (hexadecimal)",
+    "startPlaceholder": "Start (e.g., AC00)",
+    "endPlaceholder": "End (e.g., D7AF)",
+    "add": "Add"
+  },
+  "preview": {
+    "title": "Preview ({width}x{height})",
+    "loadHint": "Load a font to display the preview",
+    "legend": "Characters not included in the selected Unicode ranges (will not be converted)"
+  },
+  "result": {
+    "complete": "Conversion complete!",
+    "glyphs": "Glyphs",
+    "ranges": "Ranges",
+    "fileSize": "File size",
+    "lineHeight": "Line height",
+    "ascender": "Ascender",
+    "descender": "Descender",
+    "download": "Download .epdfont file"
+  }
+}

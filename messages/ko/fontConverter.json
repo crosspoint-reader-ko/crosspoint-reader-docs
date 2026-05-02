@@ -1,0 +1,151 @@
+{
+  "page": {
+    "loading": "폰트 변환기 로드 중...",
+    "metaTitle": "폰트 변환기",
+    "metaDescription": "TTF/OTF 폰트를 CrossPoint Reader용 EPDFont 형식으로 변환합니다. 다양한 유니코드 범위를 지원하며 실시간 미리보기 기능을 제공합니다."
+  },
+  "status": {
+    "freetypeLoading": "FreeType 라이브러리 로드 중...",
+    "freetypeLoadFailed": "Failed to load FreeType WASM library",
+    "unsupportedFile": "지원하지 않는 파일 형식입니다. TTF, OTF, WOFF, WOFF2 파일만 사용 가능합니다.",
+    "convertingButton": "변환 중...",
+    "convertButton": "EPDFont로 변환",
+    "starting": "Starting conversion...",
+    "complete": "Conversion complete!",
+    "failed": "Conversion failed",
+    "unknownError": "Unknown error"
+  },
+  "previewText": {
+    "label": "미리보기 텍스트",
+    "placeholder": "미리보기할 텍스트를 입력하세요...",
+    "default": "ABCDEFGabcdefg 0123456789\nThe quick brown fox jumps over the lazy dog.\n한글 테스트: 가나다라마바사아자차카타파하\n日本語テスト: あいうえお カキクケコ\n中文测试: 你好世界\n수학 기호: ∑∫∂√∞±×÷=≠≈\n특수 문자: ★☆♠♣♥♦►◄●○■□\n화살표: ←→↑↓↔↕⇐⇒⇑⇓"
+  },
+  "uploader": {
+    "label": "폰트 파일",
+    "drop": "파일을 놓으세요",
+    "select": "파일 선택",
+    "orDrag": " 또는 드래그 앤 드롭",
+    "formats": "TTF, OTF, WOFF, WOFF2 · 파일 크기 제한 없음",
+    "selected": "선택됨: {name}",
+    "validating": "폰트 파일 검증 중...",
+    "loadSuccess": "폰트 로드 완료",
+    "loadFailed": "폰트 검증 실패",
+    "family": "패밀리: ",
+    "style": "스타일: ",
+    "glyphs": "글리프: ",
+    "size": "크기: "
+  },
+  "settings": {
+    "fontName": "폰트 이름",
+    "fontNamePlaceholder": "예: myfont",
+    "fontSize": "폰트 크기 (px)",
+    "fontSizeHint": "4–1024px 지원. 큰 값은 변환 시간이 길어질 수 있습니다.",
+    "bitDepth": "비트 깊이",
+    "bit1": "1비트 (흑백)",
+    "bit2": "2비트 (4단계 그레이스케일)"
+  },
+  "rendering": {
+    "title": "렌더링 옵션",
+    "charSpacing": "자간 (px)",
+    "lineSpacing": "행간 (배수)",
+    "boldness": "굵기",
+    "italicAngle": "이텔릭체 기울기",
+    "horizontalScale": "장평 (%)",
+    "baselineShift": "베이스라인 (px)",
+    "antialiasing": "안티앨리어싱",
+    "reset": "초기화"
+  },
+  "presets": {
+    "label": "유니코드 범위",
+    "hint": "프리셋을 클릭하여 켜고 끌 수 있습니다. 여러 프리셋을 동시에 선택할 수 있습니다.",
+    "items": {
+      "all": {
+        "name": "전체",
+        "description": "모든 유니코드 범위 - 매우 큼 (10만자 이상)"
+      },
+      "korean": {
+        "name": "한국어",
+        "description": "한글 음절, 자모, 호환 자모, CJK 기호, 원문자"
+      },
+      "hanja": {
+        "name": "한자 (기본)",
+        "description": "CJK 통합 한자 (20,992자)"
+      },
+      "hanjaExtended": {
+        "name": "한자 (확장)",
+        "description": "CJK 한자 + 확장 A~H (약 9만자) - Very Large!"
+      },
+      "japanese": {
+        "name": "日本語",
+        "description": "히라가나, 가타카나, CJK 기호"
+      },
+      "chinese": {
+        "name": "中文",
+        "description": "CJK 통합 한자, 기호, 병음"
+      },
+      "fullwidth": {
+        "name": "전각 문자",
+        "description": "전각/반각 폼, CJK 기호"
+      },
+      "publishing": {
+        "name": "출판/문서",
+        "description": "원문자, 위/아래첨자, 단위기호, 세로쓰기"
+      },
+      "math": {
+        "name": "수학 기호",
+        "description": "수학 연산자, 그리스어, 수학 알파벳"
+      },
+      "symbols": {
+        "name": "특수 문자",
+        "description": "기호, 딩뱃, 도형, 박스 그리기"
+      },
+      "european": {
+        "name": "유럽어 확장",
+        "description": "라틴 확장, 그리스어, 키릴 확장"
+      },
+      "multilingual": {
+        "name": "다국어",
+        "description": "아랍어, 히브리어, 태국어, 베트남어"
+      },
+      "phonetics": {
+        "name": "음성 기호",
+        "description": "IPA, 음성 확장, 간격 수정자"
+      },
+      "emoji": {
+        "name": "이모지",
+        "description": "이모티콘, 픽토그램, 기호"
+      }
+    }
+  },
+  "ranges": {
+    "label": "유니코드 범위 (세부 선택)",
+    "summary": "{count}개 범위, {chars}자",
+    "large": "(대용량)",
+    "open": "열기",
+    "close": "닫기",
+    "selectAll": "전체 선택",
+    "deselectAll": "전체 해제",
+    "resetDefaults": "기본값 복원"
+  },
+  "custom": {
+    "label": "사용자 정의 유니코드 범위 (16진수)",
+    "startPlaceholder": "시작 (예: AC00)",
+    "endPlaceholder": "끝 (예: D7AF)",
+    "add": "추가"
+  },
+  "preview": {
+    "title": "미리보기 ({width}x{height})",
+    "loadHint": "폰트를 로드하면 미리보기가 표시됩니다",
+    "legend": "선택한 유니코드 범위에 포함되지 않은 문자 (변환되지 않음)"
+  },
+  "result": {
+    "complete": "변환 완료!",
+    "glyphs": "글리프",
+    "ranges": "범위",
+    "fileSize": "파일 크기",
+    "lineHeight": "줄 높이",
+    "ascender": "어센더",
+    "descender": "디센더",
+    "download": ".epdfont 파일 다운로드"
+  }
+}

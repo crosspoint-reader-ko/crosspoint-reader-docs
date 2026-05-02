@@ -18,7 +18,5 @@ export interface FontInfo {
 
 export interface QuickPreset {
   id: string;
-  name: string;
-  description: string;
   rangeIds: string[];
 }

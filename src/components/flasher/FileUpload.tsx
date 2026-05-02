@@ -1,6 +1,7 @@
 "use client";
 
 import React, { Ref, useImperativeHandle, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export interface FileUploadHandle {
   getFile: () => File | undefined;
@@ -12,6 +13,7 @@ interface FileUploadProps {
 }
 
 export default function FileUpload({ ref, disabled }: FileUploadProps) {
+  const t = useTranslations("flasher.fileUpload");
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string>("");
 
@@ -61,7 +63,7 @@ export default function FileUpload({ ref, disabled }: FileUploadProps) {
               d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
             />
           </svg>
-          파일 선택
+          {t("selectFile")}
         </button>
         {fileName && (
           <div className="flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg">

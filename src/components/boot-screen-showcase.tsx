@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { CROSSPOINT_VERSION } from "@/constants/version";
 import { getAssetPath } from "@/lib/basePath";
 
@@ -11,7 +12,8 @@ const DEVICES = [
   {
     id: "x4",
     label: "Xteink X4",
-    hint: "4.3″ · 800×480",
+    altKey: "x4Alt",
+    hintKey: "x4Hint",
     src: "/x4-device-cover.svg",
     scale: 1,
     // Page 1 표지 기반 — 시계방향 11.5° 틸트
@@ -22,7 +24,8 @@ const DEVICES = [
   {
     id: "x3",
     label: "Xteink X3",
-    hint: "3.7″ · 792×528",
+    altKey: "x3Alt",
+    hintKey: "x3Hint",
     src: "/x3-device-cover.svg",
     scale: 0.875,
     // Page 1 표지 — X4 와 동일하게 시계방향 틸트
@@ -31,7 +34,19 @@ const DEVICES = [
   },
 ] as const;
 
-function DeviceMockup({ device }: { device: (typeof DEVICES)[number] }) {
+type Device = (typeof DEVICES)[number];
+
+function DeviceMockup({
+  device,
+  altText,
+  hintText,
+  logoAlt,
+}: {
+  device: Device;
+  altText: string;
+  hintText: string;
+  logoAlt: string;
+}) {
   const width = 240 * device.scale;
   const height = 340 * device.scale;
   return (
@@ -42,7 +57,7 @@ function DeviceMockup({ device }: { device: (typeof DEVICES)[number] }) {
       >
         <Image
           src={getAssetPath(device.src)}
-          alt={`${device.label} 폼팩터`}
+          alt={altText}
           fill
           className="object-contain"
           unoptimized
@@ -62,7 +77,7 @@ function DeviceMockup({ device }: { device: (typeof DEVICES)[number] }) {
         >
           <Image
             src={getAssetPath("/logo.svg")}
-            alt="CrossPoint 로고"
+            alt={logoAlt}
             width={64}
             height={72}
             className="h-auto"
@@ -87,17 +102,25 @@ function DeviceMockup({ device }: { device: (typeof DEVICES)[number] }) {
         <div className="text-sm font-semibold text-gray-900">
           {device.label}
         </div>
-        <div className="text-xs text-gray-500 tabular-nums">{device.hint}</div>
+        <div className="text-xs text-gray-500 tabular-nums">{hintText}</div>
       </div>
     </div>
   );
 }
 
-export function BootScreenShowcase() {
+export async function BootScreenShowcase() {
+  const t = await getTranslations("home.device");
+  const logoAlt = t("logoAlt");
   return (
     <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-end sm:justify-center sm:gap-10">
       {DEVICES.map((device) => (
-        <DeviceMockup key={device.id} device={device} />
+        <DeviceMockup
+          key={device.id}
+          device={device}
+          altText={t(device.altKey)}
+          hintText={t(device.hintKey)}
+          logoAlt={logoAlt}
+        />
       ))}
     </div>
   );

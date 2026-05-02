@@ -1,6 +1,7 @@
 "use client";
 
 import { forwardRef } from "react";
+import { useTranslations } from "next-intl";
 import { PREVIEW_HEIGHT, PREVIEW_WIDTH } from "./constants";
 
 interface PreviewPanelProps {
@@ -30,11 +31,15 @@ export const PreviewPanel = forwardRef<HTMLCanvasElement, PreviewPanelProps>(
     },
     ref,
   ) {
+    const t = useTranslations("fontConverter");
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
         <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           <h2 className="text-lg font-medium text-gray-900 dark:text-white">
-            미리보기 ({PREVIEW_WIDTH}x{PREVIEW_HEIGHT})
+            {t("preview.title", {
+              width: PREVIEW_WIDTH,
+              height: PREVIEW_HEIGHT,
+            })}
           </h2>
           <div className="flex items-center gap-3 flex-wrap">
             <div className="flex items-center gap-2">
@@ -126,9 +131,7 @@ export const PreviewPanel = forwardRef<HTMLCanvasElement, PreviewPanelProps>(
             />
             {!fontData && (
               <div className="absolute inset-0 flex items-center justify-center text-gray-400 dark:text-gray-500 pointer-events-none">
-                <p className="text-lg">
-                  폰트를 로드하면 미리보기가 표시됩니다
-                </p>
+                <p className="text-lg">{t("preview.loadHint")}</p>
               </div>
             )}
           </div>
@@ -140,7 +143,7 @@ export const PreviewPanel = forwardRef<HTMLCanvasElement, PreviewPanelProps>(
               className="w-3 h-3 rounded"
               style={{ backgroundColor: "rgb(200, 100, 100)" }}
             ></span>
-            선택한 유니코드 범위에 포함되지 않은 문자 (변환되지 않음)
+            {t("preview.legend")}
           </span>
         </div>
       </div>

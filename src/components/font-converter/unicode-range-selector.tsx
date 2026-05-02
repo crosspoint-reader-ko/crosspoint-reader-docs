@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { UNICODE_RANGES } from "../unicode-range";
 import { RANGE_CATEGORIES } from "./constants";
 
@@ -30,6 +31,7 @@ export function UnicodeRangeSelector({
   onCategoryToggle,
   onCategoryCollapse,
 }: UnicodeRangeSelectorProps) {
+  const t = useTranslations("fontConverter");
   return (
     <div className="border border-gray-200 dark:border-gray-700 rounded-lg">
       <div
@@ -73,14 +75,16 @@ export function UnicodeRangeSelector({
           </button>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              유니코드 범위 (세부 선택)
+              {t("ranges.label")}
             </label>
             <span className="text-xs text-gray-500 dark:text-gray-400">
-              {selectedRanges.length}개 범위,{" "}
-              {totalSelectedChars.toLocaleString()}자
+              {t("ranges.summary", {
+                count: selectedRanges.length,
+                chars: totalSelectedChars.toLocaleString(),
+              })}
               {totalSelectedChars > 10000 && (
                 <span className="ml-1 text-yellow-600 dark:text-yellow-400">
-                  (대용량)
+                  {t("ranges.large")}
                 </span>
               )}
             </span>
@@ -94,7 +98,7 @@ export function UnicodeRangeSelector({
           }}
           className="text-sm px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-200 dark:hover:bg-gray-600"
         >
-          {isOpen ? "닫기" : "열기"}
+          {isOpen ? t("ranges.close") : t("ranges.open")}
         </button>
       </div>
 
@@ -106,21 +110,21 @@ export function UnicodeRangeSelector({
               onClick={onSelectAll}
               className="text-xs px-2 py-1 text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20"
             >
-              전체 선택
+              {t("ranges.selectAll")}
             </button>
             <button
               type="button"
               onClick={onDeselectAll}
               className="text-xs px-2 py-1 text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20"
             >
-              전체 해제
+              {t("ranges.deselectAll")}
             </button>
             <button
               type="button"
               onClick={onResetToDefaults}
               className="text-xs px-2 py-1 text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20"
             >
-              기본값 복원
+              {t("ranges.resetDefaults")}
             </button>
           </div>
 

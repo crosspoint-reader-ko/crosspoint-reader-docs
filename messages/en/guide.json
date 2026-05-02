@@ -1,0 +1,548 @@
+{
+  "metadata": {
+    "title": "User Guide",
+    "description": "How to use CrossPoint Reader. Detailed walkthrough of button controls, file management, reading mode, web server, and every feature.",
+    "ogTitle": "User Guide | CrossPoint Reader",
+    "ogDescription": "How to use CrossPoint Reader. Covers button controls, file management, and reading mode."
+  },
+  "nav": {
+    "ariaLabel": "User Guide",
+    "basics": "Basics",
+    "settings": "Settings",
+    "files": "Files & Calibre",
+    "customize": "Customize",
+    "roadmap": "Limits & Roadmap",
+    "troubleshooting": "Troubleshooting"
+  },
+  "basics": {
+    "hero": {
+      "title": "User Guide — Basics",
+      "description": "Basic usage of the CrossPoint Reader Korean firmware.",
+      "currentVersion": "Current docs version: <strong>v1.2.0-ko.0</strong>"
+    },
+    "toc": {
+      "whatsNew": "v1.2.0 Changes",
+      "hardware": "Hardware",
+      "power": "Power & Startup",
+      "screens": "Screens",
+      "reading": "Reading Mode",
+      "chapter": "Chapter Navigation"
+    },
+    "whatsNew": {
+      "title": "v1.2.0 Highlights",
+      "intro": "This release is a major update that integrates upstream CrossPoint v1.2.0 into the Korean firmware. See full release notes on the <link>release notes page</link>.",
+      "settingsUi": {
+        "title": "Settings & UI",
+        "items": [
+          "Settings screen reorganized into 4 tabs (Display / Reader / Controls / System)",
+          "Binary settings migrated to <code>.json</code> format (easier backup/restore)",
+          "Themed language picker screen",
+          "Orientation-aware popups (display correctly even in landscape)",
+          "Lyra Extended home theme (shows 3 books)"
+        ]
+      },
+      "files": {
+        "title": "File Management",
+        "items": [
+          "Multi-select file deletion",
+          "Full path bar",
+          "File extensions and [dir] prefix display",
+          "Hidden files/folders toggle",
+          "BMP image viewer",
+          "Direct book download from the web server"
+        ]
+      },
+      "reading": {
+        "title": "Reading Experience",
+        "items": [
+          "Faster chapter switching with <strong>silent pre-indexing</strong> of the next chapter",
+          "Inline footnote navigation / slim footnote mode",
+          "Auto Page Turn",
+          "End-of-book navigation behavior setting",
+          "<strong>Manual screen refresh</strong> via the power button",
+          "JPEGDEC-based image / cover decoding performance improvements"
+        ],
+        "timer": "<strong>Per-book reading timer:</strong> automatically tracks accumulated reading time and displays it on the reader menu progress line (v1.2.0-ko.14, <link>details</link>)"
+      },
+      "system": {
+        "title": "System & Stability",
+        "items": [
+          "OPDS search and next/prev page navigation",
+          "Charging lightning indicator on the battery icon",
+          "1% battery percentage display (X4)",
+          "Crash reason shown on next boot + crash log saved to SD"
+        ],
+        "sleepFolder": "<code>.sleep</code> folder priority + Cover + Custom mode improvements",
+        "languages": "Hungarian, Slovenian, Lithuanian, Kazakh and more languages added"
+      },
+      "x3": {
+        "title": "X3 only (v1.2.0-ko.12)",
+        "tilt": "<strong>Tilt to flip page:</strong> QMI8658 gyroscope detects left/right tilt to turn pages (direction reversible)",
+        "clock": "<strong>Status bar clock:</strong> DS3231 RTC + automatic NTP sync, configurable UTC offset",
+        "shared": "Single firmware shared between X3/X4; matching settings appear or hide automatically based on detected hardware"
+      }
+    },
+    "hardware": {
+      "title": "1. Hardware Overview",
+      "intro": "The Korean firmware supports both the <strong>Xteink X3</strong> and <strong>Xteink X4</strong>. Pick the model you have on the tabs below to see the form factor and button layout.",
+      "tabAria": "Device selection",
+      "imageAltX3": "Xteink X3 form factor and button layout",
+      "imageAltX4": "Xteink X4 form factor and button layout",
+      "imageCreditX3": "Image source: official Xteink X3 user manual",
+      "imageCreditX4": "Image source: official Xteink X4 user manual",
+      "specs": "Specifications",
+      "x3Specs": [
+        "Display: 3.7\" E-Ink (250+ PPI)",
+        "Dimensions: 98 × 64 × 5 mm (~3.85\" × 2.52\" × 0.20\")",
+        "Weight: 56 g",
+        "Battery: 650 mAh",
+        "Storage: 16 GB (MicroSD up to 512 GB)",
+        "NFC: supported",
+        "Charging: magnetic pogo-pin (cable included)"
+      ],
+      "x3Sensors": {
+        "title": "X3-only Sensors",
+        "items": [
+          "QMI8658 6-axis IMU (gyro/accelerometer — tilt to flip page)",
+          "DS3231 RTC + NTP sync (status bar clock)",
+          "Magnetic mount + NFC area on the back"
+        ],
+        "note": "X3-only options appear automatically when the hardware is detected. See the <link>Settings section</link> for details."
+      },
+      "x4Specs": [
+        "Display: 4.3\" E-Ink (220 PPI)",
+        "Dimensions: 112 × 69 × 6 mm (~4.4\" × 2.72\" × 0.23\")",
+        "Weight: 74 g",
+        "Battery: 450 mAh",
+        "Storage: 32 GB (MicroSD)",
+        "RAM: 128 MB",
+        "Charging: USB Type-C"
+      ],
+      "x4Features": {
+        "title": "X4-only Features",
+        "items": [
+          "1% battery percentage display (Smooth Battery)",
+          "Software correction for sunlight bleed on the white model",
+          "Magnetic mount points on the back (for cases / stands)"
+        ],
+        "note": "The X4 has no gyro/RTC, so tilt-to-flip and the status bar clock are hidden automatically."
+      },
+      "buttons": {
+        "title": "Button Layout",
+        "headerLocation": "Location",
+        "headerButton": "Button / Port",
+        "bottom": "Bottom",
+        "leftSide": "Left side",
+        "rightSide": "Right side",
+        "top": "Top",
+        "back": "Back",
+        "x3BottomButtons": "Back, OK, Next page, Previous page",
+        "x3LeftButtons": "Previous page button",
+        "x3RightButtons": "Next page button",
+        "x3TopButtons": "Reset, MicroSD card slot, Power",
+        "x3BackButtons": "Charging LED, NFC area, magnet point, magnetic charging port, strap hole",
+        "x4BottomButtons": "Back, OK, Next page, Previous page",
+        "x4LeftButtons": "Reset, MicroSD card slot",
+        "x4RightButtons": "Power, Previous page, Next page, USB-C charging port, strap hole",
+        "x4BackButtons": "Magnetic mount points",
+        "footer": "Button functions can be customized in <link>Settings</link>."
+      }
+    },
+    "power": {
+      "title": "2. Power and Startup",
+      "onOff": "Power on/off",
+      "onOffDesc": "To turn the device on or off, <strong>hold the power button for at least 0.5 seconds</strong>.",
+      "onOffShortClick": "You can change the power button to a short click in <link>Settings</link>.",
+      "reboot": "To reboot the device (e.g. after a firmware update or if it freezes), press and release the reset button, then hold the power button for a few seconds.",
+      "firstLaunch": "First launch",
+      "firstLaunchDesc": "When you turn on the device for the first time, the <link>home screen</link> is shown.",
+      "firstLaunchNote": "<strong>Note:</strong> The last book is auto-opened on the next start only if you were <em>actively reading</em> when the device was powered off. If you were in the file explorer or settings menu, you'll go back to the home screen instead."
+    },
+    "screens": {
+      "title": "3. Screens",
+      "home": "3.1 Home screen",
+      "homeDesc": "The main entry point of the firmware. From here you can jump to <strong>Continue Reading</strong>, <strong>File Explorer</strong>, <strong>File Transfer</strong>, and <strong>Settings</strong>.",
+      "fileExplorer": "3.2 File Explorer",
+      "fileExplorerIntro": "The file explorer is split into two tabs:",
+      "recent": "Recent",
+      "recentDesc": "Lists recently opened books so you can jump back to your last reading session quickly.",
+      "files": "Files (file browser)",
+      "filesDesc": "Browse the folders and files on the SD card.",
+      "controlsLabel": "<strong>Controls:</strong>",
+      "controlItems": [
+        "<strong>Switch tab:</strong> Left/right buttons toggle between Recent and Files",
+        "<strong>Browse list:</strong> Up/down (or volume up/down) buttons. Hold to scroll page-by-page",
+        "<strong>Open selection:</strong> OK opens the folder or starts reading the book",
+        "<strong>Delete file:</strong> Long-press OK and release to bring up the delete confirmation dialog. (Folder deletion is not supported)",
+        "<strong>Multi-select delete:</strong> Select multiple files at once and delete them together. (v1.2.0+)",
+        "<strong>Full path display:</strong> The current folder's full path is shown at the top so you always know where you are, even deep in the tree.",
+        "<strong>File extension display:</strong> File names are shown with their extension, and folders are highlighted with a <code>[dir]</code> prefix.",
+        "<strong>Hidden files/folders:</strong> Once enabled in settings, items beginning with <code>.</code> are also listed.",
+        "<strong>BMP image viewer:</strong> Selecting a <code>.bmp</code> file in the browser opens it in the image viewer."
+      ],
+      "readingScreen": "3.3 Reading screen",
+      "readingScreenDesc": "See the <link>Reading Mode</link> section below for details."
+    },
+    "reading": {
+      "title": "4. Reading Mode",
+      "intro": "When you open a book the button mapping changes for reading.",
+      "pageTurning": "Turning pages",
+      "headerAction": "Action",
+      "headerButton": "Button",
+      "prevPage": "Previous page",
+      "nextPage": "Next page",
+      "leftOrPrev": "Left <em>or</em> Previous",
+      "rightOrNext": "Right <em>or</em> Next",
+      "sideButtonsNote": "The role of the side (volume) buttons can be changed in <link>Settings</link>.",
+      "tipPower": "<strong>Tip:</strong> Set <link>Settings</link> &gt; <strong>Power button short press</strong> to <strong>Page turn</strong> to also use the power button to flip pages.",
+      "chapterNav": "Chapter navigation",
+      "nextChapter": "<strong>Next chapter:</strong> <strong>Long press then release</strong> Right (or Next)",
+      "prevChapter": "<strong>Previous chapter:</strong> <strong>Long press then release</strong> Left (or Previous)",
+      "systemNav": "System navigation",
+      "backToFiles": "<strong>Back to file explorer:</strong> Press Back to close the book and return to the file explorer",
+      "backToHome": "<strong>Back to home:</strong> <strong>Long-press</strong> Back to close the book and return to the home screen",
+      "chapterMenu": "<strong>Chapter menu:</strong> Press OK to open the <link>table of contents / chapter selection screen</link>",
+      "supportedLanguages": "Supported languages",
+      "supportedLanguagesIntro": "CrossPoint renders text using the following Unicode character blocks:",
+      "latinBlock": "<strong>Latin (basic, supplement, extended-A):</strong> English, German, French, Spanish, Portuguese, Italian, Dutch, Swedish, Norwegian, Danish, Finnish, Polish, Czech, Hungarian, Romanian, Slovak, Slovenian, Lithuanian, Turkish, Catalan, and more",
+      "cyrillicBlock": "<strong>Cyrillic (standard and extended):</strong> Russian, Ukrainian, Belarusian, Bulgarian, Serbian, Macedonian, Kazakh, Kyrgyz, Mongolian, and more",
+      "koreanBlock": "<strong>Korean:</strong> Fully supported in the Korean firmware (custom font included)",
+      "languageNote": "v1.2.0 adds new translations for Hungarian, Slovenian, Lithuanian, Kazakh, and Belarusian. The language picker is sorted alphabetically and styled per the active theme. Existing translations for Russian, Ukrainian, Spanish, Swedish, Dutch, Polish, German, French, Italian, Catalan, Turkish, Danish, and Finnish have also been significantly improved.",
+      "unsupportedLangs": "<strong>Not supported:</strong> Chinese, Japanese, Vietnamese, Hebrew, Arabic, Greek, Persian",
+      "epubImages": "EPUB image support",
+      "epubImagesDesc": "JPG and PNG images embedded in EPUB files are rendered. Images are auto-fitted to the screen, and you can disable image rendering via <strong>Settings → Display → Images</strong>.",
+      "jpegdecNote": "v1.2.0 swaps the cover image decoder to <strong>JPEGDEC</strong> for major performance gains. Per-pixel image rendering overhead has been removed, so page turns are faster in image-heavy books, and the upload size limit for large EPUBs has been relaxed.",
+      "imagesLimitNote": "<strong>Note:</strong> Large images such as covers may still take a moment to convert. GIF, SVG, and WebP formats are not yet supported. Heavy-cover EPUBs are faster if you pre-optimize them with <link>EPUB to XTC Converter</link>."
+    },
+    "chapter": {
+      "title": "5. Chapter selection screen",
+      "intro": "Press the <strong>OK</strong> button while reading to access this screen.",
+      "step1": "Use Up/Down (or volume up/down) to choose the chapter",
+      "step2": "Press <strong>OK</strong> to jump to that chapter",
+      "step3": "<em>or press <strong>Back</strong> to cancel and return to the current page</em>",
+      "koreaderSync": "KOReader Sync",
+      "koreaderSyncIntro": "When KOReader Sync is enabled in settings, the chapter selection screen shows additional options:",
+      "koreaderSyncProgress": "<strong>Sync Progress:</strong> Jump to the synced reading position from the KOReader server",
+      "koreaderSyncChapter": "The synced chapter name is also displayed so you can easily see where you left off on another device"
+    }
+  },
+  "settings": {
+    "hero": {
+      "title": "Settings",
+      "description": "Covers system settings (home screen), the EPUB reader OK menu, and the TXT reader OK menu separately."
+    },
+    "toc": {
+      "settings": "System Settings (Home)",
+      "epubReader": "EPUB Reader Menu",
+      "txtReader": "TXT Reader Menu"
+    },
+    "system": {
+      "title": "3.5 System Settings (Home Screen)",
+      "subtitle": "These are the device-wide settings opened from <strong>Settings</strong> on the home screen.",
+      "intro": "Configure how the device behaves. Settings are split into four categories:",
+      "v120Note": "Starting with v1.2.0, the settings screen is reorganized into four tabs: <strong>Display / Reader / Controls / System</strong>. Use Left/Right buttons to switch tabs and Up/Down to pick items. (Original categories: Display / Reader / Controls / System)",
+      "display": {
+        "title": "3.5.1 Display",
+        "items": [
+          "<strong>Sleep screen:</strong> Dark (default), Light, Custom, Cover, Cover + Custom, or None. <em>Cover + Custom</em> shows the cover only while a book is open, and falls back to the custom image otherwise. (v1.2.0)",
+          "<strong>Sleep screen cover mode:</strong> Fit / Crop",
+          "<strong>Sleep screen cover filter:</strong> None (grayscale) / Contrast (B&W) / Inverted",
+          "<strong>Status bar:</strong> None, No progress, Full + percent, Full + book bar, Book bar only, Full + chapter bar (the “Status Bar Settings” entry exposes finer-grained options)",
+          "<strong>Clock (X3 only):</strong> Shows the current time in the status bar. Time is kept by the built-in DS3231 RTC, and Wi-Fi connection auto-syncs via NTP (within ~5 s) and writes back to the RTC. Hidden on the X4 because it has no DS3231. (v1.2.0-ko.12)",
+          "<strong>Clock UTC offset (X3 only):</strong> Sets the UTC offset for the displayed clock. e.g. UTC+9 for Korea; 30-minute offsets like UTC+5:30 are also supported. (v1.2.0-ko.12)",
+          "<strong>Hide battery %:</strong> Never (default), In reader, Always. The battery icon is always shown.",
+          "<strong>Smooth Battery:</strong> On X4, battery percentage is reported in 1% increments instead of the previous 5% steps for a more accurate reading. (v1.2.0)",
+          "<strong>Charging indicator:</strong> A lightning glyph appears on the battery icon while charging. (Supported on both Classic and Lyra themes)",
+          "<strong>Refresh rate:</strong> Full-refresh interval to reduce ghosting (1, 5, 10, 15, 30 pages)",
+          "<strong>UI theme:</strong> Classic, Lyra, or Lyra Extended. Lyra Extended shows up to 3 books on the home screen instead of 1.",
+          "<strong>Images:</strong> EPUB body image rendering — <em>Show</em> (default) / <em>Placeholder</em> (small box only) / <em>Remove</em> (skip entirely). Placeholder/Remove speed up page turns. (v1.2.0)",
+          "<strong>Sunlight bleed correction:</strong> OFF/ON software fix for direct-sunlight bleed on white X4 units"
+        ]
+      },
+      "reader": {
+        "title": "3.5.2 Reader",
+        "uiLabels": "Firmware UI labels: “Reader line spacing”, “Reader screen margin”, “Reader paragraph alignment”, “Extra paragraph spacing”, “Paragraph indent”, “Character-level word wrap”, “Text antialiasing”, etc.",
+        "fontSetting": "<strong>Font setting:</strong> Choose the custom font for the EPUB/TXT reader (see the <link>Custom Fonts</link> section for details)",
+        "items": [
+          "<strong>UI font size:</strong> Small, Normal (default), Large, Very Large",
+          "<strong>Reader line spacing:</strong> Tight, Normal, Wide",
+          "<strong>Reader screen margin:</strong> 5–40 pixels in 5-pixel steps",
+          "<strong>Reader paragraph alignment:</strong> Justify (default), Left, Center, Right, or Book style",
+          "<strong>Embedded styles:</strong> Apply the EPUB's embedded CSS ON/OFF",
+          "<strong>Hyphenation:</strong> Word hyphenation for English etc. ON/OFF. v1.2.0 also improves hyphenation for EPUBs that use ISO 639-2 language codes.",
+          "<strong>Reading direction:</strong> Portrait (default), Landscape clockwise, Inverted, Landscape counter-clockwise. v1.2.0 makes in-reader popups follow the current orientation.",
+          "<strong>Extra paragraph spacing:</strong> When on, adds blank space between paragraphs",
+          "<strong>Paragraph indent:</strong> Indent the first line of each paragraph ON/OFF (independent of extra spacing)",
+          "<strong>Character-level word wrap:</strong> Wrap by character instead of by word (justified text keeps even word spacing)",
+          "<strong>Text antialiasing:</strong> Soft gray edges on text. Page turns may slow down slightly.",
+          "<strong>Auto Page Turn:</strong> Automatically advance to the next page on a fixed interval. (v1.2.0)",
+          "<strong>End of Book:</strong> Choose whether pressing Next on the last page returns you to home or stays in place. (v1.2.0)",
+          "<strong>Footnote Navigation:</strong> Follow inline footnote links and return back; supports a slim footnote display mode. (v1.2.0)"
+        ]
+      },
+      "controls": {
+        "title": "3.5.3 Controls",
+        "items": [
+          "<strong>Front button remap:</strong> Freely remap the four front buttons (Back, OK, Left, Right)",
+          "<strong>Side button order (reader):</strong> Reorder the volume buttons as Prev/Next (default) / Next/Prev (reading only)",
+          "<strong>Long press for chapter skip:</strong> Skip chapter (default) or page scroll",
+          "<strong>Power button short press:</strong> Ignore (default), Sleep, Page turn, or <strong>Manual Refresh</strong>. With Manual Refresh, a short power click instantly clears screen ghosting. (v1.2.0)",
+          "<strong>Tilt to flip page (X3 only):</strong> Slightly tilt the device left/right with the built-in QMI8658 gyro to advance/retreat pages. The direction setting (<em>Forward</em> / <em>Reverse</em>) lets you reverse the tilt-to-page mapping, and portrait/landscape/inverted orientations are all supported. Hidden on the X4 because it has no QMI8658. (v1.2.0-ko.12)"
+        ]
+      },
+      "systemTab": {
+        "title": "3.5.4 System",
+        "sleepTimeout": "<strong>Sleep Timeout:</strong> Time before auto-sleep after inactivity (1, 5, 10 (default), 15, or 30 minutes)",
+        "hiddenFiles": "<strong>Show Hidden Files:</strong> Show files/folders starting with <code>.</code> in the file browser (v1.2.0)",
+        "wifi": "<strong>Wi-Fi Networks:</strong> Pick and manage Wi-Fi network connections",
+        "koreaderSync": "<strong>KOReader Sync:</strong> Configure read-position sync with a KOReader server. See the <link>quick setup guide</link>.",
+        "opds": "<strong>OPDS Browser:</strong> Download e-books via OPDS catalogs (HTTP Basic auth supported). Since v1.2.0 it also supports <strong>search</strong> and <strong>next/prev page</strong> navigation.",
+        "clearCache": "<strong>Clear Reading Cache:</strong> Remove rendering caches and temporary files (settings and reading positions are preserved)",
+        "checkUpdate": "<strong>Check for Updates:</strong> Check for Crosspoint firmware updates over WiFi (the Korean firmware tracks <code>crosspoint-reader-ko</code> releases)",
+        "sdUpdate": "<strong>SD Card Firmware Update:</strong> Pick a firmware file (<code>.bin</code>) from the SD card to flash offline. Useful for Korean/CrossPoint firmware updates as well as rolling back to OEM X3/X4 store firmware. See the <link>install guide — method 2</link>. (v1.2.0-ko.15)",
+        "language": "<strong>Language:</strong> Pick the UI language. As of v1.2.0, ~20 languages including Korean are listed in sorted order and styled per the theme. (Newly added: Hungarian, Slovenian, Lithuanian, Kazakh, Belarusian, Finnish, Italian, Danish, Dutch; improved Polish/Ukrainian, etc.)"
+      },
+      "saveFormatNote": "<strong>Note — settings file format:</strong> Since v1.2.0 settings are stored as <code>.json</code> instead of the old binary file, making backup/restore easy. Korean-specific values like <code>customFontPath</code>, <code>characterWrap</code>, and <code>paragraphIndent</code> are also stored in the JSON. (v1.1.1-ko.1+)"
+    },
+    "epubReader": {
+      "title": "3.6 EPUB Reader Menu (OK button)",
+      "intro": "Pressing the <strong>OK button</strong> while reading an EPUB opens a reader-specific menu. It focuses on book-related actions, and includes values managed separately from system settings such as progress, orientation, and auto-turn.",
+      "items": [
+        "<strong>Chapter Selection:</strong> Jump directly to a chapter from the table of contents",
+        "<strong>Footnotes:</strong> Visible only when the current book contains footnotes; lets you browse all footnotes at once (v1.2.0)",
+        "<strong>Reading direction:</strong> Portrait (default) / Landscape clockwise / Inverted / Landscape counter-clockwise — previewed instantly on selection and applied when leaving the menu.",
+        "<strong>Auto Page Turn (pages/min):</strong> Pages-per-minute speed (Off / 1 / 3 / 6 / 12) (v1.2.0)",
+        "<strong>Jump to %:</strong> Type the percentage of the whole book to jump to that position"
+      ],
+      "screenshot": "<strong>Take Screenshot:</strong> Save the current page as BMP into the SD card's <code>/screenshots</code> folder (see the <link>screenshot guide</link>)",
+      "qr": "<strong>Show page as QR:</strong> Display the current web server / hotspot address as a QR so you can connect from your phone",
+      "home": "<strong>Go Home:</strong> Save the current reading position and return to the home screen",
+      "syncProgress": "<strong>Sync Progress:</strong> Upload the current reading position to the KOReader Sync server (see the <link>KOReader Sync</link> guide)",
+      "clearCache": "<strong>Clear Book Cache:</strong> Delete only the rendering cache (inside .crosspoint) for the current book; settings and reading position are preserved",
+      "resetTimer": "<strong>Reset Reading Timer:</strong> Reset the accumulated reading time of the current book to 0 (two-step confirmation, v1.2.0-ko.14). See the <link>Reading Timer</link> section for details",
+      "footerNote": "<strong>Note:</strong> Reading direction and auto-turn values changed in the reader OK menu are stored per book and reflected in the JSON settings. The right side of the menu's progress line shows an accumulated reading-time chip (e.g. <code>Reading Time: 1h 23m</code>)."
+    },
+    "txtReader": {
+      "title": "3.7 TXT Reader Menu (OK button)",
+      "intro": "TXT files have a flat structure with no chapters, so the menu is simpler than EPUB. Navigation is byte-offset based.",
+      "items": [
+        "<strong>Reading direction:</strong> Portrait / Landscape clockwise / Inverted / Landscape counter-clockwise",
+        "<strong>Auto Page Turn (pages/min):</strong> Pages-per-minute speed (Off / 1 / 3 / 6 / 12) — same options as EPUB",
+        "<strong>Long-press page jump:</strong> Off / 10 / 20 / 50 / 100 — long-pressing the page button for over a second skips this many pages. When Off, long-press still only flips one page (v1.2.0-ko)",
+        "<strong>Jump to %:</strong> Jump by percentage of the whole file",
+        "<strong>Take Screenshot:</strong> Save the current page as BMP",
+        "<strong>Go Home:</strong> Save the current position and return to the home screen"
+      ],
+      "resetTimer": "<strong>Reset Reading Timer:</strong> Reset the accumulated reading time of the current TXT file to 0 (v1.2.0-ko.14). Like EPUB, an accumulated time chip appears on the right of the menu's progress line. See the <link>Reading Timer</link> section for details",
+      "footerNote": "The TXT reader menu has no Chapter Selection / Footnotes / Show page as QR / Sync Progress / Clear Book Cache — those features only make sense for EPUB and are hidden for TXT."
+    }
+  },
+  "customize": {
+    "hero": {
+      "title": "Customize & Sync",
+      "description": "How to use KOReader Sync, the sleep screen, custom fonts, and screenshots."
+    },
+    "toc": {
+      "koreaderSync": "KOReader Sync",
+      "sleepScreen": "Sleep Screen",
+      "customFont": "Custom Fonts",
+      "screenshot": "Screenshots",
+      "readingTimer": "Reading Timer"
+    },
+    "koreaderSync": {
+      "title": "3.5.5 KOReader Sync — Quick Setup",
+      "intro": "CrossPoint can sync reading positions with a KOReader-compatible sync server, and is interoperable with KOReader apps or devices that use the same server/account.",
+      "optionA": "Option A: Free public server ( <code>sync.koreader.rocks</code> )",
+      "optionASteps": [
+        "(If needed) Register a user account once. If you already have a KOReader sync account you can skip this step.",
+        "On the device go to <strong>Settings → System → KOReader Sync</strong> and enter your <strong>Username</strong> and <strong>Password</strong>. Enter the password as plain text — CrossPoint computes the MD5 hash internally.",
+        "Leave <strong>Sync Server URL</strong> empty or set it to <code>https://sync.koreader.rocks</code>, then run <strong>Authenticate</strong>."
+      ],
+      "step4Intro": "While reading, press <strong>OK</strong> to open the reader menu and pick <strong>Sync Progress</strong>.",
+      "step4ApplyRemote": "<strong>Apply Remote</strong>: Jump to the remote progress position",
+      "step4UploadLocal": "<strong>Upload Local</strong>: Upload the current progress position",
+      "optionB": "Option B: Self-hosted (Docker Compose)",
+      "optionBIntro": "You can also run a sync server on your home network:",
+      "optionBHealthcheck": "Verify server: <code1>curl -H \"Accept: application/vnd.koreader.v1+json\" \"http://&lt;server-IP&gt;:17200/healthcheck\"</code1> &rarr; <code2><state></state></code2>",
+      "optionBRegister": "User registration uses the MD5-hashed password (default KOReader kosync behavior).",
+      "optionBSetUrl": "On the device set <strong>Sync Server URL</strong> to <code1>http://&lt;server-IP&gt;:17200</code1> (or <code2>https://&lt;server-IP&gt;:7200</code2> when using HTTPS port 7200).",
+      "securityWarning": "<strong>Security warning:</strong> Sending an MD5 password over plain HTTP is not safe. If the device's traffic ever leaves your LAN or you use public WiFi, switch to HTTPS (<code>https://&lt;server-IP&gt;:7200</code>) and create a sync-only account — don't reuse your main account password.",
+      "tip": "<strong>Tip:</strong> When KOReader Sync is enabled, opening the chapter selection screen also shows the chapter name of the remote progress position so you can easily see where you left off on another device."
+    },
+    "sleepScreen": {
+      "title": "3.6 Customizing the Sleep Screen",
+      "intro": "The image displayed depends on the sleep screen setting:",
+      "items": [
+        "<strong>Dark (default):</strong> CrossPoint logo on a dark background",
+        "<strong>Light:</strong> CrossPoint logo on a white background",
+        "<strong>Custom:</strong> User image from the SD card (see below). Falls back to Dark when there is no image",
+        "<strong>Cover:</strong> Cover of the currently open book. Falls back to Dark when no book is open",
+        "<strong>Cover + Custom:</strong> Show the cover only while a book is open, otherwise fall back to Custom (v1.2.0)",
+        "<strong>None:</strong> Blank screen"
+      ],
+      "customSetup": "When using <strong>Custom</strong> or <strong>Cover + Custom</strong>, place your images on the SD card:",
+      "multiImages": "<strong>Multiple images (recommended):</strong> Create a <code1>.sleep</code1> folder (hidden) on the SD card root and drop in any number of <code2>.bmp</code2> images. One is picked at random each time the device sleeps. (For backwards compatibility, a <code3>sleep</code3> folder is also recognized as a fallback.)",
+      "singleImage": "<strong>Single image:</strong> Place a <code1>sleep.bmp</code1> file in the root directory. Used as a fallback when no valid image is found in the <code2>.sleep</code2>/<code3>sleep</code3> folder.",
+      "settingNote": "<strong>Note:</strong> To use these images, set <strong>Sleep screen image</strong> to <strong>Custom</strong> in <link>Settings</link>.",
+      "tip": "<strong>Tip:</strong> For best results, use uncompressed 24-bit BMP files at 480x800 resolution. <link>X4 Wallpaper Converter</link> makes it easy to convert images into the right format."
+    },
+    "customFont": {
+      "title": "3.7 Custom Fonts",
+      "intro": "You can use custom fonts in the EPUB/TXT reader. Font changes take effect immediately without rebooting, and your current reading position is preserved. Switching fonts does invalidate the rendering cache and re-runs indexing.",
+      "prepareFontTitle": "Prepare the font file",
+      "prepareStep1": "Prepare a font file with the <code>.epdfont</code> extension. (You can convert TTF/OTF fonts using the <link>font converter</link>.)",
+      "prepareStep2": "Copy the font file to <code1>/.crosspoint/fonts/</code1> on the SD card or to the root <code2>/fonts/</code2> folder.",
+      "applyTitle": "Apply the font",
+      "applyStep1": "Go to <link>Settings</link> &gt; <strong>Font setting</strong>.",
+      "applyStep2": "Pick the font you want from the list.",
+      "applyStep3": "The chosen font is applied to the EPUB/TXT reader instantly.",
+      "defaultFontNote": "<strong>Note:</strong> The default font is <strong>KoPub Batang</strong>, optimized for Korean reading.",
+      "limitNote": "<strong>Limitations:</strong> Variable Fonts, color fonts (Emoji), and bitmap-only fonts are not supported. See the <link>Korean Font</link> page for details."
+    },
+    "screenshot": {
+      "title": "3.8 Screenshots",
+      "intro": "Save a screenshot of the current screen as a BMP file.",
+      "method1": "<strong>Method 1:</strong> Press <strong>Power + Volume Down</strong> simultaneously",
+      "method2": "<strong>Method 2:</strong> Open the chapter menu while reading and pick the <strong>Screenshot</strong> option",
+      "note": "<strong>Note:</strong> Screenshots are saved to the SD card's <code>/.crosspoint/screenshots/</code> folder."
+    },
+    "readingTimer": {
+      "title": "3.9 Reading Timer",
+      "intro": "Since v1.2.0-ko.14 the device automatically tracks accumulated reading time per book. Time accrues from the moment you open a book in either the EPUB or TXT reader, and continues across closes/re-opens. The accumulated value is stored as a 16-byte binary in that book's cache directory (<code>/.crosspoint/&lt;hash&gt;/reading_stats.bin</code> on the SD card).",
+      "whereTitle": "Where it's shown",
+      "whereDesc": "While reading, press the <strong>OK button</strong> to open the reader menu — an accumulated time chip is shown on the right of the top progress line, e.g. <code1>Reading Time: 1h 23m</code1>. Values are formatted compactly (<code2>45m</code2>, <code3>1h 23m</code3>, <code4>1d 5h</code4>, <code5>123d</code5>) and shown identically in both EPUB and TXT reader menus.",
+      "rulesTitle": "Accumulation rules",
+      "rulesHeaderSituation": "Situation",
+      "rulesHeaderAction": "Behavior",
+      "rules": [
+        ["Flipping pages or returning from a menu to the reading screen", "Continues to accumulate"],
+        ["Auto Page Turn active", "Continues to accumulate (uninterrupted during long unattended reading)"],
+        ["No input for 5 minutes", "Pauses (auto-resumes on next input)"],
+        ["Entering reader menu / chapter select / sub-activities", "Time during these is excluded from the total (menu time is excluded)"],
+        ["Sessions shorter than 30 seconds", "Skipped to save (avoid SD card wear)"],
+        ["After 5 minutes of active reading", "Auto checkpoint save"],
+        ["Reader exit / book close", "Drains remaining time and writes a final save"]
+      ],
+      "resetTitle": "Resetting the timer",
+      "resetDesc": "Pick <strong>Reset Reading Timer</strong> in the reader menu — after a two-step confirmation, that book's accumulated value is reset to 0. Other books' reading time is unaffected.",
+      "compatTitle": "Compatibility notes",
+      "compat1": "The existing <code1>progress.bin</code1>, <code2>book.bin</code2>, and <code3>section.bin</code3> cache formats are unaffected.",
+      "compat2": "<code>reading_stats.bin</code> is a new per-book file; if it doesn't exist the timer starts at 0.",
+      "compat3": "For previously read books, the timer starts at 0 the first time you boot the v1.2.0-ko.14 build."
+    }
+  },
+  "files": {
+    "hero": {
+      "title": "File Transfer & Calibre",
+      "description": "How to upload e-books to the device and integrate with Calibre."
+    },
+    "toc": {
+      "fileUpload": "File Transfer",
+      "calibreWireless": "Calibre Wireless",
+      "calibrePlugins": "Calibre Plugin"
+    },
+    "fileUpload": {
+      "title": "3.4 File Transfer Screen",
+      "intro": "Upload new e-books to the device. When you enter this screen, a WiFi selection dialog appears and the X4 starts hosting a web server.",
+      "webdav": "Beyond browser uploads, <strong>WebDAV</strong> is also supported, so you can transfer files directly from your file manager. See the <link>web server guide</link> for the full configuration.",
+      "directDownload": "You can also <strong>directly download</strong> books stored on the SD card from the web UI, which is useful for moving books to other devices. (v1.2.0+)"
+    },
+    "calibreWireless": {
+      "title": "3.4.1 Calibre Wireless Transfer",
+      "intro": "CrossPoint supports wireless transfer via the Calibre device plugin. Install the plugin first per the <link>Calibre plugin</link> chapter below.",
+      "step1": "Once the plugin is installed in Calibre, the CrossPoint Reader is auto-detected.",
+      "step2": "On the device: <strong>File Transfer → Connect to Calibre → Join network</strong>",
+      "step3": "Make sure your computer and the device are on the same WiFi network.",
+      "step4": "Click \"Send to device\" in Calibre and the EPUB/TXT files are sent to the device's <code>/books/</code> folder."
+    },
+    "calibrePlugins": {
+      "title": "3.4.2 Calibre Plugin",
+      "intro": "The CrossPoint Reader Korean team's <strong>crosspoint_reader</strong> Calibre plugin bundles wireless transfer to the device, shortcut menus, and default conversion profiles. It is a fork of the upstream project tuned for the Korean environment and Korean firmware specs.",
+      "featuresTitle": "Key features",
+      "features": [
+        "Auto-detect device and connect wirelessly from the Calibre menu",
+        "Send EPUB/TXT files over WiFi via <strong>Send to device</strong>",
+        "CrossPoint-recommended conversion profiles included by default",
+        "Korean-font-aware metadata sync (book title, author, cover image, etc. display correctly in Korean)"
+      ],
+      "installTitle": "Install",
+      "installStep1": "Download the latest <code>crosspoint_reader.zip</code> from <link>crosspoint-reader-ko/calibre-plugins/releases</link>.",
+      "installStep2": "Open Calibre → <strong>Preferences → Plugins</strong> tab",
+      "installStep3": "Pick <strong>Load plugin from file</strong> → choose the downloaded zip file",
+      "installStep4": "Restart Calibre to activate the plugin and have the device auto-detected.",
+      "compatNote": "<strong>Version compatibility:</strong> Recommended with Korean firmware v1.2.0+. Some metadata transfer features may be limited on earlier firmware."
+    }
+  },
+  "roadmap": {
+    "hero": {
+      "title": "Limitations and Roadmap",
+      "description": "Features the firmware does not yet support and what's planned next."
+    },
+    "title": "6. Current Limitations and Roadmap",
+    "intro": "This firmware is under active development. The following features are <strong>not yet supported</strong> but are planned for future updates. Each link goes to a discussion thread:",
+    "rendering": {
+      "title": "Rendering",
+      "darkMode": "Dark mode",
+      "darkModeDesc": " - Inverted reading mode",
+      "antialiasing": "Antialiasing parameters and small fonts"
+    },
+    "navigation": {
+      "title": "Navigation & UI",
+      "pageJump": "Go to page",
+      "pageJumpDesc": " - Jump directly to a specific page",
+      "search": "In-book search",
+      "searchDesc": " - Word/phrase search",
+      "bookmark": "Bookmarks",
+      "bookmarkDesc": " - Add/manage bookmarks",
+      "highlight": "Text highlighting",
+      "highlightDesc": " - Simple text highlight feature",
+      "footnote": "Inline footnotes",
+      "footnoteDesc": " - Footnote popup display",
+      "statusBar": "Status bar options",
+      "statusBarDesc": " - Extra options like time display",
+      "fileSearch": "File search/filter",
+      "fileSearchDesc": " - Search books in the library",
+      "metadata": "Metadata-based browser",
+      "metadataDesc": " - Sort by author/title"
+    },
+    "automation": {
+      "title": "Automation & Statistics",
+      "stats": "Reading stats",
+      "statsDesc": " - Track reading time/speed"
+    },
+    "external": {
+      "title": "External Integrations",
+      "readwise": "Readwise/Instapaper sync",
+      "goodreads": "Goodreads integration"
+    },
+    "i18n": {
+      "title": "More Languages",
+      "thai": "Thai support",
+      "arabic": "Arabic support",
+      "arabicDesc": " - RTL text rendering",
+      "vietnamese": "Vietnamese support"
+    },
+    "hardware": {
+      "title": "Hardware & System",
+      "bluetooth": "Bluetooth page turner",
+      "lockScreen": "Lock screen",
+      "lockScreenDesc": " - Simple PIN lock",
+      "bootBehavior": "Boot behavior selection",
+      "bootBehaviorDesc": " - Boot directly into the last book",
+      "backupRestore": "Settings backup/restore",
+      "backupRestoreDesc": " - Backup settings via the web server"
+    },
+    "participate": "<strong>Get involved:</strong> Suggest new features or share feedback on <link1>GitHub Discussions</link1>; for Korean firmware-specific discussion, see <link2>Korean firmware Discussions</link2>."
+  },
+  "troubleshooting": {
+    "hero": {
+      "title": "Troubleshooting & Bootloop Recovery",
+      "description": "What to check when the device runs into trouble."
+    },
+    "title": "7. Troubleshooting & Bootloop Recovery",
+    "intro": "If you run into bugs or crashes while using CrossPoint, please open an issue and attach the serial monitor log. Connect the device to a computer and start a serial monitor to view logs. Use <link>Serial Monitor</link> or run:",
+    "bootloop": "If the device is stuck in a bootloop, press and release the reset button, then hold the configured Back and Power buttons together to boot back to the home screen.",
+    "tip": "<strong>Tip:</strong> If books render incorrectly or behavior gets weird, try deleting the <code>.crosspoint</code> directory on the SD card to clear caches. Settings and reading positions are preserved while rendering caches are regenerated.",
+    "v120": "<strong>v1.2.0 new feature:</strong> If the device shuts down unexpectedly, the next boot shows the <strong>Crash Reason</strong> on screen and a crash report is automatically saved to <code>crash_report.txt</code> on the SD card root. Please attach this file when reporting issues."
+  }
+}

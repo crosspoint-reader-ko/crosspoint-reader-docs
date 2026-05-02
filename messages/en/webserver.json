@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "title": "Web Server Guide",
+    "description": "Learn how to upload EPUB, XTC, and XTCH files wirelessly using the built-in web server in CrossPoint Reader.",
+    "ogTitle": "Web Server Guide | CrossPoint Reader",
+    "ogDescription": "Learn how to upload files wirelessly using the built-in web server in CrossPoint Reader."
+  },
+  "hero": {
+    "title": "Web Server Guide",
+    "subtitle": "Learn how to upload and manage EPUB files over Wi-Fi."
+  },
+  "overview": {
+    "title": "Overview",
+    "intro": "CrossPoint Reader includes a built-in web server that lets you:",
+    "features": {
+      "upload": "Upload EPUB files from any device on the same Wi-Fi network",
+      "browse": "Browse and manage files on the SD card",
+      "folder": "Create folders to organize your e-book library",
+      "delete": "Delete files and folders",
+      "download": "<strong>Direct book download</strong> (v1.2.0): Download books from the SD card to your browser through the web UI",
+      "webdav": "<strong>WebDAV support</strong> (v1.1+): Mount the device as a network drive in macOS Finder, Windows Explorer, Cyberduck, and similar clients"
+    },
+    "requirementsTitle": "Requirements",
+    "requirements": {
+      "device": "A CrossPoint Reader device",
+      "wifi": "A Wi-Fi network",
+      "client": "A computer, smartphone, or tablet connected to the <strong>same Wi-Fi network</strong>"
+    }
+  },
+  "step1": {
+    "title": "Step 1: Open the Wi-Fi Screen",
+    "items": {
+      "settings": "From the main menu or file browser, open the <strong>Settings</strong> screen",
+      "wifi": "Select the <strong>Wi-Fi</strong> option",
+      "scan": "The device automatically begins scanning for available networks"
+    }
+  },
+  "step2": {
+    "title": "Step 2: Connect to Wi-Fi",
+    "availableNetworksTitle": "View Available Networks",
+    "availableNetworksIntro": "When the scan finishes, the device displays available Wi-Fi networks with the following indicators:",
+    "indicators": {
+      "signal": "<strong>Signal strength bars</strong> (||||, |||, ||, |) indicate connection quality",
+      "lock": "<strong>* symbol</strong> means the network is password-protected (encrypted)",
+      "saved": "<strong>+ symbol</strong> means saved credentials are available"
+    },
+    "selectNetworkTitle": "Select a Network",
+    "selectNetwork": {
+      "navigate": "Use the <strong>Left/Right</strong> (or <strong>Prev/Down</strong>) buttons to scroll the network list",
+      "confirm": "Press <strong>OK</strong> to select the highlighted network"
+    },
+    "passwordTitle": "Enter the Password",
+    "passwordIntro": "If the network requires a password:",
+    "passwordSteps": {
+      "keyboard": "An on-screen keyboard appears",
+      "navigate": "Use the navigation buttons to select characters",
+      "confirm": "Press <strong>OK</strong> to enter each character",
+      "done": "When finished, choose the <strong>Done</strong> option on the keyboard"
+    },
+    "noteLabel": "Note:",
+    "note": "If you have connected to this network before, the saved password is used automatically."
+  },
+  "step3": {
+    "title": "Step 3: Connection Established",
+    "intro": "Once connected, the screen shows:",
+    "info": {
+      "ssid": "<strong>Network name</strong> (SSID)",
+      "ip": "<strong>IP address</strong> (for example, 192.168.1.102)",
+      "url": "<strong>Web server URL</strong> (for example, http://192.168.1.102/)"
+    },
+    "importantLabel": "Important:",
+    "important": "Make a note of the IP address — you will need it to reach the web interface from a computer or smartphone."
+  },
+  "step4": {
+    "title": "Step 4: Open the Web Interface",
+    "computerTitle": "From a Computer",
+    "computer": {
+      "sameWifi": "Verify your computer is on the <strong>same Wi-Fi network</strong> as the CrossPoint Reader",
+      "openBrowser": "Open a web browser (Chrome is recommended)",
+      "enterIp": "Type the IP address shown on the device into the address bar",
+      "press": "Press Enter"
+    },
+    "mobileTitle": "From a Smartphone or Tablet",
+    "mobile": {
+      "sameWifi": "Verify your phone or tablet is on the <strong>same Wi-Fi network</strong> as the CrossPoint Reader",
+      "openBrowser": "Open a mobile browser (Safari, Chrome, etc.)",
+      "enterIp": "Type the IP address into the address bar",
+      "go": "Tap Go"
+    }
+  },
+  "step5": {
+    "title": "Step 5: Use the Web Interface",
+    "homeTitle": "Home Page",
+    "homeIntro": "The home page shows:",
+    "home": {
+      "status": "Device status and version information",
+      "wifi": "Wi-Fi connection status",
+      "ip": "Current IP address",
+      "memory": "Available memory"
+    },
+    "fileManagerTitle": "File Manager",
+    "fileManagerIntro": "Click <strong>File Manager</strong> to access the file management features.",
+    "browseTitle": "Browse Files",
+    "browse": {
+      "show": "All files and folders on the SD card are listed",
+      "click": "Click a folder name to enter that folder",
+      "path": "Use the breadcrumb path at the top to move to a parent folder"
+    },
+    "uploadTitle": "Upload an EPUB File",
+    "upload": {
+      "addButton": "Click the <strong>+ Add</strong> button in the top right",
+      "selectMenu": "Choose <strong>Upload eBook</strong> from the dropdown menu",
+      "chooseFile": "Click <strong>Choose File</strong> and select an .epub file",
+      "uploadButton": "Click <strong>Upload</strong>",
+      "progress": "A progress bar shows the upload status",
+      "refresh": "The page refreshes automatically when the upload completes"
+    },
+    "uploadNoteLabel": "Note:",
+    "uploadNote": "Only .epub files are accepted. Other file types are rejected.",
+    "newFolderTitle": "Create a Folder",
+    "newFolder": {
+      "addButton": "Click the <strong>+ Add</strong> button in the top right",
+      "selectMenu": "Choose <strong>New Folder</strong> from the dropdown menu",
+      "name": "Enter a folder name (letters, numbers, underscores, and hyphens only)",
+      "create": "Click <strong>Create Folder</strong>"
+    },
+    "deleteTitle": "Delete Files and Folders",
+    "delete": {
+      "icon": "Click the trash icon next to the file or folder",
+      "confirm": "Confirm the deletion in the popup dialog",
+      "button": "Click <strong>Delete</strong> to remove it permanently"
+    },
+    "deleteWarningLabel": "Warning:",
+    "deleteWarning": "Deletion is permanent and cannot be undone. Folders must be empty before they can be deleted."
+  },
+  "troubleshooting": {
+    "title": "Troubleshooting",
+    "notVisible": {
+      "title": "Device Not Reachable on the Network",
+      "problemLabel": "Problem:",
+      "problem": "The browser shows \"Cannot connect\" or \"This site can't be reached\".",
+      "items": {
+        "sameWifi": "Verify both devices are on the <strong>same Wi-Fi network</strong>",
+        "ip": "Confirm the IP address was entered correctly",
+        "http": "Include <code>http://</code> at the start of the address",
+        "vpn": "Try disabling any active VPN"
+      }
+    },
+    "drops": {
+      "title": "Connection Drops or Times Out",
+      "items": {
+        "closer": "Move closer to the Wi-Fi router",
+        "signal": "Check the signal strength on the device (|| or higher recommended)",
+        "interference": "Avoid interference from other devices"
+      }
+    },
+    "uploadFails": {
+      "title": "Upload Fails",
+      "items": {
+        "valid": "Confirm the file is a valid .epub file",
+        "space": "Verify the SD card has enough free space",
+        "smaller": "Test with a smaller file first",
+        "refresh": "Refresh the browser page and try again"
+      }
+    }
+  },
+  "security": {
+    "title": "Security Notes",
+    "items": {
+      "port": "The web server runs on port 80 (standard HTTP)",
+      "noAuth": "<strong>No authentication is required</strong> — anyone on the same network can access the interface",
+      "connected": "The web server is reachable only while the Wi-Fi screen shows \"Connected\"",
+      "stop": "Leaving the Wi-Fi screen automatically stops the web server",
+      "trusted": "For security, use only on trusted private networks"
+    }
+  },
+  "exit": {
+    "title": "Exit Wi-Fi Mode",
+    "intro": "After you finish uploading files:",
+    "steps": {
+      "back": "Press the <strong>Back</strong> button on the CrossPoint Reader",
+      "stop": "The web server stops automatically",
+      "disconnect": "Wi-Fi disconnects to save battery",
+      "return": "The previous screen returns"
+    },
+    "success": "Uploaded files are immediately available in the file browser!"
+  }
+}

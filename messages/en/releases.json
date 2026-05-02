@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "title": "Release Notes",
+    "description": "CrossPoint Reader Korean firmware release notes and changelog"
+  },
+  "hero": {
+    "backToHome": "Back to Home",
+    "title": "Release Notes",
+    "subtitle": "Version-by-version changes for CrossPoint Reader Korean firmware",
+    "currentVersion": "Current Version"
+  },
+  "card": {
+    "latest": "Latest",
+    "preRelease": "Pre-release",
+    "downloads": "Downloads"
+  },
+  "empty": {
+    "message": "Unable to load release information.",
+    "viewOnGithub": "View releases on GitHub"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "rangeSummary": "{start}-{end} of {total} releases"
+  },
+  "footer": {
+    "backToHome": "Back to Home"
+  },
+  "date": {
+    "format": "{monthName} {day}, {year}"
+  }
+}

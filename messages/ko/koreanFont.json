@@ -1,0 +1,174 @@
+{
+  "metadata": {
+    "title": "한글 폰트 정보",
+    "description": "CrossPoint Reader 한국어 버전에 내장된 KoPub 바탕, Pretendard 한글 폰트 정보와 라이선스를 안내합니다.",
+    "ogTitle": "한글 폰트 정보 | CrossPoint Reader",
+    "ogDescription": "CrossPoint Reader 한국어 버전에 내장된 KoPub 바탕, Pretendard 한글 폰트 정보를 안내합니다."
+  },
+  "hero": {
+    "title": "한글 폰트 정보",
+    "subtitle": "CrossPoint Reader 한국어 버전에 적용된 폰트 정보와 기술적 세부 사항을 안내합니다."
+  },
+  "sections": {
+    "overview": "개요",
+    "appliedFonts": "적용된 폰트",
+    "unicodeRanges": "지원 유니코드 범위",
+    "fontConversion": "커스텀 폰트 변환",
+    "pythonConversion": "Python으로 변환하기",
+    "license": "라이선스"
+  },
+  "overview": {
+    "title": "개요",
+    "intro": "한글 지원을 위해 다음 폰트들을 적용했습니다:",
+    "epubLabel": "EPUB 리더:",
+    "epubDesc": "KoPub 바탕 (KoPub Batang) - 한글/영문/한자 지원",
+    "uiLabel": "UI/시스템:",
+    "uiDesc": "Pretendard - 한글/영문 지원"
+  },
+  "appliedFonts": {
+    "title": "적용된 폰트",
+    "table": {
+      "purpose": "용도",
+      "font": "폰트",
+      "style": "스타일",
+      "size": "사이즈",
+      "header": "헤더 파일",
+      "epubReader": "EPUB 리더",
+      "ui": "UI",
+      "small": "Small"
+    }
+  },
+  "unicodeRanges": {
+    "title": "지원 유니코드 범위",
+    "intro": "KoPub 바탕 폰트는 다음 유니코드 범위를 지원합니다:",
+    "table": {
+      "range": "범위",
+      "description": "설명"
+    },
+    "rows": {
+      "hangulSyllables": "한글 음절 (Hangul Syllables) - 11,172자",
+      "hangulJamo": "한글 호환 자모 (Hangul Compatibility Jamo)",
+      "cjkUnified": "CJK 통합 한자 (CJK Unified Ideographs) - 20,992자",
+      "cjkSymbols": "CJK 기호 및 문장부호 (『』「」《》〈〉【】 등)",
+      "generalPunctuation": "General Punctuation (—–…''\"\"†)",
+      "letterlikeSymbols": "Letterlike Symbols (℃℉№™℡)",
+      "numberForms": "Number Forms (⅓⅔¼½¾)",
+      "arrows": "Arrows (←↑→↓↔↕)",
+      "mathOperators": "Mathematical Operators (±×÷≠≤≥∞)",
+      "enclosedAlpha": "Enclosed Alphanumerics (①②③ⓐⓑⓒ)",
+      "boxDrawings": "Box Drawings (─│┌┐└┘├┤┬┴┼)",
+      "geometricShapes": "Geometric Shapes (○●◎□■△▲)",
+      "miscSymbols": "Miscellaneous Symbols (☀☁☂★☆♠♣♥♦)",
+      "dingbats": "Dingbats (✓✔✕✖✗✘)",
+      "enclosedCjk": "Enclosed CJK (㈜㈀㉠㉡)"
+    }
+  },
+  "fontConversion": {
+    "title": "커스텀 폰트 변환",
+    "intro": {
+      "before": "TTF/OTF 폰트를 CrossPoint Reader에서 사용할 수 있는 ",
+      "after": " 형식으로 변환할 수 있습니다."
+    },
+    "webConverter": {
+      "title": "웹 폰트 변환기",
+      "description": "브라우저에서 바로 폰트를 변환할 수 있습니다. 다양한 유니코드 범위를 선택하고 실시간 미리보기를 확인하세요.",
+      "openButton": "폰트 변환기 열기"
+    },
+    "usage": {
+      "title": "변환된 폰트 사용 방법",
+      "step1": {
+        "linkText": "폰트 변환기",
+        "after": "에서 TTF/OTF 파일을 업로드합니다."
+      },
+      "step2": "원하는 유니코드 범위(한국어, 중국어, 일본어 등)를 선택합니다.",
+      "step3": "폰트 크기와 비트 깊이를 설정하고 변환합니다.",
+      "step4": {
+        "before": "변환된 ",
+        "middle1": " 파일을 SD 카드의 ",
+        "middle2": " 또는 루트의 ",
+        "after": " 폴더에 복사합니다."
+      },
+      "step5": "기기의 설정 > 글꼴 설정에서 폰트를 선택합니다."
+    },
+    "limitations": {
+      "title": "지원되는 폰트 형식 및 제한 사항",
+      "supported": "지원 형식:",
+      "supportedValue": "TTF, OTF, WOFF, WOFF2",
+      "notSupported": "지원되지 않는 폰트:",
+      "variableFonts": "가변 폰트 (Variable Fonts)",
+      "variableFontsDesc": " - 현재 FreeType WASM에서 가변 폰트 인터페이스가 구현되지 않았습니다.",
+      "colorFonts": "컬러 폰트 (Color Fonts/Emoji)",
+      "colorFontsDesc": " - 컬러 레이어 폰트는 흑백으로만 렌더링됩니다.",
+      "bitmapFonts": "비트맵 전용 폰트",
+      "bitmapFontsDesc": " - 스케일러블 아웃라인이 없는 순수 비트맵 폰트는 변환되지 않습니다.",
+      "note": "일반적인 한글 폰트(나눔고딕, 맑은 고딕, 본고딕 등)는 대부분 정상적으로 변환됩니다."
+    }
+  },
+  "pythonConversion": {
+    "title": "고급: Python으로 변환하기",
+    "intro": "더 많은 유니코드 범위와 세밀한 옵션이 필요하다면 Python 스크립트를 사용할 수 있습니다.",
+    "requirements": {
+      "title": "필요 사항",
+      "python": "Python 3.8 이상",
+      "freetype": "freetype-py 라이브러리"
+    },
+    "install": {
+      "title": "설치"
+    },
+    "download": {
+      "title": "스크립트 다운로드",
+      "button": "ttf_to_epdfont.py 다운로드"
+    },
+    "usage": {
+      "title": "사용법",
+      "command": "python ttf_to_epdfont.py <폰트이름> <크기> <폰트파일.ttf> [옵션]"
+    },
+    "options": {
+      "title": "옵션",
+      "table": {
+        "option": "옵션",
+        "description": "설명",
+        "default": "기본값"
+      },
+      "rows": {
+        "twoBitDesc": "2비트 그레이스케일 (안티앨리어싱)",
+        "twoBitDefault": "1비트",
+        "lineHeightDesc": "줄 높이 배율",
+        "letterSpacingDesc": "자간 (픽셀)",
+        "widthScaleDesc": "장평 (가로 비율)",
+        "baselineOffsetDesc": "베이스라인 오프셋 (픽셀)",
+        "outputDesc": "출력 파일 경로",
+        "outputDefault": "<이름>_<크기>.epdfont"
+      }
+    },
+    "example": {
+      "title": "예시"
+    },
+    "info": {
+      "title": "유니코드 범위",
+      "description": "Python 스크립트는 기본적으로 한글(가-힣), CJK 한자, 일본어(히라가나/가타카나), 라틴 확장, 수학 기호 등 광범위한 유니코드 범위를 포함합니다. 폰트에 해당 글리프가 없는 문자는 자동으로 건너뜁니다."
+    }
+  },
+  "license": {
+    "title": "라이선스",
+    "kopub": {
+      "title": "KoPub 바탕",
+      "providerLink": "한국출판인회의",
+      "providerSuffix": "에서 제공하는 서체입니다. 지적재산권은 문화체육관광부와 한국출판인회의에 있습니다.",
+      "items": {
+        "free": "출판업계, 기업, 개인 모두 별도 허가 절차 없이 무료 사용 가능",
+        "commercial": "종이책, 전자책, 인쇄물, 광고물, 온라인 상업적 이용 허용",
+        "noModify": "사전승인 없이 폰트 수정/변형 불가",
+        "noResale": "폰트 자체의 유료 판매, 양도 등 상업적 행위 금지"
+      },
+      "termsBefore": "정확한 사용조건은 ",
+      "termsLink": "서체 라이선스 약관",
+      "termsAfter": "을 참고하세요."
+    },
+    "pretendard": {
+      "title": "Pretendard",
+      "linkText": "GitHub",
+      "suffix": "에서 제공하는 오픈소스 서체입니다 (SIL Open Font License)."
+    }
+  }
+}

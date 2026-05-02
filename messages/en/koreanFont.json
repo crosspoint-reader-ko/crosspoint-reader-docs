@@ -1,0 +1,174 @@
+{
+  "metadata": {
+    "title": "Korean Font Information",
+    "description": "Information and licensing details for the KoPub Batang and Pretendard Korean fonts bundled with CrossPoint Reader Korean Edition.",
+    "ogTitle": "Korean Font Information | CrossPoint Reader",
+    "ogDescription": "Information about the KoPub Batang and Pretendard Korean fonts bundled with CrossPoint Reader Korean Edition."
+  },
+  "hero": {
+    "title": "Korean Font Information",
+    "subtitle": "Font details and technical specifications applied to the CrossPoint Reader Korean Edition."
+  },
+  "sections": {
+    "overview": "Overview",
+    "appliedFonts": "Applied Fonts",
+    "unicodeRanges": "Supported Unicode Ranges",
+    "fontConversion": "Custom Font Conversion",
+    "pythonConversion": "Python Conversion",
+    "license": "License"
+  },
+  "overview": {
+    "title": "Overview",
+    "intro": "The following fonts are applied for Korean support:",
+    "epubLabel": "EPUB Reader:",
+    "epubDesc": "KoPub Batang - supports Korean, English, and Hanja",
+    "uiLabel": "UI / System:",
+    "uiDesc": "Pretendard - supports Korean and English"
+  },
+  "appliedFonts": {
+    "title": "Applied Fonts",
+    "table": {
+      "purpose": "Purpose",
+      "font": "Font",
+      "style": "Style",
+      "size": "Size",
+      "header": "Header File",
+      "epubReader": "EPUB Reader",
+      "ui": "UI",
+      "small": "Small"
+    }
+  },
+  "unicodeRanges": {
+    "title": "Supported Unicode Ranges",
+    "intro": "The KoPub Batang font supports the following Unicode ranges:",
+    "table": {
+      "range": "Range",
+      "description": "Description"
+    },
+    "rows": {
+      "hangulSyllables": "Hangul Syllables - 11,172 characters",
+      "hangulJamo": "Hangul Compatibility Jamo",
+      "cjkUnified": "CJK Unified Ideographs - 20,992 characters",
+      "cjkSymbols": "CJK Symbols and Punctuation (『』「」《》〈〉【】 etc.)",
+      "generalPunctuation": "General Punctuation (—–…''\"\"†)",
+      "letterlikeSymbols": "Letterlike Symbols (℃℉№™℡)",
+      "numberForms": "Number Forms (⅓⅔¼½¾)",
+      "arrows": "Arrows (←↑→↓↔↕)",
+      "mathOperators": "Mathematical Operators (±×÷≠≤≥∞)",
+      "enclosedAlpha": "Enclosed Alphanumerics (①②③ⓐⓑⓒ)",
+      "boxDrawings": "Box Drawings (─│┌┐└┘├┤┬┴┼)",
+      "geometricShapes": "Geometric Shapes (○●◎□■△▲)",
+      "miscSymbols": "Miscellaneous Symbols (☀☁☂★☆♠♣♥♦)",
+      "dingbats": "Dingbats (✓✔✕✖✗✘)",
+      "enclosedCjk": "Enclosed CJK (㈜㈀㉠㉡)"
+    }
+  },
+  "fontConversion": {
+    "title": "Custom Font Conversion",
+    "intro": {
+      "before": "You can convert TTF/OTF fonts into the ",
+      "after": " format used by CrossPoint Reader."
+    },
+    "webConverter": {
+      "title": "Web Font Converter",
+      "description": "Convert fonts directly in your browser. Choose from various Unicode ranges and view a real-time preview.",
+      "openButton": "Open Font Converter"
+    },
+    "usage": {
+      "title": "How to Use Converted Fonts",
+      "step1": {
+        "linkText": "Font Converter",
+        "after": ", upload a TTF/OTF file."
+      },
+      "step2": "Select the desired Unicode ranges (Korean, Chinese, Japanese, etc.).",
+      "step3": "Set the font size and bit depth, then convert.",
+      "step4": {
+        "before": "Copy the converted ",
+        "middle1": " file to ",
+        "middle2": " on the SD card or to the root ",
+        "after": " folder."
+      },
+      "step5": "On the device, choose the font in Settings > Font Settings."
+    },
+    "limitations": {
+      "title": "Supported Font Formats and Limitations",
+      "supported": "Supported formats:",
+      "supportedValue": "TTF, OTF, WOFF, WOFF2",
+      "notSupported": "Unsupported fonts:",
+      "variableFonts": "Variable Fonts",
+      "variableFontsDesc": " - the variable font interface is not currently implemented in FreeType WASM.",
+      "colorFonts": "Color Fonts / Emoji",
+      "colorFontsDesc": " - color-layer fonts render in monochrome only.",
+      "bitmapFonts": "Bitmap-only fonts",
+      "bitmapFontsDesc": " - pure bitmap fonts without scalable outlines cannot be converted.",
+      "note": "Most common Korean fonts (Nanum Gothic, Malgun Gothic, Noto Sans CJK, etc.) convert without issue."
+    }
+  },
+  "pythonConversion": {
+    "title": "Advanced: Python Conversion",
+    "intro": "If you need more Unicode ranges or finer control, you can use a Python script.",
+    "requirements": {
+      "title": "Requirements",
+      "python": "Python 3.8 or later",
+      "freetype": "freetype-py library"
+    },
+    "install": {
+      "title": "Installation"
+    },
+    "download": {
+      "title": "Download Script",
+      "button": "Download ttf_to_epdfont.py"
+    },
+    "usage": {
+      "title": "Usage",
+      "command": "python ttf_to_epdfont.py <font-name> <size> <font-file.ttf> [options]"
+    },
+    "options": {
+      "title": "Options",
+      "table": {
+        "option": "Option",
+        "description": "Description",
+        "default": "Default"
+      },
+      "rows": {
+        "twoBitDesc": "2-bit grayscale (anti-aliasing)",
+        "twoBitDefault": "1-bit",
+        "lineHeightDesc": "Line height multiplier",
+        "letterSpacingDesc": "Letter spacing (pixels)",
+        "widthScaleDesc": "Horizontal width scale",
+        "baselineOffsetDesc": "Baseline offset (pixels)",
+        "outputDesc": "Output file path",
+        "outputDefault": "<name>_<size>.epdfont"
+      }
+    },
+    "example": {
+      "title": "Example"
+    },
+    "info": {
+      "title": "Unicode Ranges",
+      "description": "By default, the Python script covers a broad set of Unicode ranges including Hangul, CJK ideographs, Japanese kana (Hiragana/Katakana), Latin extensions, and mathematical symbols. Characters without a matching glyph in the source font are skipped automatically."
+    }
+  },
+  "license": {
+    "title": "License",
+    "kopub": {
+      "title": "KoPub Batang",
+      "providerLink": "Korean Publishers Association",
+      "providerSuffix": " typeface. Intellectual property is held by the Ministry of Culture, Sports and Tourism and the Korean Publishers Association.",
+      "items": {
+        "free": "Free for the publishing industry, businesses, and individuals without a separate licensing process",
+        "commercial": "Commercial use permitted in printed books, e-books, printed materials, advertising, and online media",
+        "noModify": "Modification or alteration of the font requires prior approval",
+        "noResale": "Resale or transfer of the font itself for profit is prohibited"
+      },
+      "termsBefore": "For the exact terms of use, please refer to the ",
+      "termsLink": "Font License Terms",
+      "termsAfter": "."
+    },
+    "pretendard": {
+      "title": "Pretendard",
+      "linkText": "GitHub",
+      "suffix": " - an open-source typeface (SIL Open Font License)."
+    }
+  }
+}

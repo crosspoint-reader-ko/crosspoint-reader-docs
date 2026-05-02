@@ -1,0 +1,130 @@
+{
+  "hero": {
+    "brandPrefix": "CrossPoint",
+    "brandSuffix": "Reader",
+    "firmwareLabel": "Korean firmware",
+    "publishedSuffix": "released",
+    "whatsNew": "What's New",
+    "tagline": "A complete open-source firmware for the Xteink X3 and X4 e-ink readers.",
+    "taglineSecondary": "A single firmware supports both models, with full Korean EPUB and TXT reading.",
+    "installGuide": "Install Guide",
+    "downloadFirmware": "Download Firmware"
+  },
+  "device": {
+    "x4Alt": "Xteink X4 form factor",
+    "x3Alt": "Xteink X3 form factor",
+    "logoAlt": "CrossPoint logo",
+    "x4Hint": "4.3″ · 800×480",
+    "x3Hint": "3.7″ · 792×528"
+  },
+  "features": {
+    "title": "Key Features",
+    "subtitle": "Highlights of the Korean edition of CrossPoint Reader.",
+    "items": {
+      "epub": {
+        "title": "Full Korean EPUB support",
+        "description": "Bundled KoPub Batang plus custom .epdfont fonts render Hangul, Hanja, and special characters cleanly. Supports EPUB, TXT, XTC, and XTCH formats."
+      },
+      "flasher": {
+        "title": "One-click web flasher",
+        "description": "Flash directly over USB from Chrome or Edge—no esptool install or driver setup required. Partition detection and automatic hard reset are handled for you."
+      },
+      "wifi": {
+        "title": "WiFi file management & OPDS",
+        "description": "Upload wirelessly via the built-in web server, download straight from OPDS catalogs, or share files in hotspot mode without a router."
+      },
+      "sync": {
+        "title": "KOReader cloud sync",
+        "description": "Connect to a KOReader Sync server to keep reading position and progress in sync across phones, tablets, and other readers. Calibre Web integration is also supported."
+      },
+      "sensor": {
+        "title": "X3-only sensor features",
+        "description": "Tilt-to-turn pages (QMI8658 gyro) and a status-bar clock (DS3231 RTC with NTP sync) are supported. Automatically hidden on the X4. (v1.2.0-ko.12)"
+      },
+      "smart": {
+        "title": "Smart reading environment",
+        "description": "Auto page turn, inline footnote navigation, manual refresh via the power button, and fine-grained layout controls. Customize the sleep screen with a cover or your own image."
+      }
+    }
+  },
+  "quickStart": {
+    "title": "Quick Install",
+    "subtitle": "Install firmware right from your web browser.",
+    "steps": {
+      "usb": {
+        "title": "Connect USB",
+        "description": "Connect the X4 with a USB-C cable, or the X3 with the included magnetic cable, to your computer."
+      },
+      "flasher": {
+        "title": "Run the web flasher",
+        "description": "Open the web flasher, connect your device, and choose the firmware."
+      },
+      "complete": {
+        "title": "Flash complete",
+        "description": "The device reboots automatically once flashing finishes. If it appears stuck, press the Reset button and hold the power button for at least one second to boot."
+      }
+    },
+    "runFlasher": "Run web flasher",
+    "viewGuide": "View detailed install guide"
+  },
+  "credits": {
+    "intro": "This Korean firmware is built on top of the project below.",
+    "repoSource": "github.com",
+    "repoTitle": "crosspoint-reader/crosspoint-reader",
+    "repoDescription": "Open-source firmware for the Xteink X4 e-ink reader. Supports EPUB reading with WiFi file upload.",
+    "license": "MIT License",
+    "inspirationPrefix": "Also thanks to the inspiring ",
+    "inspirationLink": "diy-esp32-epub-reader by atomic14",
+    "inspirationSuffix": ".",
+    "contributorsHeading": "Contributors",
+    "contributorTitle": "{login} ({contributions} contributions)",
+    "sponsorPrompt": "If you'd like to sponsor the project",
+    "sponsorDaveAllie": "Sponsor Dave Allie",
+    "sponsorKofi": "Ko-fi (eunchurn)",
+    "sponsorBuyMeACoffee": "Buy Me a Coffee"
+  },
+  "links": {
+    "title": "Useful Links",
+    "subtitle": "Handy resources to use alongside the Xteink X3/X4.",
+    "webFlasher": {
+      "title": "Official Web Flasher",
+      "description": "Install firmware directly from your web browser.",
+      "domain": "xteink.dve.al"
+    },
+    "x4Converter": {
+      "title": "X4 Converter",
+      "description": "A file conversion tool dedicated to the X4.",
+      "domain": "x4converter.rho.sh"
+    },
+    "epub2xtc": {
+      "title": "EPUB to XTC",
+      "description": "Convert EPUB files into the XTC/XTCH format.",
+      "domain": "epub2xtc.streamlit.app"
+    },
+    "calibreWorkflow": {
+      "title": "Calibre Workflow",
+      "description": "A Calibre plugin for optimizing EPUB files.",
+      "domain": "GitHub"
+    },
+    "calibrePlugins": {
+      "title": "Calibre Plugins",
+      "description": "A plugin that sends EPUB files from Calibre to CrossPoint Reader over WiFi.",
+      "domain": "GitHub"
+    },
+    "discord": {
+      "title": "Discord Community",
+      "description": "Chat with other users and get help.",
+      "domain": "Join the community"
+    },
+    "readmeClub": {
+      "title": "Readme.club",
+      "description": "A community for Xteink users.",
+      "domain": "www.readme.club"
+    },
+    "wallpaperConverter": {
+      "title": "X4 Wallpaper Converter",
+      "description": "Convert images into BMP files for the X4 sleep screen.",
+      "domain": "wallpaperconverter.jakegreen.dev"
+    }
+  }
+}

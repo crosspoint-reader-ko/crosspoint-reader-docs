@@ -1,6 +1,7 @@
 "use client";
 
 import { forwardRef } from "react";
+import { useTranslations } from "next-intl";
 import { formatFileSize } from "@/lib/epdfont-converter";
 import type { ConversionState } from "./types";
 
@@ -37,6 +38,7 @@ export const ConversionResult = forwardRef<
   HTMLAnchorElement,
   ConversionResultProps
 >(function ConversionResult({ conversionState, onDownload }, ref) {
+  const t = useTranslations("fontConverter");
   if (conversionState.status !== "success" || !conversionState.result) {
     return null;
   }
@@ -51,23 +53,29 @@ export const ConversionResult = forwardRef<
             clipRule="evenodd"
           />
         </svg>
-        <span className="font-medium">변환 완료!</span>
+        <span className="font-medium">{t("result.complete")}</span>
       </div>
       <div className="grid grid-cols-3 gap-4 text-sm">
         <div>
-          <p className="text-gray-500 dark:text-gray-400">글리프</p>
+          <p className="text-gray-500 dark:text-gray-400">
+            {t("result.glyphs")}
+          </p>
           <p className="font-medium text-gray-900 dark:text-white">
             {result.glyphCount?.toLocaleString()}
           </p>
         </div>
         <div>
-          <p className="text-gray-500 dark:text-gray-400">범위</p>
+          <p className="text-gray-500 dark:text-gray-400">
+            {t("result.ranges")}
+          </p>
           <p className="font-medium text-gray-900 dark:text-white">
             {result.intervalCount}
           </p>
         </div>
         <div>
-          <p className="text-gray-500 dark:text-gray-400">파일 크기</p>
+          <p className="text-gray-500 dark:text-gray-400">
+            {t("result.fileSize")}
+          </p>
           <p className="font-medium text-gray-900 dark:text-white">
             {formatFileSize(result.totalSize || 0)}
           </p>
@@ -75,19 +83,25 @@ export const ConversionResult = forwardRef<
       </div>
       <div className="grid grid-cols-3 gap-4 text-sm mt-2">
         <div>
-          <p className="text-gray-500 dark:text-gray-400">줄 높이</p>
+          <p className="text-gray-500 dark:text-gray-400">
+            {t("result.lineHeight")}
+          </p>
           <p className="font-medium text-gray-900 dark:text-white">
             {result.advanceY}px
           </p>
         </div>
         <div>
-          <p className="text-gray-500 dark:text-gray-400">어센더</p>
+          <p className="text-gray-500 dark:text-gray-400">
+            {t("result.ascender")}
+          </p>
           <p className="font-medium text-gray-900 dark:text-white">
             {result.ascender}px
           </p>
         </div>
         <div>
-          <p className="text-gray-500 dark:text-gray-400">디센더</p>
+          <p className="text-gray-500 dark:text-gray-400">
+            {t("result.descender")}
+          </p>
           <p className="font-medium text-gray-900 dark:text-white">
             {result.descender}px
           </p>
@@ -99,7 +113,7 @@ export const ConversionResult = forwardRef<
           hover:bg-green-700 focus:ring-4 focus:ring-green-300
           transition-colors duration-200"
       >
-        .epdfont 파일 다운로드
+        {t("result.download")}
       </button>
       <a ref={ref} className="hidden" />
     </div>

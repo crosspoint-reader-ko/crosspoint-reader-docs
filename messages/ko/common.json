@@ -1,0 +1,82 @@
+{
+  "site": {
+    "name": "CrossPoint Reader 한국어",
+    "description": "Xteink X3 및 X4 전자잉크 리더를 위한 CrossPoint Reader 한국어 펌웨어 설치 및 사용 가이드. EPUB, XTC, XTCH 파일을 지원하며 한글 폰트가 내장되어 있습니다.",
+    "title": {
+      "default": "CrossPoint Reader - 한국어 펌웨어 가이드",
+      "template": "%s | CrossPoint Reader"
+    },
+    "keywords": "CrossPoint Reader,Xteink X3,Xteink X4,전자책,e-ink,펌웨어,한국어,EPUB,XTC,XTCH,전자잉크,이북리더,오픈소스"
+  },
+  "header": {
+    "brand": "CrossPoint Reader KO",
+    "openMenu": "메뉴 열기",
+    "nav": {
+      "install": "설치 가이드",
+      "flasher": "웹 플래셔",
+      "fontConverter": "폰트 변환",
+      "userGuide": "사용자 가이드",
+      "guideBasic": "기본 사용",
+      "webserver": "파일 전송",
+      "koreanFont": "한글 폰트",
+      "releases": "릴리즈"
+    },
+    "donate": {
+      "button": "기부하기"
+    },
+    "language": {
+      "label": "언어 선택",
+      "korean": "한국어",
+      "english": "English"
+    }
+  },
+  "footer": {
+    "docs": {
+      "title": "문서",
+      "install": "설치 가이드",
+      "guide": "사용자 가이드",
+      "webserver": "웹 서버 사용법",
+      "koreanFont": "한글 폰트 정보",
+      "releases": "릴리즈 노트"
+    },
+    "links": {
+      "title": "링크",
+      "githubKorean": "GitHub (한국어 버전)",
+      "githubUpstream": "GitHub (원본)",
+      "webFlasher": "웹 플래셔"
+    },
+    "community": {
+      "title": "커뮤니티"
+    },
+    "sponsor": {
+      "title": "후원",
+      "daveAllie": "Dave Allie (원본)"
+    },
+    "disclaimer": "CrossPoint Reader는 <strong>Xteink</strong>와 제휴되어 있지 않습니다.",
+    "license": "MIT License © {year} CrossPoint Reader Contributors"
+  },
+  "common": {
+    "loading": "로딩 중...",
+    "comingSoon": "준비 중",
+    "version": "버전",
+    "currentVersion": "현재 버전: v{version}",
+    "downloadCount": "다운로드 수",
+    "released": "릴리즈됨",
+    "latest": "최신",
+    "next": "다음",
+    "previous": "이전",
+    "more": "더 보기",
+    "back": "뒤로",
+    "close": "닫기",
+    "open": "열기",
+    "download": "다운로드",
+    "warning": "경고",
+    "note": "참고",
+    "tip": "팁",
+    "info": "안내"
+  },
+  "redirect": {
+    "loading": "리디렉션 중...",
+    "fallback": "자동 리디렉션이 안 되면 아래 링크를 클릭하세요:"
+  }
+}

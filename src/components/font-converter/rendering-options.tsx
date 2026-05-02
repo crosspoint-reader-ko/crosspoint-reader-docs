@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 interface RenderingOptionsProps {
   charSpacing: number;
   lineSpacing: number;
@@ -35,15 +37,16 @@ export function RenderingOptions({
   onAntialiasingChange,
   onReset,
 }: RenderingOptionsProps) {
+  const t = useTranslations("fontConverter");
   return (
     <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
       <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
-        렌더링 옵션
+        {t("rendering.title")}
       </h3>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div>
           <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-            자간 (px)
+            {t("rendering.charSpacing")}
           </label>
           <input
             type="number"
@@ -58,7 +61,7 @@ export function RenderingOptions({
 
         <div>
           <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-            행간 (배수)
+            {t("rendering.lineSpacing")}
           </label>
           <input
             type="number"
@@ -76,7 +79,7 @@ export function RenderingOptions({
 
         <div>
           <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-            굵기
+            {t("rendering.boldness")}
           </label>
           <input
             type="range"
@@ -91,7 +94,7 @@ export function RenderingOptions({
 
         <div>
           <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-            이텔릭체 기울기
+            {t("rendering.italicAngle")}
           </label>
           <input
             type="range"
@@ -108,7 +111,7 @@ export function RenderingOptions({
 
         <div>
           <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-            장평 (%)
+            {t("rendering.horizontalScale")}
           </label>
           <input
             type="number"
@@ -125,7 +128,7 @@ export function RenderingOptions({
 
         <div>
           <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-            베이스라인 (px)
+            {t("rendering.baselineShift")}
           </label>
           <input
             type="number"
@@ -152,7 +155,7 @@ export function RenderingOptions({
             htmlFor="antialiasing"
             className="text-xs text-gray-600 dark:text-gray-400"
           >
-            안티앨리어싱
+            {t("rendering.antialiasing")}
           </label>
         </div>
 
@@ -162,7 +165,7 @@ export function RenderingOptions({
             onClick={onReset}
             className="text-xs px-2 py-1.5 text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20"
           >
-            초기화
+            {t("rendering.reset")}
           </button>
         </div>
       </div>
