@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "releases": [
+    {
+      "id": "stable-1.2.0-ko.17",
+      "channel": "stable",
+      "name": "1.2.0-ko.17",
+      "version": "1.2.0-ko.17",
+      "released_at": "2026-05-03T09:27:33Z",
+      "notes": "CrossPoint Reader KO v1.2.0-ko.17 stable firmware",
+      "firmware_url": "https://github.com/crosspoint-reader-ko/crosspoint-reader-ko/releases/download/1.2.0-ko.17/firmware.bin",
+      "firmware_sha256": "693edbf0a3e9557856a1fa26b4cd5b6a82828759202bf2c283d154f638405cd2",
+      "size": 6886560,
+      "supported_devices": [
+        "x4",
+        "x3"
+      ]
+    },
+    {
+      "id": "stable-1.2.0-ko.16",
+      "channel": "stable",
+      "name": "1.2.0-ko.16",
+      "version": "1.2.0-ko.16",
+      "released_at": "2026-05-02T17:21:40Z",
+      "notes": "CrossPoint Reader KO v1.2.0-ko.16 stable firmware",
+      "firmware_url": "https://github.com/crosspoint-reader-ko/crosspoint-reader-ko/releases/download/1.2.0-ko.16/firmware.bin",
+      "firmware_sha256": "b989ac632cb7e33a5b924251f8115e4a814263982220082489a1258845cc7490",
+      "size": 6878640,
+      "supported_devices": [
+        "x4",
+        "x3"
+      ]
+    },
+    {
+      "id": "stable-1.2.0-ko.15",
+      "channel": "stable",
+      "name": "1.2.0-ko.15",
+      "version": "1.2.0-ko.15",
+      "released_at": "2026-04-30T07:39:38Z",
+      "notes": "CrossPoint Reader KO v1.2.0-ko.15 stable firmware",
+      "firmware_url": "https://github.com/crosspoint-reader-ko/crosspoint-reader-ko/releases/download/1.2.0-ko.15/firmware.bin",
+      "firmware_sha256": "2c1e9a6d4d11b4f7eb82fea257b21cbab75199ee73cb9bb45458246b688a9c6f",
+      "size": 6872208,
+      "supported_devices": [
+        "x4",
+        "x3"
+      ]
+    }
+  ]
+}
