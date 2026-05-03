@@ -56,13 +56,6 @@ interface KoreanVersionEntry {
   filename: string;
 }
 
-interface ReleaseNote {
-  tag_name: string;
-  name: string;
-  body: string;
-  published_at: string;
-}
-
 interface CatalogRelease {
   id: string;
   channel: string;
@@ -81,39 +74,6 @@ function sha256(filePath: string): string {
   return createHash("sha256").update(buf).digest("hex");
 }
 
-async function fetchReleaseNotes(): Promise<Map<string, string>> {
-  const map = new Map<string, string>();
-  try {
-    const response = await fetch(
-      `https://api.github.com/repos/${REPO}/releases?per_page=10`,
-      {
-        headers: {
-          Accept: "application/vnd.github.v3+json",
-          "User-Agent": "crosspoint-reader-docs-build",
-          ...(process.env.GITHUB_TOKEN
-            ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
-            : {}),
-        },
-      },
-    );
-    if (!response.ok) {
-      console.warn(
-        `[catalog] release notes fetch failed (${response.status}), notes 필드는 release 이름으로 fallback`,
-      );
-      return map;
-    }
-    const data = (await response.json()) as ReleaseNote[];
-    for (const r of data) {
-      // body 첫 1024자만 사용 — OTA 알림 메시지로 충분, JSON 크기 제한
-      const trimmed = (r.body || "").trim().slice(0, 1024);
-      map.set(r.tag_name, trimmed);
-    }
-  } catch (err) {
-    console.warn(`[catalog] release notes fetch error: ${err}`);
-  }
-  return map;
-}
-
 async function main(): Promise<void> {
   if (!existsSync(VERSIONS_PATH)) {
     console.error(`[catalog] ${VERSIONS_PATH} not found. download-firmware.ts 먼저 실행하세요.`);
@@ -130,8 +90,6 @@ async function main(): Promise<void> {
     `[catalog] 최신 ${versions.length}개 릴리즈로 catalog 생성 중 (전체 ${allVersions.length}개 중)...`,
   );
 
-  const notesMap = await fetchReleaseNotes();
-
   const releases: CatalogRelease[] = [];
   for (const v of versions) {
     const binPath = join(FIRMWARE_DIR, v.filename);
@@ -141,9 +99,7 @@ async function main(): Promise<void> {
     }
     const size = statSync(binPath).size;
     const hash = sha256(binPath);
-    const notes =
-      notesMap.get(v.tag_name) ||
-      `CrossPoint Reader Korean firmware ${v.tag_name}`;
+    const notes = `CrossPoint Reader KO v${v.tag_name} ${CHANNEL} firmware`;
 
     releases.push({
       id: `${CHANNEL}-${v.tag_name}`,
