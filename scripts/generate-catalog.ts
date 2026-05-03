@@ -47,6 +47,7 @@ const OUTPUT_PATH = join(PUBLIC_DIR, "catalog");
 const REPO = "crosspoint-reader-ko/crosspoint-reader-ko";
 const SUPPORTED_DEVICES = ["x4", "x3"];
 const CHANNEL = "stable";
+const MAX_RELEASES = 3;
 
 interface KoreanVersionEntry {
   tag_name: string;
@@ -119,11 +120,15 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  const versions = JSON.parse(
+  const allVersions = JSON.parse(
     readFileSync(VERSIONS_PATH, "utf-8"),
   ) as KoreanVersionEntry[];
+  // 최신 N개만 (korean-versions.json은 published_at 내림차순)
+  const versions = allVersions.slice(0, MAX_RELEASES);
 
-  console.log(`[catalog] ${versions.length}개 릴리즈로 catalog 생성 중...`);
+  console.log(
+    `[catalog] 최신 ${versions.length}개 릴리즈로 catalog 생성 중 (전체 ${allVersions.length}개 중)...`,
+  );
 
   const notesMap = await fetchReleaseNotes();
 
