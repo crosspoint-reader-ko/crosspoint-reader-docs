@@ -257,7 +257,7 @@
           "<strong>UI theme:</strong> Classic, Lyra, or Lyra Extended. Lyra Extended shows up to 3 books on the home screen instead of 1.",
           "<strong>Images:</strong> EPUB body image rendering — <em>Show</em> (default) / <em>Placeholder</em> (small box only) / <em>Remove</em> (skip entirely). Placeholder/Remove speed up page turns. (v1.2.0)",
           "<strong>Sunlight bleed correction:</strong> OFF/ON software fix for direct-sunlight bleed on white X4 units",
-          "<strong>Sleep Screen Selector:</strong> Loads the BMP cover images from the SD card's <code>.sleep</code>/<code>sleep</code> folders and lets you preview each one and tick the ones you want to use. Only the selected images are picked at random for the sleep screen; if nothing is selected, the entire folder is used (legacy behavior). Located at the bottom of the menu. (new)"
+          "<strong>Sleep Screen Selector:</strong> Loads the BMP cover images from the SD card's <code>.sleep</code>/<code>sleep</code> folders and lets you preview each one and tick the ones you want to use. Only the selected images are picked at random for the sleep screen; if nothing is selected, the entire folder is used (legacy behavior)."
         ]
       },
       "reader": {
