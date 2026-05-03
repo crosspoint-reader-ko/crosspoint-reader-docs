@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "bun run scripts/update-version.ts && bun run scripts/download-firmware.ts",
+    "prebuild": "bun run scripts/update-version.ts && bun run scripts/download-firmware.ts && bun run scripts/generate-catalog.ts",
     "build": "next build && bun run scripts/postbuild-locale.ts",
     "start": "serve out",
     "lint": "next lint"
