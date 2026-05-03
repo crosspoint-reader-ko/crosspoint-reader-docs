@@ -360,7 +360,7 @@ export default function GuideSettingsPage() {
                       </li>
                     </ul>
                     <p className="text-gray-500 text-xs">
-                      {t("txtReader.footerNote")}
+                      {t.rich("txtReader.footerNote", { strong })}
                     </p>
                   </div>
                 </div>

@@ -9,9 +9,9 @@ export const RANGE_CATEGORIES = Array.from(
   new Set(UNICODE_RANGES.map((r) => r.category)),
 );
 
-export const DEFAULT_ENABLED_RANGES = UNICODE_RANGES.filter(
-  (r) => r.defaultEnabled,
-).map((r) => r.id);
+// 처음 진입 시 모든 유니코드 범위를 기본 선택해 사용자가 별도 선택 없이도
+// 한글·영문·기호·CJK 등을 빠짐없이 변환 결과에 포함시킬 수 있도록 함.
+export const DEFAULT_ENABLED_RANGES = UNICODE_RANGES.map((r) => r.id);
 
 // Preset structure (id + rangeIds). Visible name/description come from i18n
 // (fontConverter.presets.items.<id>.name/description).

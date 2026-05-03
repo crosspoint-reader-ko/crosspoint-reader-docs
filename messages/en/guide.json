@@ -256,7 +256,8 @@
           "<strong>Refresh rate:</strong> Full-refresh interval to reduce ghosting (1, 5, 10, 15, 30 pages)",
           "<strong>UI theme:</strong> Classic, Lyra, or Lyra Extended. Lyra Extended shows up to 3 books on the home screen instead of 1.",
           "<strong>Images:</strong> EPUB body image rendering — <em>Show</em> (default) / <em>Placeholder</em> (small box only) / <em>Remove</em> (skip entirely). Placeholder/Remove speed up page turns. (v1.2.0)",
-          "<strong>Sunlight bleed correction:</strong> OFF/ON software fix for direct-sunlight bleed on white X4 units"
+          "<strong>Sunlight bleed correction:</strong> OFF/ON software fix for direct-sunlight bleed on white X4 units",
+          "<strong>Sleep Screen Selector:</strong> Loads the BMP cover images from the SD card's <code>.sleep</code>/<code>sleep</code> folders and lets you preview each one and tick the ones you want to use. Only the selected images are picked at random for the sleep screen; if nothing is selected, the entire folder is used (legacy behavior). Located at the bottom of the menu. (new)"
         ]
       },
       "reader": {
@@ -310,6 +311,7 @@
       "items": [
         "<strong>Chapter Selection:</strong> Jump directly to a chapter from the table of contents",
         "<strong>Footnotes:</strong> Visible only when the current book contains footnotes; lets you browse all footnotes at once (v1.2.0)",
+        "<strong>Reader Options:</strong> A sub-screen of the reader menu that lets you change the most-used reading settings in one place: font (current font name shown), Reader category (line spacing, screen margin, paragraph alignment, extra paragraph spacing, paragraph indent, character-level word wrap, antialiasing), EPUB-only toggles (embedded styles, image display — hidden in TXT), the Controls category (side button order, long-press chapter, power-button short press), and sunlight-bleed correction. Going back from Options returns to the menu, and leaving the menu commits all changed values at once (no flash if nothing changed). The home-screen settings and Reader Options share the same definitions, so changes are mirrored both ways. Reading direction stays as the menu's inline cycle and is excluded from Options. (new)",
         "<strong>Reading direction:</strong> Portrait (default) / Landscape clockwise / Inverted / Landscape counter-clockwise — previewed instantly on selection and applied when leaving the menu.",
         "<strong>Auto Page Turn (pages/min):</strong> Pages-per-minute speed (Off / 1 / 3 / 6 / 12) (v1.2.0)",
         "<strong>Jump to %:</strong> Type the percentage of the whole book to jump to that position"
@@ -326,6 +328,7 @@
       "title": "3.7 TXT Reader Menu (OK button)",
       "intro": "TXT files have a flat structure with no chapters, so the menu is simpler than EPUB. Navigation is byte-offset based.",
       "items": [
+        "<strong>Reader Options:</strong> Change font, the Reader category (line spacing, screen margin, paragraph alignment, extra paragraph spacing, paragraph indent, character-level word wrap, antialiasing), the Controls category (side button order, long-press chapter, power-button short press), and sunlight-bleed correction in one screen. EPUB-only toggles (embedded styles, image display) are hidden in TXT. Leaving the menu after Options commits all changes at once; if nothing changed, you return to the page without a flash. (new)",
         "<strong>Reading direction:</strong> Portrait / Landscape clockwise / Inverted / Landscape counter-clockwise",
         "<strong>Auto Page Turn (pages/min):</strong> Pages-per-minute speed (Off / 1 / 3 / 6 / 12) — same options as EPUB",
         "<strong>Long-press page jump:</strong> Off / 10 / 20 / 50 / 100 — long-pressing the page button for over a second skips this many pages. When Off, long-press still only flips one page (v1.2.0-ko)",
@@ -334,7 +337,7 @@
         "<strong>Go Home:</strong> Save the current position and return to the home screen"
       ],
       "resetTimer": "<strong>Reset Reading Timer:</strong> Reset the accumulated reading time of the current TXT file to 0 (v1.2.0-ko.14). Like EPUB, an accumulated time chip appears on the right of the menu's progress line. See the <link>Reading Timer</link> section for details",
-      "footerNote": "The TXT reader menu has no Chapter Selection / Footnotes / Show page as QR / Sync Progress / Clear Book Cache — those features only make sense for EPUB and are hidden for TXT."
+      "footerNote": "The TXT reader menu has no Chapter Selection / Footnotes / Show page as QR / Sync Progress / Clear Book Cache — those features only make sense for EPUB and are hidden for TXT. <strong>Recent fix:</strong> when extra paragraph spacing was on and a paragraph crossed a page boundary, some lines from the previous page would re-appear at the top of the next page. That paragraph-duplication bug is fixed. Known remaining edge case — going backward immediately after a % jump can briefly duplicate one wrapped line; flipping forward once auto-corrects it. Also, the bottom hint on settings / Reader Options screens has been changed from \"Toggle\" to \"Select\" for clearer wording."
     }
   },
   "customize": {
