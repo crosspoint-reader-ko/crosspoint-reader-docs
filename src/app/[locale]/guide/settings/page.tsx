@@ -149,6 +149,11 @@ export default function GuideSettingsPage() {
                           {t.rich(`system.display.items.${i}`, {
                             strong,
                             em,
+                            code: (chunks) => (
+                              <code className="bg-gray-100 px-1 rounded">
+                                {chunks}
+                              </code>
+                            ),
                           })}
                         </li>
                       ))}
