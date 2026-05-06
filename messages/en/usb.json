@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "title": "USB SD Browser",
+    "description": "Browse CrossPoint Reader's SD card from the browser over USB. Supports rename, delete, and new folder (uploads, downloads, and moves are not supported).",
+    "ogTitle": "USB SD Browser | CrossPoint Reader",
+    "ogDescription": "Connect via WebSerial to browse the SD card on CrossPoint Reader and rename, delete, or create folders."
+  },
+  "hero": {
+    "title": "USB SD Browser",
+    "subtitle": "Browse the SD card over USB. Only rename, delete, and new folder are supported — uploads, downloads, and moves are not.",
+    "browserBadge": "Chrome / Edge / Opera"
+  },
+  "browserUnsupported": {
+    "title": "WebSerial not supported",
+    "description": "This feature requires a Chromium-based browser (Chrome, Edge, Opera). Firefox and Safari do not implement the WebSerial API.",
+    "openInChrome": "Open in Chrome"
+  },
+  "status": {
+    "disconnected": "Disconnected",
+    "connecting": "Connecting…",
+    "connected": "Connected",
+    "error": "Error",
+    "freeHeap": "Free heap",
+    "firmware": "Firmware",
+    "lastPing": "Last ping"
+  },
+  "actions": {
+    "connect": "Connect device",
+    "disconnect": "Disconnect",
+    "reconnect": "Reconnect",
+    "upload": "Upload files",
+    "uploadButton": "Choose files",
+    "newFolder": "New folder",
+    "rename": "Rename",
+    "delete": "Delete",
+    "download": "Download",
+    "refresh": "Refresh",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "create": "Create",
+    "selectAll": "Select all",
+    "deselectAll": "Deselect all"
+  },
+  "instructions": {
+    "title": "How it works",
+    "step1": {
+      "title": "Plug in USB cable",
+      "body": "Connect the device to your PC with a USB cable. The device must be powered on."
+    },
+    "step2": {
+      "title": "Grant port access",
+      "body": "Click <strong>Connect device</strong> in the top right. The browser opens a serial-port picker — choose <code>USB JTAG/serial debug unit</code>."
+    },
+    "step3": {
+      "title": "Tidy the file tree",
+      "body": "Once connected, the SD card tree appears. You can rename items, delete them, and create new folders."
+    },
+    "noteTitle": "Note",
+    "note": "USB mode currently supports rename, delete, and new folder only. Uploads, downloads, and moving items between folders are not supported."
+  },
+  "browser": {
+    "rootLabel": "SD card",
+    "currentPath": "Current path",
+    "emptyFolder": "This folder is empty",
+    "fileCount": "{count} items",
+    "selectedCount": "{count} selected",
+    "loading": "Loading…",
+    "uploading": "Uploading…",
+    "uploadProgress": "{name} ({percent}%)",
+    "downloadingFile": "Downloading: {name}",
+    "uploadComplete": "Upload complete",
+    "deleteConfirmSingle": "Delete <strong>{name}</strong>?",
+    "deleteConfirmMulti": "Delete {count} selected items?",
+    "newFolderPrompt": "Folder name",
+    "renamePrompt": "New name",
+    "dropZone": "Drop files here to upload to the current folder",
+    "dropZoneActive": "Release to upload",
+    "size": "Size",
+    "type": "Type",
+    "name": "Name",
+    "typeFile": "File",
+    "typeFolder": "Folder",
+    "lastModified": "Modified"
+  },
+  "errors": {
+    "noPort": "No port selected",
+    "openFailed": "Cannot open port: {message}",
+    "deviceNotResponding": "Device not responding. Check the connection.",
+    "uploadFailed": "Upload failed: {message}",
+    "downloadFailed": "Download failed: {message}",
+    "deleteFailed": "Delete failed: {message}",
+    "mkdirFailed": "Folder creation failed: {message}",
+    "renameFailed": "Rename failed: {message}",
+    "listFailed": "List failed: {message}",
+    "lostConnection": "Connection lost",
+    "timeout": "Timed out"
+  }
+}

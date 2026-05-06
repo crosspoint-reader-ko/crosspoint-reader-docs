@@ -12,6 +12,7 @@ const NAMESPACES = [
   "fontConverter",
   "koreanFont",
   "webserver",
+  "usb",
   "guide",
   "releases",
 ] as const;
