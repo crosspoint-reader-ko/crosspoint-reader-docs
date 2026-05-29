@@ -5,8 +5,9 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { basePath } from "@/lib/basePath";
 import { routing, type Locale } from "@/i18n/routing";
+import { SophonzInit } from "@/components/sophonz-init";
 
-const siteUrl = "https://eunchurn.github.io/crosspoint-reader-docs";
+const siteUrl = "https://crosspoint.idlerecord.com";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -56,23 +57,39 @@ export async function generateMetadata({
       siteName,
       locale: ogLocale,
       type: "website",
-      images: [locale === "ko" ? "/opengraph-image" : `/${locale}/opengraph-image`],
+      images: [
+        locale === "ko" ? "/opengraph-image" : `/${locale}/opengraph-image`,
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: siteName,
       description: siteDescription,
-      images: [locale === "ko" ? "/opengraph-image" : `/${locale}/opengraph-image`],
+      images: [
+        locale === "ko" ? "/opengraph-image" : `/${locale}/opengraph-image`,
+      ],
       creator: "@eunchurn",
     },
     icons: {
       icon: [
         { url: `${basePath}/logo.svg`, type: "image/svg+xml" },
-        { url: `${basePath}/web-app-manifest-192x192.png`, sizes: "192x192", type: "image/png" },
-        { url: `${basePath}/web-app-manifest-512x512.png`, sizes: "512x512", type: "image/png" },
+        {
+          url: `${basePath}/web-app-manifest-192x192.png`,
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          url: `${basePath}/web-app-manifest-512x512.png`,
+          sizes: "512x512",
+          type: "image/png",
+        },
       ],
       apple: [
-        { url: `${basePath}/web-app-manifest-192x192.png`, sizes: "192x192", type: "image/png" },
+        {
+          url: `${basePath}/web-app-manifest-192x192.png`,
+          sizes: "192x192",
+          type: "image/png",
+        },
       ],
     },
     manifest: `${basePath}/manifest.json`,
@@ -111,6 +128,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body className="bg-gray-50 text-gray-900 antialiased">
+        <SophonzInit />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>

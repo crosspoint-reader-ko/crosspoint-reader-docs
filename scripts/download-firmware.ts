@@ -31,6 +31,19 @@ interface KoreanVersionEntry {
   filename: string;
 }
 
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN || "";
+
+function githubHeaders(): Record<string, string> {
+  const headers: Record<string, string> = {
+    Accept: "application/vnd.github.v3+json",
+    "User-Agent": "crosspoint-reader-docs-build",
+  };
+  if (GITHUB_TOKEN) {
+    headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
+  }
+  return headers;
+}
+
 const FIRMWARE_SOURCES: FirmwareSource[] = [
   {
     name: "Korean Community",
@@ -94,10 +107,7 @@ async function downloadFirmware(source: FirmwareSource): Promise<void> {
 
   try {
     const releaseResponse = await fetch(source.url, {
-      headers: {
-        Accept: "application/vnd.github.v3+json",
-        "User-Agent": "crosspoint-reader-docs-build",
-      },
+      headers: githubHeaders(),
     });
 
     if (!releaseResponse.ok) {
@@ -202,10 +212,7 @@ async function downloadKoreanFirmwareReleases(): Promise<KoreanVersionEntry[]> {
     const response = await fetch(
       "https://api.github.com/repos/crosspoint-reader-ko/crosspoint-reader-ko/releases?per_page=5",
       {
-        headers: {
-          Accept: "application/vnd.github.v3+json",
-          "User-Agent": "crosspoint-reader-docs-build",
-        },
+        headers: githubHeaders(),
       }
     );
 
