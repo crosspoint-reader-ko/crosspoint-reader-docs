@@ -14,6 +14,7 @@
     "nav": {
       "install": "Install Guide",
       "flasher": "Web Flasher",
+      "flasherTool": "Flash firmware",
       "fontConverter": "Font Converter",
       "userGuide": "User Guide",
       "guideBasic": "Basics",

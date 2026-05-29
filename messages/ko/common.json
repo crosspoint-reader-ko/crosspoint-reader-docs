@@ -14,6 +14,7 @@
     "nav": {
       "install": "설치 가이드",
       "flasher": "웹 플래셔",
+      "flasherTool": "펌웨어 플래시",
       "fontConverter": "폰트 변환",
       "userGuide": "사용자 가이드",
       "guideBasic": "기본 사용",
